@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nilai - LMS Siswa</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="stylesheet" href="../assets/style_siswa.css">
+</head>
+<body class="dashboard-page text-sm">
+
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="school-logo">
+                <i class="fa-solid fa-school text-primary mb-4"></i>
+                <div>Sekolah<br>Nama Sekolah/ Kampus</div>
+            </div>
+        </div>
+        <div class="user-profile">
+            <img src="https://ui-avatars.com/api/?name=Budi+Santoso&background=4f46e5&color=fff" alt="User">
+            <div>
+                <div class="fw-bold">Budi Santoso</div>
+                <div class="text-muted small">Siswa • IX-B</div>
+            </div>
+        </div>
+        <div class="sidebar-actions">
+            <div class="d-flex gap-2">
+                <a href="notifikasi.html" class="btn btn-outline-secondary d-flex justify-content-between align-items-center rounded-pill">
+                    <span>Notifikasi </span>
+                </a>
+                <a href="profile.html" class="btn btn-outline-secondary d-flex justify-content-between align-items-center rounded-pill bg-light text-dark">
+                    <span>Profil </span>
+                </a>
+                <a href="../login.html" class="btn btn-outline-danger d-flex justify-content-between align-items-center rounded-pill bg-light text-danger">
+                    <span>Keluar </span>
+                </a>
+            </a>
+            </div>
+        </div>
+        <nav class="nav-menu">
+            <a href="dashboard_siswa.html" class="nav-link"><i class="fa-solid fa-home text-primary"></i> Dashboard</a>
+            <a href="kelas_siswa.html" class="nav-link"><i class="fa-solid fa-chalkboard-user text-success"></i> Kelas Saya</a>
+            <a href="tugas_siswa.html" class="nav-link"><i class="fa-solid fa-clipboard-list text-warning"></i> Tugas</a>
+            <a href="nilai_siswa.html" class="nav-link active"><i class="fa-solid fa-star text-danger"></i> Nilai</a>
+            <a href="jadwal_siswa.html" class="nav-link"><i class="fa-solid fa-calendar-days text-info"></i> Jadwal</a>
+        </nav>
+        
+    </div>
+
+    <div class="main-content">
+        <div class="topbar d-flex align-items-center w-100">
+            <div class="d-flex align-items-center gap-3 w-100">
+                <span class="fw-bold"><i class="fa-solid fa-star text-danger"></i> Nilai Saya</span>
+                <select class="form-select w-auto"><option>Semester Ganjil 2025/2026</option></select>
+            </div>
+        </div>
+
+        <div class="content-area">
+
+            <!-- Ringkasan Nilai -->
+            <div class="row g-3 mb-4">
+                <div class="col-md-3">
+                    <div class="card border-0 shadow-sm rounded-3 p-3 text-center">
+                        <div class="fw-bold fs-2 text-primary">82</div>
+                        <div class="text-muted small">Rata-Rata Nilai</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card border-0 shadow-sm rounded-3 p-3 text-center">
+                        <div class="fw-bold fs-2 text-success">95</div>
+                        <div class="text-muted small">Nilai Tertinggi</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card border-0 shadow-sm rounded-3 p-3 text-center">
+                        <div class="fw-bold fs-2 text-warning">68</div>
+                        <div class="text-muted small">Nilai Terendah</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card border-0 shadow-sm rounded-3 p-3 text-center">
+                        <div class="fw-bold fs-2 text-info">8</div>
+                        <div class="small text-muted">Tugas Dinilai</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabel Nilai per Mata Pelajaran -->
+            <div class="card border-0 shadow-sm rounded-3">
+                <div class="card-header bg-white pt-3 px-4">
+                    <h6 class="fw-bold mb-0">Rekap Nilai per Mata Pelajaran</h6>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-anggota mb-0">
+                            <thead>
+                                <tr>
+                                    <th width="50">#</th>
+                                    <th width="130">MATA PELAJARAN</th>
+                                    <th>JUDUL TUGAS</th>
+                                    <th width="120" class="text-center">JENIS</th>
+                                    <th width="100" class="text-center">NILAI</th>
+                                    <th width="120" class="text-center">GRADE</th>
+                                    <th width="150">TANGGAL DINILAI</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-muted fw-bold">1</td>
+                                    <td><span class="badge-mapel badge-mapel-blue">Informatika</span></td>
+                                    <td class="fw-medium">Tugas Mengenal Hardware</td>
+                                    <td class="text-center"><span class="badge bg-light text-dark border small">Tugas</span></td>
+                                    <td class="text-center">
+                                        <span class="nilai-circle" style="background:#dcfce7;color:#16a34a;">90</span>
+                                    </td>
+                                    <td class="text-center"><span class="grade-badge grade-a">A</span></td>
+                                    <td class="text-muted small">12 Jul 2025</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-muted fw-bold">2</td>
+                                    <td><span class="badge-mapel badge-mapel-blue">Informatika</span></td>
+                                    <td class="fw-medium">UH Bab 1 - Sistem Komputer</td>
+                                    <td class="text-center"><span class="badge bg-light text-dark border small">Ulangan</span></td>
+                                    <td class="text-center">
+                                        <span class="nilai-circle" style="background:#dcfce7;color:#16a34a;">85</span>
+                                    </td>
+                                    <td class="text-center"><span class="grade-badge grade-a">A</span></td>
+                                    <td class="text-muted small">10 Jul 2025</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-muted fw-bold">3</td>
+                                    <td><span class="badge-mapel badge-mapel-green">Matematika</span></td>
+                                    <td class="fw-medium">Latihan Soal Persamaan Linear</td>
+                                    <td class="text-center"><span class="badge bg-light text-dark border small">Tugas</span></td>
+                                    <td class="text-center">
+                                        <span class="nilai-circle" style="background:#fef9c3;color:#854d0e;">75</span>
+                                    </td>
+                                    <td class="text-center"><span class="grade-badge grade-b">B</span></td>
+                                    <td class="text-muted small">8 Jul 2025</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-muted fw-bold">4</td>
+                                    <td><span class="badge-mapel badge-mapel-orange">B. Indonesia</span></td>
+                                    <td class="fw-medium">Analisis Teks Eksposisi</td>
+                                    <td class="text-center"><span class="badge bg-light text-dark border small">Tugas</span></td>
+                                    <td class="text-center">
+                                        <span class="nilai-circle" style="background:#dcfce7;color:#16a34a;">95</span>
+                                    </td>
+                                    <td class="text-center"><span class="grade-badge grade-a">A</span></td>
+                                    <td class="text-muted small">5 Jul 2025</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-muted fw-bold">5</td>
+                                    <td><span class="badge-mapel badge-mapel-red">IPA</span></td>
+                                    <td class="fw-medium">Kuis Sel dan Jaringan</td>
+                                    <td class="text-center"><span class="badge bg-light text-dark border small">Kuis</span></td>
+                                    <td class="text-center">
+                                        <span class="nilai-circle" style="background:#fee2e2;color:#dc2626;">68</span>
+                                    </td>
+                                    <td class="text-center"><span class="grade-badge grade-c">C</span></td>
+                                    <td class="text-muted small">3 Jul 2025</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/sidebar-toggle.js"></script>
+</body>
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masuk Kelas - LMS Siswa</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="stylesheet" href="../assets/style_siswa.css">
+</head>
+<body class="dashboard-page text-sm">
+
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="school-logo">
+                <i class="fa-solid fa-school text-primary mb-4"></i>
+                <div>Sekolah<br>Nama Sekolah/ Kampus</div>
+            </div>
+        </div>
+        <div class="user-profile">
+            <img src="https://ui-avatars.com/api/?name=Budi+Santoso&background=4f46e5&color=fff" alt="User">
+            <div>
+                <div class="fw-bold">Budi Santoso</div>
+                <div class="text-muted small">Siswa • IX-B</div>
+            </div>
+        </div>
+        <div class="sidebar-actions">
+            <div class="d-flex gap-2">
+                <a href="notifikasi.html" class="btn btn-outline-secondary w-50 d-flex justify-content-between align-items-center rounded-pill bg-light text-dark">
+                    <span>Notifikasi</span> <i class="fa-solid fa-bell"></i>
+                </a>
+            </a>
+                <a href="profil_siswa.html" class="btn btn-outline-secondary w-50 d-flex justify-content-between align-items-center rounded-pill">
+                    <span>Profil</span> <i class="fa-solid fa-user"></i>
+                </a>
+            </div>
+        </div>
+        <nav class="nav-menu">
+            <a href="dashboard_siswa.html" class="nav-link"><i class="fa-solid fa-home text-primary"></i> Dashboard</a>
+            <a href="kelas_siswa.html" class="nav-link active"><i class="fa-solid fa-chalkboard-user text-success"></i> Kelas Saya</a>
+            <a href="tugas_siswa.html" class="nav-link"><i class="fa-solid fa-clipboard-list text-warning"></i> Tugas</a>
+            <a href="nilai_siswa.html" class="nav-link"><i class="fa-solid fa-star text-danger"></i> Nilai</a>
+            <a href="jadwal_siswa.html" class="nav-link"><i class="fa-solid fa-calendar-days text-info"></i> Jadwal</a>
+        </nav>
+        
+    </div>
+
+    <div class="main-content">
+        <div class="topbar d-flex justify-content-between align-items-center w-100">
+            <div class="d-flex align-items-center gap-3">
+                <a href="kelas_siswa.html" class="btn btn-outline-secondary rounded-pill"><i class="fa-solid fa-arrow-left"></i> Kembali</a>
+                <h5 class="mb-0 fw-bold"><i class="fa-solid fa-plus-circle"></i> Masuk Kelas</h5>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <div class="input-group" style="max-width: 300px;">
+                    <input type="text" class="form-control rounded-start-pill" placeholder="Cari kelas..." id="searchKelas" onkeyup="searchClasses()">
+                    <button class="btn btn-outline-secondary rounded-end-pill"><i class="fa-solid fa-search"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-area">
+            <div class="alert alert-info" role="alert">
+                <i class="fa-solid fa-circle-info"></i> Pilih kelas di bawah ini untuk bergabung. Anda dapat mengikuti beberapa kelas sekaligus.
+            </div>
+
+            <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
+
+                <!-- Card Kelas Tersedia 1 -->
+                <div class="col class-card-wrapper">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-header p-0" style="background: linear-gradient(135deg,#0d6efd,#0dcaf0); min-height: 100px; display: flex; align-items: flex-end;">
+                            <div class="text-white p-3 w-100">
+                                <div class="small opacity-75"><i class="fa-regular fa-file-lines"></i> VIII-A • Semester Ganjil</div>
+                                <h6 class="mb-0 fw-bold mt-1">Biologi</h6>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <div class="small text-muted">
+                                    <div class="mb-2"><i class="fa-solid fa-user-tie"></i> <strong>Guru:</strong> Ibu Siti Nurhaliza</div>
+                                    <div class="mb-2"><i class="fa-solid fa-users"></i> <strong>Peserta:</strong> 28 siswa</div>
+                                    <div><i class="fa-solid fa-calendar"></i> <strong>Dimulai:</strong> 18 Juli 2025</div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="mb-3">
+                                <span class="badge bg-success bg-opacity-10 text-success small me-2"><i class="fa-solid fa-video"></i> 5 Materi</span>
+                                <span class="badge bg-warning bg-opacity-10 text-warning small me-2"><i class="fa-solid fa-clipboard"></i> 3 Quiz</span>
+                                <span class="badge bg-info bg-opacity-10 text-info small"><i class="fa-solid fa-tasks"></i> 2 Tugas</span>
+                            </div>
+                            <button class="btn btn-primary w-100 rounded-pill" onclick="joinClass('Biologi')"><i class="fa-solid fa-check"></i> Masuk Kelas</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card Kelas Tersedia 2 -->
+                <div class="col class-card-wrapper">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-header p-0" style="background: linear-gradient(135deg,#28a745,#20c997); min-height: 100px; display: flex; align-items: flex-end;">
+                            <div class="text-white p-3 w-100">
+                                <div class="small opacity-75"><i class="fa-regular fa-file-lines"></i> VIII-B • Semester Ganjil</div>
+                                <h6 class="mb-0 fw-bold mt-1">Fisika</h6>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <div class="small text-muted">
+                                    <div class="mb-2"><i class="fa-solid fa-user-tie"></i> <strong>Guru:</strong> Bapak Ahmad Wijaya</div>
+                                    <div class="mb-2"><i class="fa-solid fa-users"></i> <strong>Peserta:</strong> 32 siswa</div>
+                                    <div><i class="fa-solid fa-calendar"></i> <strong>Dimulai:</strong> 18 Juli 2025</div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="mb-3">
+                                <span class="badge bg-success bg-opacity-10 text-success small me-2"><i class="fa-solid fa-video"></i> 6 Materi</span>
+                                <span class="badge bg-warning bg-opacity-10 text-warning small me-2"><i class="fa-solid fa-clipboard"></i> 4 Quiz</span>
+                                <span class="badge bg-info bg-opacity-10 text-info small"><i class="fa-solid fa-tasks"></i> 3 Tugas</span>
+                            </div>
+                            <button class="btn btn-primary w-100 rounded-pill" onclick="joinClass('Fisika')"><i class="fa-solid fa-check"></i> Masuk Kelas</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card Kelas Tersedia 3 -->
+                <div class="col class-card-wrapper">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-header p-0" style="background: linear-gradient(135deg,#dc3545,#fd7e14); min-height: 100px; display: flex; align-items: flex-end;">
+                            <div class="text-white p-3 w-100">
+                                <div class="small opacity-75"><i class="fa-regular fa-file-lines"></i> VIII-C • Semester Ganjil</div>
+                                <h6 class="mb-0 fw-bold mt-1">Kimia</h6>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <div class="small text-muted">
+                                    <div class="mb-2"><i class="fa-solid fa-user-tie"></i> <strong>Guru:</strong> Ibu Dewi Santoso</div>
+                                    <div class="mb-2"><i class="fa-solid fa-users"></i> <strong>Peserta:</strong> 25 siswa</div>
+                                    <div><i class="fa-solid fa-calendar"></i> <strong>Dimulai:</strong> 18 Juli 2025</div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="mb-3">
+                                <span class="badge bg-success bg-opacity-10 text-success small me-2"><i class="fa-solid fa-video"></i> 4 Materi</span>
+                                <span class="badge bg-warning bg-opacity-10 text-warning small me-2"><i class="fa-solid fa-clipboard"></i> 2 Quiz</span>
+                                <span class="badge bg-info bg-opacity-10 text-info small"><i class="fa-solid fa-tasks"></i> 2 Tugas</span>
+                            </div>
+                            <button class="btn btn-primary w-100 rounded-pill" onclick="joinClass('Kimia')"><i class="fa-solid fa-check"></i> Masuk Kelas</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card Kelas Tersedia 4 -->
+                <div class="col class-card-wrapper">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-header p-0" style="background: linear-gradient(135deg,#6f42c1,#b19cd9); min-height: 100px; display: flex; align-items: flex-end;">
+                            <div class="text-white p-3 w-100">
+                                <div class="small opacity-75"><i class="fa-regular fa-file-lines"></i> IX-A • Semester Ganjil</div>
+                                <h6 class="mb-0 fw-bold mt-1">Matematika</h6>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <div class="small text-muted">
+                                    <div class="mb-2"><i class="fa-solid fa-user-tie"></i> <strong>Guru:</strong> Bapak Rudi Hermawan</div>
+                                    <div class="mb-2"><i class="fa-solid fa-users"></i> <strong>Peserta:</strong> 31 siswa</div>
+                                    <div><i class="fa-solid fa-calendar"></i> <strong>Dimulai:</strong> 18 Juli 2025</div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="mb-3">
+                                <span class="badge bg-success bg-opacity-10 text-success small me-2"><i class="fa-solid fa-video"></i> 7 Materi</span>
+                                <span class="badge bg-warning bg-opacity-10 text-warning small me-2"><i class="fa-solid fa-clipboard"></i> 5 Quiz</span>
+                                <span class="badge bg-info bg-opacity-10 text-info small"><i class="fa-solid fa-tasks"></i> 4 Tugas</span>
+                            </div>
+                            <button class="btn btn-primary w-100 rounded-pill" onclick="joinClass('Matematika')"><i class="fa-solid fa-check"></i> Masuk Kelas</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card Kelas Tersedia 5 -->
+                <div class="col class-card-wrapper">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-header p-0" style="background: linear-gradient(135deg,#17a2b8,#20c997); min-height: 100px; display: flex; align-items: flex-end;">
+                            <div class="text-white p-3 w-100">
+                                <div class="small opacity-75"><i class="fa-regular fa-file-lines"></i> IX-B • Semester Ganjil</div>
+                                <h6 class="mb-0 fw-bold mt-1">Bahasa Indonesia</h6>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <div class="small text-muted">
+                                    <div class="mb-2"><i class="fa-solid fa-user-tie"></i> <strong>Guru:</strong> Ibu Eka Putri</div>
+                                    <div class="mb-2"><i class="fa-solid fa-users"></i> <strong>Peserta:</strong> 29 siswa</div>
+                                    <div><i class="fa-solid fa-calendar"></i> <strong>Dimulai:</strong> 18 Juli 2025</div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="mb-3">
+                                <span class="badge bg-success bg-opacity-10 text-success small me-2"><i class="fa-solid fa-video"></i> 5 Materi</span>
+                                <span class="badge bg-warning bg-opacity-10 text-warning small me-2"><i class="fa-solid fa-clipboard"></i> 3 Quiz</span>
+                                <span class="badge bg-info bg-opacity-10 text-info small"><i class="fa-solid fa-tasks"></i> 3 Tugas</span>
+                            </div>
+                            <button class="btn btn-primary w-100 rounded-pill" onclick="joinClass('Bahasa Indonesia')"><i class="fa-solid fa-check"></i> Masuk Kelas</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card Kelas Tersedia 6 -->
+                <div class="col class-card-wrapper">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-header p-0" style="background: linear-gradient(135deg,#fd7e14,#ffc107); min-height: 100px; display: flex; align-items: flex-end;">
+                            <div class="text-white p-3 w-100">
+                                <div class="small opacity-75"><i class="fa-regular fa-file-lines"></i> IX-C • Semester Ganjil</div>
+                                <h6 class="mb-0 fw-bold mt-1">Sejarah</h6>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <div class="small text-muted">
+                                    <div class="mb-2"><i class="fa-solid fa-user-tie"></i> <strong>Guru:</strong> Bapak Hendra Wijaya</div>
+                                    <div class="mb-2"><i class="fa-solid fa-users"></i> <strong>Peserta:</strong> 26 siswa</div>
+                                    <div><i class="fa-solid fa-calendar"></i> <strong>Dimulai:</strong> 18 Juli 2025</div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="mb-3">
+                                <span class="badge bg-success bg-opacity-10 text-success small me-2"><i class="fa-solid fa-video"></i> 4 Materi</span>
+                                <span class="badge bg-warning bg-opacity-10 text-warning small me-2"><i class="fa-solid fa-clipboard"></i> 2 Quiz</span>
+                                <span class="badge bg-info bg-opacity-10 text-info small"><i class="fa-solid fa-tasks"></i> 1 Tugas</span>
+                            </div>
+                            <button class="btn btn-primary w-100 rounded-pill" onclick="joinClass('Sejarah')"><i class="fa-solid fa-check"></i> Masuk Kelas</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/sidebar-toggle.js"></script>
+
+    <script>
+        function searchClasses() {
+            const input = document.getElementById('searchKelas').value.toLowerCase();
+            const cards = document.querySelectorAll('.class-card-wrapper');
+            
+            cards.forEach(card => {
+                const className = card.querySelector('h6').textContent.toLowerCase();
+                const teacher = card.querySelector('.text-muted').textContent.toLowerCase();
+                
+                if (className.includes(input) || teacher.includes(input)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function joinClass(className) {
+            // Show success alert
+            const alertDiv = document.createElement('div');
+            alertDiv.className = 'alert alert-success alert-dismissible fade show position-fixed';
+            alertDiv.style.top = '20px';
+            alertDiv.style.right = '20px';
+            alertDiv.style.zIndex = '9999';
+            alertDiv.role = 'alert';
+            alertDiv.innerHTML = `
+                <i class="fa-solid fa-check-circle"></i> <strong>Berhasil!</strong> Anda telah bergabung dengan kelas <strong>${className}</strong>.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            `;
+            document.body.appendChild(alertDiv);
+
+            // Redirect after 2 seconds
+            setTimeout(() => {
+                window.location.href = 'kelas_siswa.html';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

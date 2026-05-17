@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LMS Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+
+<body class="dashboard-page text-sm">
+
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="school-logo">
+                <i class="fa-solid fa-school text-primary mb-4"></i>
+                <div>Sekolah<br>Nama Sekolah/ Kampus</div>
+            </div>
+        </div>
+        
+        <div class="user-profile">
+            <img src="https://ui-avatars.com/api/?name=Staff+Komputer&background=e0e0e0&color=333" alt="User">
+            <div>
+                <div class="fw-bold">Staff Komputer</div>
+                <div class="text-muted small">Super Admin</div>
+            </div>
+        </div>
+        <div class="sidebar-actions">
+            <div class="d-flex gap-2">
+                <a href="notifikasi.html" class="btn btn-outline-secondary d-flex justify-content-between align-items-center rounded-pill">
+                    <span>Notifikasi </span>
+                </a>
+                <a href="profile.html" class="btn btn-outline-secondary d-flex justify-content-between align-items-center rounded-pill bg-light text-dark">
+                    <span>Profil </span>
+                </a>
+                <a href="../login.html" class="btn btn-outline-danger d-flex justify-content-between align-items-center rounded-pill bg-light text-danger">
+                    <span>Keluar </span>
+                </a>
+            </a>
+            </div>
+        </div>
+
+        <nav class="nav-menu">
+            <a href="dashboard.html" class="nav-link active"><i class="fa-solid fa-home text-primary"></i> Dashboard</a>
+            <a href="class_all.html" class="nav-link"><i class="fa-solid fa-chalkboard-user text-success"></i> Kelas</a>
+            <a href="user_management.html" class="nav-link"><i class="fa-solid fa-users text-info"></i> Manajemen User</a>
+            <a href="pengaturan_website.html" class="nav-link"><i class="fa-solid fa-gear"></i> Pengaturan Website</a>
+        </nav>
+
+        
+    </div>
+
+    <div class="main-content bg-light">
+        
+        <div class="dashboard-banner p-4 p-lg-5 text-white">
+            <img src="https://cdn-icons-png.flaticon.com/512/3143/3143282.png" class="banner-bg-icon" alt="bg">
+            
+            <div class="position-relative z-1">
+                <div class="row align-items-center mb-5">
+                    <div class="col-lg-5">
+                        <h2 class="fw-bold mb-3">Hi, Staff Komputer</h2>
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="fa-solid fa-circle-user"></i>
+                            <span class="fw-medium">Selamat datang di aplikasi pintar LMS!</span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-7 mt-4 mt-lg-0">
+                        <div class="d-flex flex-wrap gap-3 justify-content-lg-end">
+                            <div class="stat-box d-flex align-items-center justify-content-between p-2 px-3 rounded-pill" style="min-width: 250px;">
+                                <span class="fw-bold me-3">kelas</span>
+                                <span class="fw-bold fs-5 me-3">9</span>
+                                <button class="btn btn-light btn-sm rounded-pill fw-bold text-dark px-3 py-1">Lihat Kelas</button>
+                            </div>
+                            
+                            <div class="stat-box d-flex align-items-center justify-content-between p-2 px-3 rounded-pill" style="min-width: 250px;">
+                                <span class="fw-bold me-3">Siswa</span>
+                                <span class="fw-bold fs-5 me-3">100</span>
+                                <button class="btn btn-light btn-sm rounded-pill fw-bold text-dark px-3 py-1">Lihat Kelas</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="border-white opacity-25 mb-4">
+
+                <div class="row g-4 pb-3">
+                    <div class="col-md-6">
+                        <div class="card border-0 rounded-4 shadow-sm p-4 text-center h-100">
+                            <h6 class="fw-bold text-dark mb-4 mt-2">Pemberian Nilai Tugas</h6>
+                            
+                            <div class="px-2">
+                                <div class="progress-label-container w-100">
+                                    <div class="progress-line"></div>
+                                    <div class="progress-label left">Belum Mengikuti</div>
+                                    <div class="progress-label right">Selesai</div>
+                                </div>
+                                <div class="progress custom-progress mt-3 w-100 shadow-sm">
+                                    <div class="progress-bar progress-danger-custom d-flex justify-content-end pe-3 text-white fw-bold" style="width: 47%;">47%</div>
+                                    <div class="progress-bar progress-success-custom d-flex justify-content-start ps-3 text-white fw-bold" style="width: 53%;">53%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="card border-0 rounded-4 shadow-sm p-4 text-center h-100">
+                            <h6 class="fw-bold text-dark mb-4 mt-2">Pengumpulan Tugas Siswa</h6>
+                            
+                            <div class="px-2">
+                                <div class="progress-label-container w-100">
+                                    <div class="progress-line"></div>
+                                    <div class="progress-label left">Belum Mengikuti</div>
+                                    <div class="progress-label right">Selesai</div>
+                                </div>
+                                <div class="progress custom-progress mt-3 w-100 shadow-sm">
+                                    <div class="progress-bar progress-danger-custom d-flex justify-content-end pe-3 text-white fw-bold" style="width: 71%;">71%</div>
+                                    <div class="progress-bar progress-success-custom d-flex justify-content-start ps-3 text-white fw-bold" style="width: 29%;">29%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-area">
+            <div class="notification-list">
+                <div class="notification-item unread">
+                    <span class="notification-icon bg-primary-subtle text-primary"><i class="fa-solid fa-user-plus"></i></span>
+                    <div class="flex-grow-1">
+                        <div class="d-flex justify-content-between align-items-start gap-2">
+                            <div>
+                                <div class="fw-semibold">Permintaan bergabung kelas baru</div>
+                                <div class="text-muted small">12 siswa meminta akses ke kelas "IX-B Informatika".</div>
+                            </div>
+                            <small class="text-muted">Baru saja</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="notification-item unread">
+                    <span class="notification-icon bg-success-subtle text-success"><i class="fa-solid fa-clipboard-check"></i></span>
+                    <div class="flex-grow-1">
+                        <div class="d-flex justify-content-between align-items-start gap-2">
+                            <div>
+                                <div class="fw-semibold">Tugas telah dipublikasikan</div>
+                                <div class="text-muted small">Tugas "Laporan Praktikum Sistem Komputer" berhasil dipublikasikan.</div>
+                            </div>
+                            <small class="text-muted">5 menit lalu</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="notification-item">
+                    <span class="notification-icon bg-warning-subtle text-warning"><i class="fa-solid fa-circle-exclamation"></i></span>
+                    <div class="flex-grow-1">
+                        <div class="d-flex justify-content-between align-items-start gap-2">
+                            <div>
+                                <div class="fw-semibold">Ada 4 tugas terlambat dikumpulkan</div>
+                                <div class="text-muted small">Periksa detail pengumpulan pada kelas "IX-B Matematika".</div>
+                            </div>
+                            <small class="text-muted">1 jam lalu</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="notification-item">
+                    <span class="notification-icon bg-info-subtle text-info"><i class="fa-solid fa-gear"></i></span>
+                    <div class="flex-grow-1">
+                        <div class="d-flex justify-content-between align-items-start gap-2">
+                            <div>
+                                <div class="fw-semibold">Pengaturan website berhasil diperbarui</div>
+                                <div class="text-muted small">Nama website dan hero index diperbarui oleh Super Admin.</div>
+                            </div>
+                            <small class="text-muted">Kemarin</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/sidebar-toggle.js"></script>
+</body>
+</html>

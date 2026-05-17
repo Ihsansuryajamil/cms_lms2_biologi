@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Tugas - LMS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body class="dashboard-page text-sm">
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="school-logo">
+                <i class="fa-solid fa-school text-primary mb-4"></i>
+                <div>Sekolah<br>Nama Sekolah/ Kampus</div>
+            </div>
+        </div>
+        <div class="user-profile">
+            <img src="https://ui-avatars.com/api/?name=Staff+Komputer&background=e0e0e0&color=333" alt="User">
+            <div>
+                <div class="fw-bold">Staff Komputer</div>
+                <div class="text-muted small">Super Admin</div>
+            </div>
+        </div>
+        <div class="sidebar-actions">
+            <div class="d-flex gap-2">
+                <a href="notifikasi.html" class="btn btn-outline-secondary d-flex justify-content-between align-items-center rounded-pill">
+                    <span>Notifikasi </span>
+                </a>
+                <a href="profile.html" class="btn btn-outline-secondary d-flex justify-content-between align-items-center rounded-pill bg-light text-dark">
+                    <span>Profil </span>
+                </a>
+                <a href="../login.html" class="btn btn-outline-danger d-flex justify-content-between align-items-center rounded-pill bg-light text-danger">
+                    <span>Keluar </span>
+                </a>
+            </a>
+            </div>
+        </div>
+        <nav class="nav-menu">
+            <a href="dashboard.html" class="nav-link"><i class="fa-solid fa-home text-primary"></i> Dashboard</a>
+            <a href="class_all.html" class="nav-link active"><i class="fa-solid fa-chalkboard-user text-success"></i> Kelas</a>
+            <a href="user_management.html" class="nav-link"><i class="fa-solid fa-users text-info"></i> Manajemen User</a>
+            <a href="pengaturan_website.html" class="nav-link"><i class="fa-solid fa-gear"></i> Pengaturan Website</a>
+        </nav>
+        
+    </div>
+
+    <div class="main-content">
+        <div class="topbar d-flex justify-content-between align-items-center w-100">
+            <div class="d-flex align-items-center gap-3">
+                <a href="class_detail.html" class="btn btn-outline-secondary rounded-pill"><i class="fa-solid fa-arrow-left"></i> Kembali</a>
+                <h5 class="mb-0 fw-bold">Tambah Tugas Baru</h5>
+            </div>
+        </div>
+
+        <div class="content-area">
+            <div class="create-form-panel mx-auto" style="max-width: 900px;">
+                <div class="create-form-title">Tugas Siswa</div>
+                <div class="create-form-subtitle">Atur tugas baru lengkap dengan deadline dan metode pengumpulan.</div>
+
+                <div class="row g-3">
+                    <div class="col-md-8">
+                        <label class="form-section-label mb-2">Judul Tugas</label>
+                        <input type="text" class="form-control" placeholder="Contoh: Laporan Praktikum Sistem Komputer">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-section-label mb-2">Topik</label>
+                        <select class="form-select">
+                            <option>Topik 1 - Dasar Komputer</option>
+                            <option>Topik 2 - Browser dan CMS</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-section-label mb-2">Tanggal Mulai</label>
+                        <input type="date" class="form-control">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-section-label mb-2">Deadline</label>
+                        <input type="date" class="form-control">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-section-label mb-2">Pukul</label>
+                        <input type="time" class="form-control">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-section-label mb-2">Nilai Maksimal</label>
+                        <input type="number" class="form-control" value="100">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-section-label mb-2">Mode Penilaian</label>
+                        <select class="form-select">
+                            <option>Manual</option>
+                            <option>Rubrik</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-section-label mb-2">Status</label>
+                        <select class="form-select">
+                            <option>Draft</option>
+                            <option>Publish</option>
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-section-label mb-2">Instruksi Tugas</label>
+                        <textarea class="form-control" rows="4" placeholder="Tuliskan detail instruksi pengerjaan tugas"></textarea>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-section-label mb-2">Pengumpulan</label>
+                        <div class="d-flex flex-wrap gap-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="opsiFile" checked>
+                                <label class="form-check-label" for="opsiFile">Upload File</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="opsiTeks">
+                                <label class="form-check-label" for="opsiTeks">Jawaban Teks</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="opsiLink">
+                                <label class="form-check-label" for="opsiLink">Lampiran Link</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-end gap-2 mt-4">
+                    <a href="class_detail.html" class="btn btn-outline-secondary rounded-pill px-4">Batal</a>
+                    <button class="btn btn-primary rounded-pill px-4"><i class="fa-solid fa-save"></i> Simpan Tugas</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/sidebar-toggle.js"></script>
+</body>
+</html>
