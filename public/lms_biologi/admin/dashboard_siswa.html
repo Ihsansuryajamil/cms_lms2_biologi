@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Siswa - LMS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="stylesheet" href="../assets/style_siswa.css">
+</head>
+
+<body class="dashboard-page text-sm">
+
+    <!-- ===== SIDEBAR ===== -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="school-logo">
+                <i class="fa-solid fa-school text-primary mb-4"></i>
+                <div>Sekolah<br>Nama Sekolah/ Kampus</div>
+            </div>
+        </div>
+
+        <div class="user-profile">
+            <img src="https://ui-avatars.com/api/?name=Budi+Santoso&background=4f46e5&color=fff" alt="User">
+            <div>
+                <div class="fw-bold">Budi Santoso</div>
+                <div class="text-muted small">Siswa • IX-B</div>
+            </div>
+        </div>
+        <div class="sidebar-actions">
+            <div class="d-flex gap-2">
+                <a href="notifikasi.html" class="btn btn-outline-secondary d-flex justify-content-between align-items-center rounded-pill">
+                    <span>Notifikasi </span>
+                </a>
+                <a href="profile.html" class="btn btn-outline-secondary d-flex justify-content-between align-items-center rounded-pill bg-light text-dark">
+                    <span>Profil </span>
+                </a>
+                <a href="../login.html" class="btn btn-outline-danger d-flex justify-content-between align-items-center rounded-pill bg-light text-danger">
+                    <span>Keluar </span>
+                </a>
+            </a>
+            </div>
+        </div>
+
+        <nav class="nav-menu">
+            <a href="dashboard_siswa.html" class="nav-link active"><i class="fa-solid fa-home text-primary"></i> Dashboard</a>
+            <a href="kelas_siswa.html" class="nav-link"><i class="fa-solid fa-chalkboard-user text-success"></i> Kelas Saya</a>
+            <a href="tugas_siswa.html" class="nav-link"><i class="fa-solid fa-clipboard-list text-warning"></i> Tugas</a>
+            <a href="nilai_siswa.html" class="nav-link"><i class="fa-solid fa-star text-danger"></i> Nilai</a>
+            <a href="jadwal_siswa.html" class="nav-link"><i class="fa-solid fa-calendar-days text-info"></i> Jadwal</a>
+        </nav>
+
+        
+    </div>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <div class="main-content bg-light">
+
+        <!-- Hero Banner -->
+        <div class="dashboard-banner p-4 p-lg-5 text-white">
+            <img src="https://cdn-icons-png.flaticon.com/512/3143/3143282.png" class="banner-bg-icon" alt="bg">
+            <div class="position-relative z-1">
+                <div class="row align-items-center mb-4">
+                    <div class="col-lg-6">
+                        <!-- <p class="mb-1 opacity-75 small"><i class="fa-solid fa-sun me-1"></i> Selamat Pagi,</p> -->
+                        <h2 class="fw-bold mb-2">Hi, Budi Santoso 👋</h2>
+                        <p class="opacity-75 small mb-0">Kelas IX-B &nbsp;|&nbsp; NIS: 232407001 &nbsp;|&nbsp; Semester Ganjil 2025/2026</p>
+                    </div>
+                    <div class="col-lg-6 mt-4 mt-lg-0">
+                        <div class="d-flex flex-wrap gap-3 justify-content-lg-end">
+                            <div class="stat-box d-flex align-items-center justify-content-between p-2 px-3 rounded-pill" style="min-width: 200px;">
+                                <span class="fw-bold me-3"><i class="fa-solid fa-chalkboard me-1"></i> Kelas</span>
+                                <span class="fw-bold fs-5 me-3">5</span>
+                                <a href="kelas_siswa.html" class="btn btn-light btn-sm rounded-pill fw-bold text-dark px-3 py-1">Lihat</a>
+                            </div>
+                            <div class="stat-box d-flex align-items-center justify-content-between p-2 px-3 rounded-pill" style="min-width: 200px;">
+                                <span class="fw-bold me-3"><i class="fa-solid fa-clipboard-list me-1"></i> Tugas</span>
+                                <span class="fw-bold fs-5 me-3">3</span>
+                                <a href="tugas_siswa.html" class="btn btn-light btn-sm rounded-pill fw-bold text-dark px-3 py-1">Lihat</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="border-white opacity-25 mb-4">
+
+                <!-- Progress Cards -->
+                <div class="row g-4 pb-3">
+                    <div class="col-md-6">
+                        <div class="card border-0 rounded-4 shadow-sm p-4 text-center h-100">
+                            <h6 class="fw-bold text-dark mb-4 mt-2">Progress Penyelesaian Tugas</h6>
+                            <div class="px-2">
+                                <div class="progress-label-container w-100">
+                                    <div class="progress-line"></div>
+                                    <div class="progress-label left">Belum Selesai</div>
+                                    <div class="progress-label right">Selesai</div>
+                                </div>
+                                <div class="progress custom-progress mt-3 w-100 shadow-sm">
+                                    <div class="progress-bar progress-danger-custom d-flex justify-content-end pe-3 text-white fw-bold" style="width: 30%;">30%</div>
+                                    <div class="progress-bar progress-success-custom d-flex justify-content-start ps-3 text-white fw-bold" style="width: 70%;">70%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card border-0 rounded-4 shadow-sm p-4 text-center h-100">
+                            <h6 class="fw-bold text-dark mb-4 mt-2">Rata-Rata Nilai</h6>
+                            <div class="px-2">
+                                <div class="progress-label-container w-100">
+                                    <div class="progress-line"></div>
+                                    <div class="progress-label left">0</div>
+                                    <div class="progress-label right">100</div>
+                                </div>
+                                <div class="progress custom-progress mt-3 w-100 shadow-sm">
+                                    <div class="progress-bar progress-danger-custom d-flex justify-content-end pe-3 text-white fw-bold" style="width: 18%;">18%</div>
+                                    <div class="progress-bar progress-success-custom d-flex justify-content-start ps-3 text-white fw-bold" style="width: 82%;">82</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Nav Pills -->
+        <div class="d-flex justify-content-center bottom-nav-pills px-3">
+            <div class="bg-white rounded-2 shadow-sm d-inline-flex border overflow-hidden flex-wrap">
+                <a href="tugas_siswa.html" class="btn btn-light bg-white border-end border-0 rounded-0 fw-medium text-dark text-decoration-none px-4 py-2">
+                    Tugas Saya <i class="fa-solid fa-clipboard-list ms-2 text-muted"></i>
+                </a>
+                <a href="jadwal_siswa.html" class="btn btn-light bg-white border-end border-0 rounded-0 fw-medium text-dark text-decoration-none px-4 py-2">
+                    Jadwal Saya <i class="fa-solid fa-calendar ms-2 text-muted"></i>
+                </a>
+                <a href="nilai_siswa.html" class="btn btn-light bg-white border-end border-0 rounded-0 fw-medium text-dark text-decoration-none px-4 py-2">
+                    Nilai Saya <i class="fa-solid fa-star ms-2 text-muted"></i>
+                </a>
+                <a href="#" class="btn btn-light bg-white rounded-0 fw-medium text-dark text-decoration-none px-4 py-2 border-0">
+                    Riwayat Login <i class="fa-solid fa-clock ms-2 text-muted"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Section -->
+        <div class="px-4 py-4">
+            <div class="row g-4">
+
+                <!-- Tugas Mendatang -->
+                <div class="col-lg-7">
+                    <div class="card border-0 shadow-sm rounded-3">
+                        <div class="card-header bg-white border-bottom pt-3 pb-0 px-4 d-flex justify-content-between align-items-center">
+                            <h6 class="fw-bold mb-3"><i class="fa-solid fa-clipboard-list text-warning me-2"></i> Tugas Mendatang</h6>
+                            <a href="tugas_siswa.html" class="text-primary small text-decoration-none mb-3">Lihat Semua</a>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-anggota mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>MATA PELAJARAN</th>
+                                            <th>JUDUL TUGAS</th>
+                                            <th>DEADLINE</th>
+                                            <th class="text-center">STATUS</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><span class="badge-mapel badge-mapel-blue">Informatika</span></td>
+                                            <td class="fw-medium">Membuat desain flowchart</td>
+                                            <td class="text-muted small">20 Jul 2025</td>
+                                            <td class="text-center"><span class="status-badge status-pending">Belum Dikumpul</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="badge-mapel badge-mapel-green">Matematika</span></td>
+                                            <td class="fw-medium">Latihan Soal Aljabar Bab 3</td>
+                                            <td class="text-muted small">22 Jul 2025</td>
+                                            <td class="text-center"><span class="status-badge status-done">Sudah Dikumpul</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="badge-mapel badge-mapel-orange">B. Indonesia</span></td>
+                                            <td class="fw-medium">Menulis Teks Narasi</td>
+                                            <td class="text-muted small">25 Jul 2025</td>
+                                            <td class="text-center"><span class="status-badge status-pending">Belum Dikumpul</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="badge-mapel badge-mapel-red">IPA</span></td>
+                                            <td class="fw-medium">Laporan Praktikum Fotosintesis</td>
+                                            <td class="text-muted small">28 Jul 2025</td>
+                                            <td class="text-center"><span class="status-badge status-late">Terlambat</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kelas Terbaru & Pengumuman -->
+                <div class="col-lg-5">
+                    <!-- Kelas Saya -->
+                    <div class="card border-0 shadow-sm rounded-3 mb-4">
+                        <div class="card-header bg-white border-bottom pt-3 pb-0 px-4 d-flex justify-content-between align-items-center">
+                            <h6 class="fw-bold mb-3"><i class="fa-solid fa-chalkboard-user text-success me-2"></i> Kelas Saya</h6>
+                            <a href="kelas_siswa.html" class="text-primary small text-decoration-none mb-3">Lihat Semua</a>
+                        </div>
+                        <div class="card-body p-3">
+                            <a href="kelas_detail_siswa.html" class="kelas-item-mini text-decoration-none d-flex align-items-center gap-3 p-2 rounded-3 mb-2">
+                                <div class="kelas-icon-mini" style="background:#4f46e5;">
+                                    <i class="fa-solid fa-laptop-code"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <div class="fw-bold text-dark small">Informatika</div>
+                                    <div class="text-muted" style="font-size:0.75rem;">Staff Komputer • 7 Topik</div>
+                                </div>
+                                <i class="fa-solid fa-chevron-right text-muted small"></i>
+                            </a>
+                            <a href="#" class="kelas-item-mini text-decoration-none d-flex align-items-center gap-3 p-2 rounded-3 mb-2">
+                                <div class="kelas-icon-mini" style="background:#16a34a;">
+                                    <i class="fa-solid fa-square-root-variable"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <div class="fw-bold text-dark small">Matematika</div>
+                                    <div class="text-muted" style="font-size:0.75rem;">Guru Matematika • 5 Topik</div>
+                                </div>
+                                <i class="fa-solid fa-chevron-right text-muted small"></i>
+                            </a>
+                            <a href="#" class="kelas-item-mini text-decoration-none d-flex align-items-center gap-3 p-2 rounded-3 mb-2">
+                                <div class="kelas-icon-mini" style="background:#ea580c;">
+                                    <i class="fa-solid fa-book-open"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <div class="fw-bold text-dark small">Bahasa Indonesia</div>
+                                    <div class="text-muted" style="font-size:0.75rem;">Guru B.Indonesia • 4 Topik</div>
+                                </div>
+                                <i class="fa-solid fa-chevron-right text-muted small"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Pengumuman -->
+                    <!-- <div class="card border-0 shadow-sm rounded-3">
+                        <div class="card-header bg-white border-bottom pt-3 pb-0 px-4">
+                            <h6 class="fw-bold mb-3"><i class="fa-solid fa-bullhorn text-danger me-2"></i> Pengumuman</h6>
+                        </div>
+                        <div class="card-body p-3">
+                            <div class="announcement-item mb-3 pb-3 border-bottom">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span class="fw-bold small text-dark">Jadwal UTS Semester Ganjil</span>
+                                    <span class="text-muted" style="font-size:0.7rem;">2 hari lalu</span>
+                                </div>
+                                <p class="text-muted mb-0" style="font-size:0.8rem;">UTS akan dilaksanakan pada tanggal 1-5 Agustus 2025. Harap mempersiapkan diri.</p>
+                            </div>
+                            <div class="announcement-item">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span class="fw-bold small text-dark">Pengumpulan Tugas Akhir</span>
+                                    <span class="text-muted" style="font-size:0.7rem;">5 hari lalu</span>
+                                </div>
+                                <p class="text-muted mb-0" style="font-size:0.8rem;">Batas akhir pengumpulan tugas akhir semester adalah tanggal 30 Juli 2025.</p>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+
+            </div>
+        </div>
+
+    </div><!-- end main-content -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/sidebar-toggle.js"></script>
+</body>
+</html>

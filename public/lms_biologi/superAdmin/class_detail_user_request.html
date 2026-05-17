@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Kelas - Permintaan Bergabung</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body class="dashboard-page text-sm">
+
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="school-logo">
+                <i class="fa-solid fa-school text-primary mb-4"></i>
+                <div>Sekolah<br>Nama Sekolah/ Kampus</div>
+            </div>
+        </div>
+        
+        <div class="user-profile">
+            <img src="https://ui-avatars.com/api/?name=Staff+Komputer&background=e0e0e0&color=333" alt="User">
+            <div>
+                <div class="fw-bold">Staff Komputer</div>
+                <div class="text-muted small">Super Admin</div>
+            </div>
+        </div>
+        <div class="sidebar-actions">
+            <div class="d-flex gap-2">
+                <a href="notifikasi.html" class="btn btn-outline-secondary d-flex justify-content-between align-items-center rounded-pill">
+                    <span>Notifikasi </span>
+                </a>
+                <a href="profile.html" class="btn btn-outline-secondary d-flex justify-content-between align-items-center rounded-pill bg-light text-dark">
+                    <span>Profil </span>
+                </a>
+                <a href="../login.html" class="btn btn-outline-danger d-flex justify-content-between align-items-center rounded-pill bg-light text-danger">
+                    <span>Keluar </span>
+                </a>
+            </a>
+            </div>
+        </div>
+
+        <nav class="nav-menu">
+            <a href="dashboard.html" class="nav-link"><i class="fa-solid fa-home text-primary"></i> Dashboard</a>
+            <a href="class_all.html" class="nav-link active"><i class="fa-solid fa-chalkboard-user text-success"></i> Kelas</a>
+            <a href="user_management.html" class="nav-link"><i class="fa-solid fa-users text-info"></i> Manajemen User</a>
+            <a href="pengaturan_website.html" class="nav-link"><i class="fa-solid fa-gear"></i> Pengaturan Website</a>
+        </nav>
+
+        
+    </div>
+
+    <div class="main-content">
+        <div class="topbar d-flex justify-content-between align-items-center w-100">
+            <div class="d-flex align-items-center gap-3">
+                <a href="dashboard.html" class="btn btn-outline-secondary rounded-pill"><i class="fa-solid fa-arrow-left"></i> Kembali</a>
+                <h5 class="mb-0 fw-bold">IX B-INFORMATIKA (KOMP)</h5>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <span class="text-success small fw-bold"><i class="fa-solid fa-check-circle"></i> Kelas Disetujui</span>
+                <button class="btn btn-outline-secondary rounded-pill"><i class="fa-solid fa-share-nodes"></i> Bagikan</button>
+            </div>
+        </div>
+
+        <div class="content-area">
+            
+             <ul class="nav nav-tabs mb-4">
+                <li class="nav-item"><a class="nav-link text-muted" href="class_detail.html">Topik <span class="badge bg-light text-dark">9</span></a></li>
+                <li class="nav-item"><a class="nav-link active fw-bold" href="class_detail_user.html">Anggota <span class="badge bg-light text-dark">15</span></a></li>
+                <li class="nav-item"><a class="nav-link text-muted" href="class_detail_discuss.html"><i class="fa-regular fa-comments"></i> Diskusi</a></li>
+                <li class="nav-item"><a class="nav-link text-muted" href="class_edit.html"><i class="fa-solid fa-gear"></i> Pengaturan</a></li>
+                <li class="nav-item ms-auto"><span class="nav-link border-0 text-muted">Informatika</span></li>
+            </ul>
+
+            <div class="sub-tabs">
+                <a href="class_detail_user.html">Anggota Aktif <span class="badge rounded-pill">15</span></a>
+                <a href="class_detail_user_request.html" class="active">Permintaan Bergabung <span class="badge rounded-pill">0</span></a>
+            </div>
+
+            <div class="position-relative mb-4">
+                <input type="text" class="form-control rounded-pill py-2 pe-5" placeholder="Cari disini...">
+                <i class="fa-solid fa-search position-absolute top-50 end-0 translate-middle-y me-4 text-muted"></i>
+            </div>
+
+            <div class="bg-light rounded p-5 text-center text-muted border border-1 border-opacity-50">
+                <i class="fa-solid fa-triangle-exclamation fa-2x mb-2 text-secondary opacity-75"></i>
+                <p class="mb-0 fw-medium">Tidak ada anggota permintaan bergabung.</p>
+            </div>
+            
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/sidebar-toggle.js"></script>
+</body>
+</html>

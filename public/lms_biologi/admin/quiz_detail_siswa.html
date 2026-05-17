@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Quiz - LMS Siswa</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="stylesheet" href="../assets/style_siswa.css">
+</head>
+<body class="dashboard-page text-sm">
+
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="school-logo">
+                <i class="fa-solid fa-school text-primary mb-4"></i>
+                <div>Sekolah<br>Nama Sekolah/ Kampus</div>
+            </div>
+        </div>
+        <div class="user-profile">
+            <img src="https://ui-avatars.com/api/?name=Budi+Santoso&background=4f46e5&color=fff" alt="User">
+            <div>
+                <div class="fw-bold">Budi Santoso</div>
+                <div class="text-muted small">Siswa • IX-B</div>
+            </div>
+        </div>
+        <div class="sidebar-actions">
+            <div class="d-flex gap-2">
+                <a href="notifikasi.html" class="btn btn-outline-secondary d-flex justify-content-between align-items-center rounded-pill">
+                    <span>Notifikasi </span>
+                </a>
+                <a href="profile.html" class="btn btn-outline-secondary d-flex justify-content-between align-items-center rounded-pill bg-light text-dark">
+                    <span>Profil </span>
+                </a>
+                <a href="../login.html" class="btn btn-outline-danger d-flex justify-content-between align-items-center rounded-pill bg-light text-danger">
+                    <span>Keluar </span>
+                </a>
+            </a>
+            </div>
+        </div>
+        <nav class="nav-menu">
+            <a href="dashboard_siswa.html" class="nav-link"><i class="fa-solid fa-home text-primary"></i> Dashboard</a>
+            <a href="kelas_siswa.html" class="nav-link active"><i class="fa-solid fa-chalkboard-user text-success"></i> Kelas Saya</a>
+            <a href="tugas_siswa.html" class="nav-link"><i class="fa-solid fa-clipboard-list text-warning"></i> Tugas</a>
+            <a href="nilai_siswa.html" class="nav-link"><i class="fa-solid fa-star text-danger"></i> Nilai</a>
+            <a href="jadwal_siswa.html" class="nav-link"><i class="fa-solid fa-calendar-days text-info"></i> Jadwal</a>
+        </nav>
+        
+    </div>
+
+    <div class="main-content">
+        <div class="topbar d-flex justify-content-between align-items-center w-100">
+            <div class="d-flex align-items-center gap-3">
+                <a href="kelas_detail_siswa.html" class="btn btn-outline-secondary rounded-pill"><i class="fa-solid fa-arrow-left"></i> Kembali</a>
+                <h5 class="mb-0 fw-bold">Browser dan CMS</h5>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <span class="badge bg-warning bg-opacity-10 text-warning rounded-pill"><i class="fa-solid fa-spinner"></i> Sedang Dipelajari</span>
+            </div>
+        </div>
+
+        <div class="content-area">
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- Quiz Info -->
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-header bg-light border-0">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="bg-warning text-white rounded p-2">
+                                    <i class="fa-solid fa-circle-question fa-lg"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0 fw-bold">Quiz: Browser dan CMS untuk Digitalisasi Budaya Indonesia</h6>
+                                    <small class="text-muted">8 soal • Durasi: 25 menit • Skor minimum: 65</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="alert alert-info mb-4">
+                                <strong><i class="fa-solid fa-info-circle"></i> Instruksi:</strong> Bacalah setiap pertanyaan dengan cermat dan pilih jawaban yang paling tepat. Quiz ini terdiri dari pertanyaan pilihan ganda tentang browser dan sistem manajemen konten (CMS).
+                            </div>
+
+                            <!-- Quiz Status -->
+                            <div class="text-center mb-4">
+                                <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <div class="border rounded p-3">
+                                            <div class="h4 mb-0 text-warning">8</div>
+                                            <small class="text-muted">Total Soal</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="border rounded p-3">
+                                            <div class="h4 mb-0 text-info">25</div>
+                                            <small class="text-muted">Menit</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="border rounded p-3">
+                                            <div class="h4 mb-0 text-success">65</div>
+                                            <small class="text-muted">Skor Min</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Quiz Actions -->
+                            <div class="text-center">
+                                <button class="btn btn-warning btn-lg px-5" onclick="startQuiz()">
+                                    <i class="fa-solid fa-play me-2"></i>Mulai Quiz
+                                </button>
+                                <p class="text-muted mt-2 mb-0">Pastikan koneksi internet stabil sebelum memulai</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quiz Rules -->
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header bg-light border-0">
+                            <h6 class="mb-0 fw-bold"><i class="fa-solid fa-clipboard-list text-primary"></i> Aturan Quiz</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="d-flex align-items-start gap-2">
+                                        <i class="fa-solid fa-clock text-warning mt-1"></i>
+                                        <div>
+                                            <strong>Waktu Terbatas</strong>
+                                            <p class="small text-muted mb-0">Quiz harus diselesaikan dalam waktu 25 menit</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="d-flex align-items-start gap-2">
+                                        <i class="fa-solid fa-shuffle text-info mt-1"></i>
+                                        <div>
+                                            <strong>Tidak Bisa Mundur</strong>
+                                            <p class="small text-muted mb-0">Setelah menjawab, tidak bisa kembali ke soal sebelumnya</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="d-flex align-items-start gap-2">
+                                        <i class="fa-solid fa-wifi text-success mt-1"></i>
+                                        <div>
+                                            <strong>Koneksi Stabil</strong>
+                                            <p class="small text-muted mb-0">Pastikan koneksi internet stabil selama quiz</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="d-flex align-items-start gap-2">
+                                        <i class="fa-solid fa-save text-danger mt-1"></i>
+                                        <div>
+                                            <strong>Otomatis Tersimpan</strong>
+                                            <p class="small text-muted mb-0">Jawaban otomatis tersimpan setiap pergantian soal</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <!-- Quiz History -->
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-header bg-light border-0">
+                            <h6 class="mb-0 fw-bold"><i class="fa-solid fa-history text-info"></i> Riwayat Quiz</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="text-center py-4">
+                                <i class="fa-solid fa-circle-question fa-3x text-muted mb-3"></i>
+                                <p class="text-muted mb-0">Belum pernah mengerjakan quiz ini</p>
+                                <small class="text-muted">Quiz akan tersedia setelah Anda menyelesaikannya</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Study Materials -->
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-header bg-light border-0">
+                            <h6 class="mb-0 fw-bold"><i class="fa-solid fa-book text-success"></i> Bahan Belajar</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex align-items-center justify-content-between p-2 border rounded mb-2">
+                                <div class="d-flex align-items-center gap-2">
+                                    <i class="fa-solid fa-file-pdf text-danger"></i>
+                                    <small class="fw-bold">Panduan Browser.pdf</small>
+                                </div>
+                                <button class="btn btn-sm btn-outline-primary btn-sm"><i class="fa-solid fa-download"></i></button>
+                            </div>
+
+                            <div class="d-flex align-items-center justify-content-between p-2 border rounded mb-2">
+                                <div class="d-flex align-items-center gap-2">
+                                    <i class="fa-solid fa-video text-danger"></i>
+                                    <small class="fw-bold">Video CMS Tutorial</small>
+                                </div>
+                                <button class="btn btn-sm btn-outline-primary btn-sm"><i class="fa-solid fa-play"></i></button>
+                            </div>
+
+                            <div class="d-flex align-items-center justify-content-between p-2 border rounded">
+                                <div class="d-flex align-items-center gap-2">
+                                    <i class="fa-solid fa-link text-primary"></i>
+                                    <small class="fw-bold">Referensi Online</small>
+                                </div>
+                                <button class="btn btn-sm btn-outline-primary btn-sm"><i class="fa-solid fa-external-link"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header bg-light border-0">
+                            <h6 class="mb-0 fw-bold"><i class="fa-solid fa-bolt text-warning"></i> Aksi Cepat</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-outline-primary" onclick="practiceMode()">
+                                    <i class="fa-solid fa-graduation-cap me-2"></i>Mode Latihan
+                                </button>
+                                <button class="btn btn-outline-info" onclick="viewInstructions()">
+                                    <i class="fa-solid fa-question-circle me-2"></i>Baca Instruksi
+                                </button>
+                                <button class="btn btn-outline-success" onclick="contactTeacher()">
+                                    <i class="fa-solid fa-envelope me-2"></i>Tanya Guru
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/sidebar-toggle.js"></script>
+
+    <script>
+        function startQuiz() {
+            if (confirm('Apakah Anda yakin ingin memulai quiz? Waktu akan mulai berjalan dan tidak bisa dihentikan.')) {
+                // Redirect to quiz taking page or open quiz modal
+                alert('Quiz dimulai! Waktu 25 menit sudah berjalan.');
+            }
+        }
+
+        function practiceMode() {
+            alert('Mode latihan akan membuka quiz tanpa batas waktu dan tanpa nilai.');
+        }
+
+        function viewInstructions() {
+            // Scroll to instructions section
+            document.querySelector('.alert-info').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function contactTeacher() {
+            alert('Fitur chat dengan guru akan segera hadir.');
+        }
+    </script>
+</body>
+</html>

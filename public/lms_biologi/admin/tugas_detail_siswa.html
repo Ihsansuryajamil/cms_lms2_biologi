@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Tugas - LMS Siswa</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="stylesheet" href="../assets/style_siswa.css">
+</head>
+<body class="dashboard-page text-sm">
+
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="school-logo">
+                <i class="fa-solid fa-school text-primary mb-4"></i>
+                <div>Sekolah<br>Nama Sekolah/ Kampus</div>
+            </div>
+        </div>
+        <div class="user-profile">
+            <img src="https://ui-avatars.com/api/?name=Budi+Santoso&background=4f46e5&color=fff" alt="User">
+            <div>
+                <div class="fw-bold">Budi Santoso</div>
+                <div class="text-muted small">Siswa • IX-B</div>
+            </div>
+        </div>
+        <div class="sidebar-actions">
+            <div class="d-flex gap-2">
+                <a href="notifikasi.html" class="btn btn-outline-secondary d-flex justify-content-between align-items-center rounded-pill">
+                    <span>Notifikasi </span>
+                </a>
+                <a href="profile.html" class="btn btn-outline-secondary d-flex justify-content-between align-items-center rounded-pill bg-light text-dark">
+                    <span>Profil </span>
+                </a>
+                <a href="../login.html" class="btn btn-outline-danger d-flex justify-content-between align-items-center rounded-pill bg-light text-danger">
+                    <span>Keluar </span>
+                </a>
+            </a>
+            </div>
+        </div>
+        <nav class="nav-menu">
+            <a href="dashboard_siswa.html" class="nav-link"><i class="fa-solid fa-home text-primary"></i> Dashboard</a>
+            <a href="kelas_siswa.html" class="nav-link active"><i class="fa-solid fa-chalkboard-user text-success"></i> Kelas Saya</a>
+            <a href="tugas_siswa.html" class="nav-link"><i class="fa-solid fa-clipboard-list text-warning"></i> Tugas</a>
+            <a href="nilai_siswa.html" class="nav-link"><i class="fa-solid fa-star text-danger"></i> Nilai</a>
+            <a href="jadwal_siswa.html" class="nav-link"><i class="fa-solid fa-calendar-days text-info"></i> Jadwal</a>
+        </nav>
+        
+    </div>
+
+    <div class="main-content">
+        <div class="topbar d-flex justify-content-between align-items-center w-100">
+            <div class="d-flex align-items-center gap-3">
+                <a href="kelas_detail_siswa.html" class="btn btn-outline-secondary rounded-pill"><i class="fa-solid fa-arrow-left"></i> Kembali</a>
+                <h5 class="mb-0 fw-bold">Algoritma dan Pemrograman Dasar</h5>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <span class="badge bg-secondary bg-opacity-10 text-secondary rounded-pill"><i class="fa-solid fa-lock"></i> Belum Dibuka</span>
+            </div>
+        </div>
+
+        <div class="content-area">
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- Tugas Info -->
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-header bg-light border-0">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="bg-secondary text-white rounded p-2">
+                                    <i class="fa-solid fa-clipboard-check fa-lg"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0 fw-bold">Tugas: Memahami Sistem Komputer: Input, Proses, dan Output</h6>
+                                    <small class="text-muted">Nilai maksimal: 100 • Deadline: 15 Agustus 2025, 17:00</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="alert alert-warning mb-4">
+                                <strong><i class="fa-solid fa-lock"></i> Tugas Belum Dapat Dikerjakan</strong>
+                                <p class="mb-0">Tugas ini akan terbuka setelah Anda menyelesaikan topik sebelumnya.</p>
+                            </div>
+
+                            <div class="mb-4">
+                                <h6 class="fw-bold mb-3">Instruksi Tugas</h6>
+                                <div class="border rounded p-3 bg-light">
+                                    <p class="mb-2">Pembahasan fungsi tiap komponen komputer untuk menerima, menyimpan, memproses, dan menampilkan data.</p>
+                                    <p class="mb-0">Buatlah laporan lengkap dengan penjelasan masing-masing komponen dan berikan contoh penggunaannya dalam kehidupan sehari-hari.</p>
+                                </div>
+                            </div>
+
+                            <!-- Requirements -->
+                            <div class="mb-4">
+                                <h6 class="fw-bold mb-3">Persyaratan Pengumpulan</h6>
+                                <div class="row g-2">
+                                    <div class="col-md-6">
+                                        <div class="d-flex align-items-center gap-2 p-2 border rounded">
+                                            <i class="fa-solid fa-file-upload text-success"></i>
+                                            <small>Laporan tertulis (DOC/PDF)</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="d-flex align-items-center gap-2 p-2 border rounded">
+                                            <i class="fa-solid fa-images text-info"></i>
+                                            <small>Gambar/diagram komponen</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="d-flex align-items-center gap-2 p-2 border rounded">
+                                            <i class="fa-solid fa-font text-warning"></i>
+                                            <small>Jawaban teks (minimal 500 kata)</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="d-flex align-items-center gap-2 p-2 border rounded">
+                                            <i class="fa-solid fa-link text-primary"></i>
+                                            <small>Link referensi (opsional)</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Rubrik Penilaian -->
+                            <div class="mb-4">
+                                <h6 class="fw-bold mb-3">Rubrik Penilaian</h6>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Aspek</th>
+                                                <th>Sangat Baik (90-100)</th>
+                                                <th>Baik (80-89)</th>
+                                                <th>Cukup (70-79)</th>
+                                                <th>Kurang (0-69)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><strong>Konten</strong></td>
+                                                <td>Sangat lengkap dan akurat</td>
+                                                <td>Lengkap dan cukup akurat</td>
+                                                <td>Cukup lengkap</td>
+                                                <td>Tidak lengkap</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Presentasi</strong></td>
+                                                <td>Rapi dan menarik</td>
+                                                <td>Cukup rapi</td>
+                                                <td>Kurang rapi</td>
+                                                <td>Berantakan</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Kreativitas</strong></td>
+                                                <td>Sangat kreatif</td>
+                                                <td>Cukup kreatif</td>
+                                                <td>Kurang kreatif</td>
+                                                <td>Tidak kreatif</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <!-- Submission Status -->
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-header bg-light border-0">
+                            <h6 class="mb-0 fw-bold"><i class="fa-solid fa-upload text-info"></i> Status Pengumpulan</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="text-center py-3">
+                                <i class="fa-solid fa-lock fa-3x text-muted mb-3"></i>
+                                <p class="text-muted mb-1">Tugas terkunci</p>
+                                <small class="text-muted">Selesaikan topik sebelumnya untuk membuka tugas ini</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Deadline Info -->
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-header bg-light border-0">
+                            <h6 class="mb-0 fw-bold"><i class="fa-solid fa-calendar-days text-danger"></i> Tenggat Waktu</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="text-center">
+                                <div class="h3 mb-1 text-danger">15</div>
+                                <div class="text-muted small mb-2">Agustus 2025</div>
+                                <div class="badge bg-danger">17:00 WIB</div>
+                            </div>
+                            <hr>
+                            <div class="small text-muted text-center">
+                                <div><i class="fa-solid fa-clock me-1"></i> 7 hari lagi</div>
+                                <div><i class="fa-solid fa-calendar me-1"></i> Jumat, 15 Agustus 2025</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Study Materials -->
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-header bg-light border-0">
+                            <h6 class="mb-0 fw-bold"><i class="fa-solid fa-book text-success"></i> Bahan Referensi</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex align-items-center justify-content-between p-2 border rounded mb-2">
+                                <div class="d-flex align-items-center gap-2">
+                                    <i class="fa-solid fa-file-pdf text-danger"></i>
+                                    <small class="fw-bold">Panduan Tugas.pdf</small>
+                                </div>
+                                <button class="btn btn-sm btn-outline-primary btn-sm"><i class="fa-solid fa-download"></i></button>
+                            </div>
+
+                            <div class="d-flex align-items-center justify-content-between p-2 border rounded mb-2">
+                                <div class="d-flex align-items-center gap-2">
+                                    <i class="fa-solid fa-video text-danger"></i>
+                                    <small class="fw-bold">Video Tutorial Tugas</small>
+                                </div>
+                                <button class="btn btn-sm btn-outline-primary btn-sm"><i class="fa-solid fa-play"></i></button>
+                            </div>
+
+                            <div class="d-flex align-items-center justify-content-between p-2 border rounded">
+                                <div class="d-flex align-items-center gap-2">
+                                    <i class="fa-solid fa-link text-primary"></i>
+                                    <small class="fw-bold">Template Laporan</small>
+                                </div>
+                                <button class="btn btn-sm btn-outline-primary btn-sm"><i class="fa-solid fa-external-link"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header bg-light border-0">
+                            <h6 class="mb-0 fw-bold"><i class="fa-solid fa-bolt text-warning"></i> Aksi Cepat</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-outline-secondary" disabled>
+                                    <i class="fa-solid fa-pencil me-2"></i>Kerjakan Tugas
+                                </button>
+                                <button class="btn btn-outline-info" onclick="viewRubrik()">
+                                    <i class="fa-solid fa-list-check me-2"></i>Lihat Rubrik
+                                </button>
+                                <button class="btn btn-outline-success" onclick="contactTeacher()">
+                                    <i class="fa-solid fa-envelope me-2"></i>Tanya Guru
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/sidebar-toggle.js"></script>
+
+    <script>
+        function viewRubrik() {
+            // Scroll to rubrik section
+            document.querySelector('h6:contains("Rubrik Penilaian")').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function contactTeacher() {
+            alert('Fitur chat dengan guru akan segera hadir.');
+        }
+    </script>
+</body>
+</html>
