@@ -5,12 +5,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/login', function () {
-    return view('Auth.login');
-})->name('login');
-Route::get('/register', function () {
-    return view('Auth.register');
-})->name('register');
+use App\Http\Controllers\Auth\AuthController;
+
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login.get');
+Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+
+Route::get('/register', [AuthController::class, 'showRegister'])->name('register.get');
+Route::post('/register', [AuthController::class, 'register'])->name('register.post');
 Route::get('/Students/Dashboard', function () {
     return view('Dashboard.Siswa.dashboard');
 })->name('students_dashboard');
@@ -113,11 +114,9 @@ Route::get('/Teachers/Topik/Tambah/Tugas', function () {
 })->name('guru_topik_tambah_tugas');
 
 Route::get('/Teachers/Users', function () {
-    return view('Dashboard.Guru.user_management');
+    return view('Dashboard.Guru.UserManagement.user_management');
 })->name('guru_user_management');
-Route::get('/Teachers/Users/{id}', function () {
-    return view('Dashboard.Guru.user_detail');
-})->name('guru_user_detail');
+
 
 Route::get('/Teachers/Notifikasi', function () {
     return view('Dashboard.Guru.notifikasi');
@@ -128,6 +127,9 @@ Route::get('/Teachers/Profil', function () {
 Route::get('/Teachers/Profil/Settings', function () {
     return view('Dashboard.Guru.profile_setting');
 })->name('guru_profile_setting');
+Route::get('/Teachers/Users/Details', function () {
+    return view('Dashboard.Guru.UserManagement.user_detail');
+})->name('guru_user_detail');
 Route::get('/Teachers/Pengaturan', function () {
     return view('Dashboard.Guru.pengaturan_website');
 })->name('guru_pengaturan_website');
