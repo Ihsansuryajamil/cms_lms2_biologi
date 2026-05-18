@@ -12,62 +12,50 @@ class AuthController extends Controller
 {
     public function showLogin()
     {
-        return view('auth.login');
+        return view('Auth.login'); // Pastikan path ini sesuai dengan letak file login.blade.php Anda
     }
 
     public function showRegister()
     {
-        return view('auth.register');
+        return view('Auth.register'); // Pastikan path ini sesuai
     }
 
     public function login(Request $request)
     {
-        $validated = $request->validate([
+        $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required', 'string'],
-            'role' => ['required', 'in:teacher,student'],
         ]);
 
-        $credentials = [
-            'email' => $validated['email'],
-            'password' => $validated['password'],
-        ];
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            
+            $user = Auth::user();
 
-        if (!Auth::attempt($credentials)) {
-            return back()->withErrors([
-                'email' => 'Email atau password salah.',
-            ])->withInput();
+            // Redirect berdasarkan role yang ada di Database
+            if (Str::lower((string) $user->role) === 'teacher' || Str::lower((string) $user->role) === 'super_admin') {
+                return redirect()->route('teachers_dashboard');
+            }
+
+            return redirect()->route('students_dashboard');
         }
 
-        $user = Auth::user();
-
-        // Pastikan role yang dicoba sesuai dengan role user di database
-        if (Str::lower((string) $user->role) !== $validated['role']) {
-            Auth::logout();
-
-            return back()->withErrors([
-                'role' => 'Akun ini tidak terdaftar sebagai role yang dipilih.',
-            ])->withInput();
-        }
-
-        if (Str::lower((string) $user->role) === 'teacher') {
-            return redirect()->route('teachers_dashboard');
-        }
-
-        return redirect()->route('students_dashboard');
+        return back()->withErrors([
+            'email' => 'Email atau password yang Anda masukkan salah.',
+        ])->withInput();
     }
 
     public function register(Request $request)
     {
         $validated = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255'], // Ini mencocokkan input dari form HTML
             'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'role' => ['required', 'in:teacher,student'],
         ]);
 
         $user = User::create([
-            'name' => $validated['name'],
+            'nama' => $validated['name'], // <-- PASTIKAN KEY-NYA 'nama' (sesuai DB), BUKAN 'name'
             'email' => $validated['email'],
             'password' => bcrypt($validated['password']),
             'role' => $validated['role'],
@@ -81,5 +69,12 @@ class AuthController extends Controller
 
         return redirect()->route('students_dashboard');
     }
-}
 
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('login');
+    }
+}

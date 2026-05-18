@@ -22,9 +22,13 @@
                 <a href="{{ route('students_profil') }}" class="btn btn-outline-secondary d-flex justify-content-between align-items-center rounded-pill bg-light text-dark">
                     <span>Profil </span>
                 </a>
-                <a href="{{ route('login') }}" class="btn btn-outline-danger d-flex justify-content-between align-items-center rounded-pill bg-light text-danger">
-                    <span>Keluar </span>
-                </a>
+                <form action="{{ route('logout') }}" method="POST" class="d-inline w-100">
+                    @csrf
+                    <button type="submit" class="btn btn-outline-danger d-flex justify-content-between align-items-center rounded-pill bg-light text-danger w-100" style="border: 1px solid #dc3545; padding: 8px 15px;">
+                        <span>Keluar</span>
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                    </button>
+                </form>
             </a>
             </div>
         </div>

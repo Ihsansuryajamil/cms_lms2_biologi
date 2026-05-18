@@ -1,23 +1,36 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AuthController;
 
 Route::get('/', function () {
     return view('welcome');
 });
-use App\Http\Controllers\Auth\AuthController;
 
-Route::get('/login', [AuthController::class, 'showLogin'])->name('login.get');
+// Authentication Routes
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
-
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register.get');
 Route::post('/register', [AuthController::class, 'register'])->name('register.post');
-Route::get('/Students/Dashboard', function () {
-    return view('Dashboard.Siswa.dashboard');
-})->name('students_dashboard');
-Route::get('/Students/Kelas', function () {
-    return view('Dashboard.Siswa.Kelas.kelasAll');
-})->name('students_kelas');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// Siswa Routes (Wajib Login)
+Route::middleware('auth')->group(function () {
+    Route::get('/Students/Dashboard', function () {
+        return view('Dashboard.Siswa.dashboard');
+    })->name('students_dashboard');
+    
+    Route::get('/Students/Kelas', function () {
+        return view('Dashboard.Siswa.Kelas.kelasAll');
+    })->name('students_kelas');
+});
+
+// Tambahkan Route Dummy untuk Guru jika belum ada, agar redirect tidak error
+Route::middleware('auth')->group(function () {
+    Route::get('/Teachers/Dashboard', function () {
+        return view('Dashboard.Guru.dashboard'); // Sesuaikan dengan view Anda
+    })->name('teachers_dashboard');
+});
 Route::get('/Students/Kelas/BelumDisetujui', function () {
     return view('Dashboard.Siswa.Kelas.kelasAll_belumSetuju');
 })->name('students_kelas_belum_disetujui');
@@ -55,12 +68,12 @@ Route::get('/Students/Profil/Settings', function () {
 
 
 
-Route::get('/Teachers/Dashboard', function () {
-    return view('Dashboard.Guru.dashboard');
-})->name('teachers_dashboard');
-Route::get('/Teachers/Dashboard', function () {
-    return view('Dashboard.Guru.dashboard');
-})->name('guru_dashboard');
+// Route::get('/Teachers/Dashboard', function () {
+//     return view('Dashboard.Guru.dashboard');
+// })->name('teachers_dashboard');
+// Route::get('/Teachers/Dashboard', function () {
+//     return view('Dashboard.Guru.dashboard');
+// })->name('teachers_dashboard');
 Route::get('/Teachers/Kelas', function () {
     return view('Dashboard.Guru.Kelas.kelas_all');
 })->name('guru_class_all');

@@ -20,26 +20,39 @@
                     <p>Sistem manajemen pembelajaran dengan<br>teknologi unggulan terbaik.</p>
                 </div>
 
-                <form action="superAdmin/dashboard.html">
+                <form action="{{ route('register.post') }}" method="POST">
+                    @csrf
+
                     <div class="input-group">
                         <i class="fa-solid fa-user"></i>
-                        <input type="text" placeholder="0000000002" required>
-                    </div>
-                    <div class="input-group">
-                        <i class="fa-solid fa-lock"></i>
-                        <input type="password" placeholder="••••••••" required>
-                        <i class="fa-solid fa-eye right-icon"></i>
-                    </div>
-                    
-                    <div class="forgot-password">
-                        <a href="#">Forgot Password?</a>
+                        <input type="text" name="name" placeholder="Nama Lengkap" value="{{ old('name') }}" required>
                     </div>
 
-                    <button type="submit" class="btn-login">Login</button>
-                    
-                    <!-- <a href="superAdmin/dashboard.html" class="btn-outline-login"><i class="fa-solid fa-chalkboard-user"></i> Ke Halaman Guru</a>
-                    <a href="admin/dashboard_siswa.html" class="btn-outline-login"><i class="fa-solid fa-user-graduate"></i> Ke Halaman Siswa</a> -->
-                    <!-- <button type="button" class="btn-outline-login"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" width="16"> Login With Google</button> -->
+                    <div class="input-group">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="email" name="email" placeholder="Email" value="{{ old('email') }}" required>
+                    </div>
+
+                    <div class="input-group">
+                        <i class="fa-solid fa-id-badge"></i>
+                        <select name="role" required style="width: 100%; border: none; padding-left: 10px;">
+                            <option value="" disabled selected>Pilih Role Pendaftar</option>
+                            <option value="student">Siswa</option>
+                            <option value="teacher">Guru</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" name="password" placeholder="Password" required>
+                    </div>
+
+                    <div class="input-group">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" name="password_confirmation" placeholder="Konfirmasi Password" required>
+                    </div>
+
+                    <button type="submit" class="btn-login">Register</button>
                 </form>
             </div>
 

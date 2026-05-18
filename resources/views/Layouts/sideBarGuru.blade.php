@@ -22,14 +22,18 @@
                 <a href="{{ route('guru_profil') }}" class="btn btn-outline-secondary d-flex justify-content-between align-items-center rounded-pill bg-light text-dark">
                     <span>Profil </span>
                 </a>
-                <a href="{{ route('login') }}" class="btn btn-outline-danger d-flex justify-content-between align-items-center rounded-pill bg-light text-danger">
-                    <span>Keluar </span>
-                </a>
+                <form action="{{ route('logout') }}" method="POST" class="d-inline w-100">
+                    @csrf
+                    <button type="submit" class="btn btn-outline-danger d-flex justify-content-between align-items-center rounded-pill bg-light text-danger w-100" style="border: 1px solid #dc3545; padding: 8px 15px;">
+                        <span>Keluar</span>
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                    </button>
+                </form>
             </div>
         </div>
 
         <nav class="nav-menu">
-            <a href="{{ route('guru_dashboard') }}" class="nav-link {{ Request::is('Teachers/Dashboard') ? 'active' : '' }}"><i class="fa-solid fa-home text-primary"></i> Dashboard</a>
+            <a href="{{ route('teachers_dashboard') }}" class="nav-link {{ Request::is('Teachers/Dashboard') ? 'active' : '' }}"><i class="fa-solid fa-home text-primary"></i> Dashboard</a>
             <a href="{{ route('guru_class_all') }}" class="nav-link {{ Request::is('Teachers/Kelas') ? 'active' : '' }}"><i class="fa-solid fa-chalkboard-user text-success"></i> Kelas</a>
             <a href="{{ route('guru_user_management') }}" class="nav-link {{ Request::is('Teachers/Users') ? 'active' : '' }}"><i class="fa-solid fa-users text-info"></i> Manajemen User</a>
             <a href="{{ route('guru_pengaturan_website') }}" class="nav-link {{ Request::is('Teachers/Pengaturan') ? 'active' : '' }}"><i class="fa-solid fa-gear"></i> Pengaturan Website</a>

@@ -20,14 +20,23 @@
                     <p>Sistem manajemen pembelajaran dengan<br>teknologi unggulan terbaik.</p>
                 </div>
 
-                <form action="superAdmin/dashboard.html">
+                <form action="{{ route('login.post') }}" method="POST">
+                    @csrf
+                    
+                    @if ($errors->any())
+                        <div class="alert alert-danger" style="color: red; margin-bottom: 15px; font-size: 14px;">
+                            {{ $errors->first() }}
+                        </div>
+                    @endif
+
                     <div class="input-group">
-                        <i class="fa-solid fa-user"></i>
-                        <input type="text" placeholder="0000000002" required>
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="email" name="email" placeholder="Email (contoh@mail.com)" value="{{ old('email') }}" required>
                     </div>
+                    
                     <div class="input-group">
                         <i class="fa-solid fa-lock"></i>
-                        <input type="password" placeholder="••••••••" required>
+                        <input type="password" name="password" placeholder="••••••••" required>
                         <i class="fa-solid fa-eye right-icon"></i>
                     </div>
                     
@@ -36,10 +45,9 @@
                     </div>
 
                     <button type="submit" class="btn-login">Login</button>
-                    
-                    <!-- <a href="superAdmin/dashboard.html" class="btn-outline-login"><i class="fa-solid fa-chalkboard-user"></i> Ke Halaman Guru</a>
-                    <a href="admin/dashboard_siswa.html" class="btn-outline-login"><i class="fa-solid fa-user-graduate"></i> Ke Halaman Siswa</a> -->
-                    <!-- <button type="button" class="btn-outline-login"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" width="16"> Login With Google</button> -->
+                    <div style="text-align: center; margin-top: 15px;">
+                        <a href="{{ route('register.get') }}" style="text-decoration: none;">Belum punya akun? Daftar di sini</a>
+                    </div>
                 </form>
             </div>
 

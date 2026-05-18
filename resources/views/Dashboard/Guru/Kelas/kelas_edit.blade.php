@@ -6,7 +6,7 @@
     
         <div class="topbar d-flex justify-content-between align-items-center w-100">
             <div class="d-flex align-items-center gap-3">
-                <a href="{{ route('guru_dashboard') }}" class="btn btn-outline-secondary rounded-pill"><i class="fa-solid fa-arrow-left"></i> Kembali</a>
+                <a href="{{ route('teachers_dashboard') }}" class="btn btn-outline-secondary rounded-pill"><i class="fa-solid fa-arrow-left"></i> Kembali</a>
                 <h5 class="mb-0 fw-bold">IX B-INFORMATIKA (KOMP)</h5>
             </div>
             <div class="d-flex align-items-center gap-3">
