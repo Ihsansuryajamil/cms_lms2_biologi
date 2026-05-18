@@ -1,4 +1,7 @@
 @extends('Layouts.app')
+@section('sidebar')
+    @include('Layouts.sideBarSiswa')
+@endsection
 @section('content')
     <div class="topbar d-flex align-items-center w-100">
             <div class="d-flex align-items-center gap-3 w-100">

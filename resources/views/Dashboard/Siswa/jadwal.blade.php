@@ -1,4 +1,7 @@
 @extends('Layouts.app')
+@section('sidebar')
+    @include('Layouts.sideBarSiswa')
+@endsection
 @section('content')
     <div class="topbar d-flex align-items-center w-100">
         <span class="fw-bold"><i class="fa-solid fa-calendar-days text-info"></i> Jadwal Pelajaran</span>

@@ -30,11 +30,11 @@
         </div>
 
         <nav class="nav-menu">
-            <a href="{{ route('students_dashboard') }}" class="nav-link active"><i class="fa-solid fa-home text-primary"></i> Dashboard</a>
-            <a href="{{ route('students_kelas') }}" class="nav-link"><i class="fa-solid fa-chalkboard-user text-success"></i> Kelas Saya</a>
-            <a href="{{ route('students_tugas') }}" class="nav-link"><i class="fa-solid fa-clipboard-list text-warning"></i> Tugas</a>
-            <a href="{{ route('students_nilai') }}" class="nav-link"><i class="fa-solid fa-star text-danger"></i> Nilai</a>
-            <a href="{{ route('students_jadwal') }}" class="nav-link"><i class="fa-solid fa-calendar-days text-info"></i> Jadwal</a>
+            <a href="{{ route('students_dashboard') }}" class="nav-link {{ Request::is('Students/Dashboard') ? 'active' : '' }}"><i class="fa-solid fa-home text-primary"></i> Dashboard</a>
+            <a href="{{ route('students_kelas') }}" class="nav-link {{ Request::is('Students/Kelas') ? 'active' : '' }}"><i class="fa-solid fa-chalkboard-user text-success"></i> Kelas Saya</a>
+            <a href="{{ route('students_tugas') }}" class="nav-link {{ Request::is('Students/Tugas') ? 'active' : '' }}"><i class="fa-solid fa-clipboard-list text-warning"></i> Tugas</a>
+            <a href="{{ route('students_nilai') }}" class="nav-link {{ Request::is('Students/Nilai') ? 'active' : '' }}"><i class="fa-solid fa-star text-danger"></i> Nilai</a>
+            <a href="{{ route('students_jadwal') }}" class="nav-link {{ Request::is('Students/Jadwal') ? 'active' : '' }}"><i class="fa-solid fa-calendar-days text-info"></i> Jadwal</a>
         </nav>
 
         

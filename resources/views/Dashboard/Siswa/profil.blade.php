@@ -1,4 +1,7 @@
 @extends('Layouts.app')
+@section('sidebar')
+    @include('Layouts.sideBarSiswa')
+@endsection
 @section('content')
     <div class="content-area pt-4">
 

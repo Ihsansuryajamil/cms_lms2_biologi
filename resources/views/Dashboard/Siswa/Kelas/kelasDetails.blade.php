@@ -1,4 +1,7 @@
 @extends('Layouts.app')
+@section('sidebar')
+    @include('Layouts.sideBarSiswa')
+@endsection
 @section('content')
 <div class="topbar d-flex justify-content-between align-items-center w-100">
             <div class="d-flex align-items-center gap-3">
@@ -33,7 +36,7 @@
                         </div>
                     </div>
                     <div>
-                        <a href="materi_detail_siswa.html" class="btn btn-primary rounded-pill px-4"><i class="fa-solid fa-eye"></i> Lihat Materi</a>
+                        <a href="{{ route('students_details_materi') }}" class="btn btn-primary rounded-pill px-4"><i class="fa-solid fa-eye"></i> Lihat Materi</a>
                     </div>
                 </div>
 
@@ -50,7 +53,7 @@
                         </div>
                     </div>
                     <div>
-                        <a href="quiz_detail_siswa.html" class="btn btn-warning text-white rounded-pill px-4"><i class="fa-solid fa-play"></i> Lihat Quiz</a>
+                        <a href="{{ route('students_details_quiz') }}" class="btn btn-warning text-white rounded-pill px-4"><i class="fa-solid fa-play"></i> Lihat Quiz</a>
                     </div>
                 </div>
 
@@ -67,7 +70,7 @@
                         </div>
                     </div>
                     <div>
-                        <a href="tugas_detail_siswa.html" class="btn btn-outline-secondary rounded-pill px-4"><i class="fa-solid fa-eye"></i> Lihat Tugas</a>
+                        <a href="{{ route('students_details_tugas') }}" class="btn btn-outline-secondary rounded-pill px-4"><i class="fa-solid fa-eye"></i> Lihat Tugas</a>
                     </div>
                 </div>
 
@@ -355,4 +358,140 @@
                 </div>
             </div>
         </div>
+        <script>
+        // Tab switching functionality
+        function switchTab(e, tabName) {
+            e.preventDefault();
+            
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.style.display = 'none');
+            
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('#classTabs .nav-link');
+            tabs.forEach(tab => {
+                tab.classList.remove('active', 'fw-bold');
+                tab.classList.add('text-muted');
+            });
+            
+            // Show selected tab content
+            const selectedContent = document.getElementById(tabName + '-content');
+            if (selectedContent) {
+                selectedContent.style.display = 'block';
+            }
+            
+            // Add active class to clicked tab
+            e.target.closest('.nav-link').classList.add('active', 'fw-bold');
+            e.target.closest('.nav-link').classList.remove('text-muted');
+        }
+
+        // Open New Discussion Modal
+        function openNewDiscussion() {
+            // Create a simple form modal for new discussion
+            const html = `
+                <div class="modal fade" id="newDiscussionModal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header border-bottom">
+                                <h5 class="modal-title">Buat Diskusi Baru</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Judul Diskusi</label>
+                                    <input type="text" class="form-control" placeholder="Masukkan judul diskusi...">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Deskripsi</label>
+                                    <textarea class="form-control" rows="4" placeholder="Jelaskan pertanyaan atau topik diskusi Anda..."></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button>
+                                <button type="button" class="btn btn-primary" onclick="submitNewDiscussion()">Posting Diskusi</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Remove if already exists
+            const existing = document.getElementById('newDiscussionModal');
+            if (existing) existing.remove();
+            
+            document.body.insertAdjacentHTML('beforeend', html);
+            const modal = new bootstrap.Modal(document.getElementById('newDiscussionModal'));
+            modal.show();
+        }
+
+        // Open Discussion Detail Modal
+        function openNewDiscussion() {
+            // Create a simple form modal for new discussion
+            const html = `
+                <div class="modal fade" id="newDiscussionModal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header border-bottom">
+                                <h5 class="modal-title">Buat Diskusi Baru</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Judul Diskusi</label>
+                                    <input type="text" class="form-control" placeholder="Masukkan judul diskusi...">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Deskripsi</label>
+                                    <textarea class="form-control" rows="4" placeholder="Jelaskan pertanyaan atau topik diskusi Anda..."></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button>
+                                <button type="button" class="btn btn-primary" onclick="submitNewDiscussion()">Posting Diskusi</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Remove if already exists
+            const existing = document.getElementById('newDiscussionModal');
+            if (existing) existing.remove();
+            
+            document.body.insertAdjacentHTML('beforeend', html);
+            const modal = new bootstrap.Modal(document.getElementById('newDiscussionModal'));
+            modal.show();
+        }
+
+        // Open Discussion Detail Modal
+        function openDiscussionDetail() {
+            const modal = document.getElementById('discussionDetailModal');
+            const discussionModal = new bootstrap.Modal(modal);
+            discussionModal.show();
+        }
+
+        // Submit reply
+        function submitReply() {
+            alert('Balasan berhasil dikirim!');
+        }
+
+        // Submit new discussion
+        function submitNewDiscussion() {
+            alert('Diskusi baru berhasil dibuat!');
+            const modal = bootstrap.Modal.getInstance(document.getElementById('newDiscussionModal'));
+            if (modal) modal.hide();
+        }
+
+        // Search members functionality
+        function searchMembers() {
+            const searchInput = document.getElementById('searchAnggota').value.toLowerCase();
+            const membersList = document.getElementById('membersList');
+            const rows = membersList.querySelectorAll('tr');
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(searchInput) ? '' : 'none';
+            });
+        }
+    </script>
 @endsection

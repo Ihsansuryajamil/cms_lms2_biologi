@@ -1,4 +1,7 @@
 @extends('Layouts.app')
+@section('sidebar')
+    @include('Layouts.sideBarSiswa')
+@endsection
 @section('content')
     <style>
         .setting-tabs .nav-link {

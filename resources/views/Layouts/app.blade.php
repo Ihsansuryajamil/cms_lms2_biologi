@@ -11,8 +11,7 @@
 
 <body class="dashboard-page text-sm">
 
-    @include('Layouts.sideBarSiswa')
-
+    @yield('sidebar')
     <!-- ===== MAIN CONTENT ===== -->
     <div class="main-content bg-light">
 

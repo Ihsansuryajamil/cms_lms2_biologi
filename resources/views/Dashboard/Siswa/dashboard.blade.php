@@ -1,4 +1,7 @@
 @extends('Layouts.app')
+@section('sidebar')
+    @include('Layouts.sideBarSiswa')
+@endsection
 @section('content')
 <div class="dashboard-banner p-4 p-lg-5 text-white">
             <img src="https://cdn-icons-png.flaticon.com/512/3143/3143282.png" class="banner-bg-icon" alt="bg">
