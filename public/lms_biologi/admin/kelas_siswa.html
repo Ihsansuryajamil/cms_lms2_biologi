@@ -41,9 +41,9 @@
         <nav class="nav-menu">
             <a href="dashboard_siswa.html" class="nav-link"><i class="fa-solid fa-home text-primary"></i> Dashboard</a>
             <a href="kelas_siswa.html" class="nav-link active"><i class="fa-solid fa-chalkboard-user text-success"></i> Kelas Saya</a>
-            <a href="tugas_siswa.html" class="nav-link"><i class="fa-solid fa-clipboard-list text-warning"></i> Tugas</a>
+            <!-- <a href="tugas_siswa.html" class="nav-link"><i class="fa-solid fa-clipboard-list text-warning"></i> Tugas</a> -->
             <a href="nilai_siswa.html" class="nav-link"><i class="fa-solid fa-star text-danger"></i> Nilai</a>
-            <a href="jadwal_siswa.html" class="nav-link"><i class="fa-solid fa-calendar-days text-info"></i> Jadwal</a>
+            <!-- <a href="jadwal_siswa.html" class="nav-link"><i class="fa-solid fa-calendar-days text-info"></i> Jadwal</a> -->
         </nav>
         
     </div>
@@ -79,123 +79,136 @@
                 <div class="row row-cols-2 row-cols-md-2 row-cols-xl-4 g-4">
 
                 <!-- Card Kelas 1 -->
-                <div class="col">
-                    <div class="class-card">
-                        <div class="card-cover" style="background: linear-gradient(135deg,#4f46e5,#818cf8);">
-                            <span class="text-white small opacity-75"><i class="fa-regular fa-file-lines"></i> IX-B • Semester Ganjil</span>
+                <div class="col course-item-wrapper">
+                    <div class="course-card">
+                        <div class="course-img-container">
+                            <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=600&q=80" alt="Sintesis Protein"> 
+                            <span class="badge-status badge-new">BARU</span>
                         </div>
-                        <div style="background:#4f46e5; color:white; padding:8px 15px; font-size:0.8rem; display:flex; align-items:center; gap:10px;">
-                            <i class="fa-solid fa-laptop-code"></i>
-                            <span>Materi:<br><strong>Informatika</strong></span>
+                        <div class="card-body-custom">
+                            <span class="course-category">Biologi Sel</span>
+                            <h6 class="course-title">Sintesis Protein Lanjutan</h6>
                         </div>
-                        <div class="p-3">
-                            <div class="d-flex justify-content-between text-muted small mb-2">
-                                <span><i class="fa-solid fa-users"></i> 30 Peserta</span>
-                                <span><i class="fa-regular fa-calendar"></i> 14/07/25</span>
+                        <div class="card-footer-custom">
+                            <div class="text-warning small">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                <span class="text-dark fw-bold ms-1">5.0</span>
                             </div>
-                            <div class="mb-2">
-                                <div class="d-flex justify-content-between small mb-1">
-                                    <span class="text-muted">Progress</span>
-                                    <span class="text-primary fw-bold">60%</span>
-                                </div>
-                                <div class="progress" style="height:6px; border-radius:10px;">
-                                    <div class="progress-bar bg-primary" style="width:60%;"></div>
-                                </div>
-                            </div>
-                            <a href="kelas_detail_siswa.html" class="btn btn-light w-100 text-primary border border-primary-subtle rounded-pill">Masuk Kelas</a>
+                            <div class="fw-bold text-success">Gratis</div>
                         </div>
+                    </div>
+
+                    <div class="course-popover">
+                        <div class="popover-header d-flex align-items-center gap-3">
+                            <img src="https://ui-avatars.com/api/?name=Cita+Tresnawati&background=0D8ABC&color=fff" alt="Instruktur">
+                            <div>
+                                <h6 class="fw-bold mb-0 text-dark">Sintesis Protein Lanjutan</h6>
+                                <small class="text-muted">Oleh: Cita Tresnawati</small>
+                            </div>
+                        </div>
+                        
+                        <p class="small text-muted mt-3 mb-0" style="line-height: 1.5;">
+                            Tujuan Pembelajaran: Setelah menyelesaikan modul metabolisme, siswa dapat menjabarkan proses transkripsi dan translasi RNA secara komprehensif.
+                        </p>
+                        
+                        <div class="popover-specifications">
+                            <div class="spec-item">
+                                <i class="fa-solid fa-layer-group"></i>
+                                Menengah
+                            </div>
+                            <div class="spec-item">
+                                <i class="fa-solid fa-book-open"></i>
+                                26 Materi
+                            </div>
+                            <div class="spec-item">
+                                <i class="fa-regular fa-clock"></i>
+                                4 Jam
+                            </div>
+                        </div>
+
+                        <a href="kelas_detail_siswa.html" class="btn btn-preview-course text-center text-decoration-none d-block">LIHAT MATERI</a>
+                        
+                        
                     </div>
                 </div>
 
-                <!-- Card Kelas 2 -->
-                <div class="col">
-                    <div class="class-card">
-                        <div class="card-cover" style="background: linear-gradient(135deg,#16a34a,#4ade80);">
-                            <span class="text-white small opacity-75"><i class="fa-regular fa-file-lines"></i> IX-B • Semester Ganjil</span>
+                <div class="col course-item-wrapper">
+                    <div class="course-card">
+                        <div class="course-img-container">
+                            <img src="https://images.unsplash.com/photo-1530026405186-ed1f139313f8?auto=format&fit=crop&w=600&q=80" alt="Metabolisme Sel">
+                            <span class="badge-status badge-new">POPULER</span>
                         </div>
-                        <div style="background:#16a34a; color:white; padding:8px 15px; font-size:0.8rem; display:flex; align-items:center; gap:10px;">
-                            <i class="fa-solid fa-square-root-variable"></i>
-                            <span>Materi:<br><strong>Matematika</strong></span>
+                        <div class="card-body-custom">
+                            <span class="course-category">Biokimia</span>
+                            <h6 class="course-title">Metabolisme Sel & Peran Enzim</h6>
                         </div>
-                        <div class="p-3">
-                            <div class="d-flex justify-content-between text-muted small mb-2">
-                                <span><i class="fa-solid fa-users"></i> 30 Peserta</span>
-                                <span><i class="fa-regular fa-calendar"></i> 14/07/25</span>
+                        <div class="card-footer-custom">
+                            <div class="text-warning small">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                                <span class="text-dark fw-bold ms-1">4.7</span>
                             </div>
-                            <div class="mb-2">
-                                <div class="d-flex justify-content-between small mb-1">
-                                    <span class="text-muted">Progress</span>
-                                    <span class="fw-bold" style="color:#16a34a;">45%</span>
-                                </div>
-                                <div class="progress" style="height:6px; border-radius:10px;">
-                                    <div class="progress-bar" style="width:45%; background:#16a34a;"></div>
-                                </div>
-                            </div>
-                            <a href="#" class="btn btn-light w-100 text-success border border-success-subtle rounded-pill">Masuk Kelas</a>
+                            <div class="fw-bold text-success">Gratis</div>
                         </div>
+                    </div>
+
+                    <div class="course-popover">
+                        <div class="popover-header d-flex align-items-center gap-3">
+                            <img src="https://ui-avatars.com/api/?name=Budi+Santoso&background=16a34a&color=fff" alt="Instruktur">
+                            <div>
+                                <h6 class="fw-bold mb-0 text-dark">Metabolisme Sel & Enzim</h6>
+                                <small class="text-muted">Oleh: Budi Santoso</small>
+                            </div>
+                        </div>
+                        
+                        <p class="small text-muted mt-3 mb-0" style="line-height: 1.5;">
+                            Membahas reaksi anabolisme dan katabolisme di dalam sel, serta bagaimana struktur enzim mempengaruhi laju reaksi metabolisme makhluk hidup.
+                        </p>
+                        
+                        <div class="popover-specifications">
+                            <div class="spec-item">
+                                <i class="fa-solid fa-layer-group"></i>
+                                Mahir
+                            </div>
+                            <div class="spec-item">
+                                <i class="fa-solid fa-book-open"></i>
+                                18 Materi
+                            </div>
+                            <div class="spec-item">
+                                <i class="fa-regular fa-clock"></i>
+                                5 Jam
+                            </div>
+                        </div>
+
+                        <a href="kelas_detail_siswa.html" class="btn btn-preview-course text-center text-decoration-none d-block">LIHAT MATERI</a>
+                        
+                        
                     </div>
                 </div>
 
-                <!-- Card Kelas 3 -->
-                <div class="col">
-                    <div class="class-card">
-                        <div class="card-cover" style="background: linear-gradient(135deg,#ea580c,#fb923c);">
-                            <span class="text-white small opacity-75"><i class="fa-regular fa-file-lines"></i> IX-B • Semester Ganjil</span>
+                
+                <!-- <div class="col">
+                    <div class="class-card border rounded overflow-hidden shadow-sm">
+                        <div class="card-cover" style="background: url('https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&w=600&q=80') center/cover no-repeat; height: 120px;">
                         </div>
-                        <div style="background:#ea580c; color:white; padding:8px 15px; font-size:0.8rem; display:flex; align-items:center; gap:10px;">
-                            <i class="fa-solid fa-book-open"></i>
-                            <span>Materi:<br><strong>Bahasa Indonesia</strong></span>
-                        </div>
-                        <div class="p-3">
-                            <div class="d-flex justify-content-between text-muted small mb-2">
-                                <span><i class="fa-solid fa-users"></i> 30 Peserta</span>
-                                <span><i class="fa-regular fa-calendar"></i> 14/07/25</span>
+                        
+                        <div style="background:white; color:black;">
+                            <div class="d-flex justify-content-between align-items-start" style="padding: 12px 15px 0; font-size: 0.85rem;">
+                                <span style="font-size: 2 rem;">Materi:<br><strong style="font-size: 1.5 rem;">Metabolisme Sel & Peran Enzim</strong></span>
+                                <span class="text-muted"><i class="fa-solid fa-users"></i> 30 Peserta</span>
                             </div>
-                            <div class="mb-2">
-                                <div class="d-flex justify-content-between small mb-1">
-                                    <span class="text-muted">Progress</span>
-                                    <span class="fw-bold" style="color:#ea580c;">80%</span>
-                                </div>
-                                <div class="progress" style="height:6px; border-radius:10px;">
-                                    <div class="progress-bar" style="width:80%; background:#ea580c;"></div>
-                                </div>
-                            </div>
-                            <a href="#" class="btn btn-light w-100 text-warning border border-warning-subtle rounded-pill">Masuk Kelas</a>
+                            
+                            <hr class="mx-3 mt-3 mb-0" style="border-color: #000000;">
                         </div>
-                    </div>
-                </div>
 
-                <!-- Card Kelas 4 -->
-                <div class="col">
-                    <div class="class-card">
-                        <div class="card-cover" style="background: linear-gradient(135deg,#dc2626,#f87171);">
-                            <span class="text-white small opacity-75"><i class="fa-regular fa-file-lines"></i> IX-B • Semester Ganjil</span>
-                        </div>
-                        <div style="background:#dc2626; color:white; padding:8px 15px; font-size:0.8rem; display:flex; align-items:center; gap:10px;">
-                            <i class="fa-solid fa-flask"></i>
-                            <span>Materi:<br><strong>IPA</strong></span>
-                        </div>
-                        <div class="p-3">
-                            <div class="d-flex justify-content-between text-muted small mb-2">
-                                <span><i class="fa-solid fa-users"></i> 30 Peserta</span>
-                                <span><i class="fa-regular fa-calendar"></i> 14/07/25</span>
-                            </div>
-                            <div class="mb-2">
-                                <div class="d-flex justify-content-between small mb-1">
-                                    <span class="text-muted">Progress</span>
-                                    <span class="fw-bold text-danger">30%</span>
-                                </div>
-                                <div class="progress" style="height:6px; border-radius:10px;">
-                                    <div class="progress-bar bg-danger" style="width:30%;"></div>
-                                </div>
-                            </div>
-                            <a href="#" class="btn btn-light w-100 text-danger border border-danger-subtle rounded-pill">Masuk Kelas</a>
+                        <div class="p-3" style="background:white;">
+                            <a href="kelas_detail_siswa.html" class="btn btn-light w-100 text-primary border border-primary-subtle rounded-pill fw-medium">Masuk Materi</a>
                         </div>
                     </div>
-                </div>
+                </div> -->
+                
 
                 <!-- Card Kelas 5 -->
-                <div class="col">
+                <!-- <div class="col">
                     <div class="class-card">
                         <div class="card-cover" style="background: linear-gradient(135deg,#0891b2,#67e8f9);">
                             <span class="text-white small opacity-75"><i class="fa-regular fa-file-lines"></i> IX-B • Semester Ganjil</span>
@@ -221,7 +234,7 @@
                             <a href="#" class="btn btn-light w-100 text-info border border-info-subtle rounded-pill">Masuk Kelas</a>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
             </div>
         </div>
@@ -302,5 +315,27 @@
             }, 1500);
         }
     </script>
+    <nav class="mobile-bottom-nav">
+    <ul>
+        <li>
+            <a href="dashboard_siswa.html">
+            <i class="fa-solid fa-home fs-5"></i>
+            <span>Dashboard</span>
+            </a>
+        </li>
+        <li>
+            <a href="kelas_siswa.html" class="active">
+            <i class="fa-solid fa-chalkboard-user fs-5"></i>
+            <span>Kelas</span>
+            </a>
+        </li>
+        <li>
+            <a href="nilai_siswa.html">
+            <i class="fa-solid fa-star fs-5"></i>
+            <span>Nilai</span>
+            </a>
+        </li>
+    </ul>
+  </nav>
 </body>
 </html>

@@ -22,75 +22,180 @@
                 <li class="nav-item"><a class="nav-link text-muted" href="{{ route('guru_class_discuss') }}"><i class="fa-regular fa-comments"></i> Diskusi</a></li>
                 <li class="nav-item"><a class="nav-link text-muted" href="{{ route('guru_class_edit') }}"><i class="fa-solid fa-gear"></i> Pengaturan</a></li>
                 <li class="nav-item ms-auto"><span class="nav-link border-0 text-muted">Informatika</span></li>
-            </ul>
+            </ul> 
 
             <button class="btn btn-light w-100 border border-dashed text-primary py-3 mb-4 border-2" style="border-style: dashed !important;" data-bs-toggle="modal" data-bs-target="#createTopikModal">
                 <i class="fa-solid fa-plus"></i> Buat Topik Baru
             </button>
-
-            <div class="topic-stack">
-                <div class="topic-card-modern">
-                    <div class="topic-main">
-                        
-                        <span class="create-type-icon text-primary bg-primary-subtle"><i class="fa-solid fa-book-open-reader"></i></span>
-                        <div>
-                            <div class="topic-meta mb-1">
-                                <span class="text-primary"><i class="fa-solid fa-circle-check"></i>Materi</span>
+            <div id="topik-content" class="tab-content">
+                <!-- Topik List (read-only untuk siswa) -->
+                <div class="accordion mb-4" id="topicAccordion">
+                    
+                    <!-- Accordion Item 1: Materi -->
+                    <div class="accordion-item border-0 border-bottom">
+                        <h2 class="accordion-header" id="headingTopik1">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTopik1" aria-expanded="true">
+                                <div class="d-flex align-items-center gap-4 w-100 pe-3">
+                                    <div class="bg-primary text-white rounded p-3" style="min-width: 50px;">
+                                        <i class="fa-solid fa-book-open-reader"></i>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <div class="mb-1">
+                                            <span class="badge bg-success bg-opacity-10 text-success rounded-pill"><i class="fa-solid fa-circle-check"></i> Materi</span>
+                                        </div>
+                                        <h6 class="fw-bold mb-0">Pengenalan Komputer dan Sistem Operasi</h6>
+                                    </div>
+                                    <span class="small text-muted fw-normal">5 Sub • 45m</span>
+                                </div>
+                            </button>
+                        </h2>
+                        <div id="collapseTopik1" class="accordion-collapse collapse show" data-bs-parent="#topicAccordion">
+                            <div class="accordion-body bg-white">
+                                <div class="topic-detail-item">
+                                    <span class="item-number">1</span>
+                                    <i class="fa-solid fa-book item-icon text-success"></i>
+                                    <a href="materi_detail_siswa.html" class="item-title">Pengantar Komputer</a>
+                                    <div class="topic-side">
+                                        <div class="topic-actions">
+                                            <button class="btn btn-success rounded-pill btn-sm px-3"><i class="fa-solid fa-paper-plane"></i> Publish</button>
+                                            <a href="{{ route('guru_topik_edit_materi') }}" class="btn btn-light border btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
+                                            <a href="{{ route('guru_topik_detail_materi') }}" class="btn btn-light border btn-sm"><i class="fa-solid fa-eye"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="topic-detail-item">
+                                    <span class="item-number">2</span>
+                                    <i class="fa-solid fa-book item-icon text-success"></i>
+                                    <a href="materi_detail_siswa.html" class="item-title">Tugas Materi</a>
+                                    <div class="topic-side">
+                                        <div class="topic-actions">
+                                            <button class="btn btn-success rounded-pill btn-sm px-3"><i class="fa-solid fa-paper-plane"></i> Publish</button>
+                                            <!-- <button class="btn btn-light border btn-sm"><i class="fa-solid fa-ellipsis"></i></button> -->
+                                            <a href="{{ route('guru_topik_edit_tugas') }}" class="btn btn-light border btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
+                                            <a href="{{ route('guru_topik_detail_tugas') }}" class="btn btn-light border btn-sm"><i class="fa-solid fa-eye"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="topic-detail-item">
+                                    <span class="item-number">3</span>
+                                    <i class="fa-solid fa-circle-question item-icon text-warning"></i>
+                                    <a href="materi_detail_siswa.html" class="item-title">Kuis Pra-Syarat</a>
+                                     <div class="topic-side">
+                                        <div class="topic-actions">
+                                            <button class="btn btn-outline-danger rounded-pill btn-sm px-3">Unpublish</button>
+                                            <a href="{{ route('guru_topik_edit_quiz') }}" class="btn btn-light border btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
+                                            <a href="{{ route('guru_topik_detail_quiz') }}" class="btn btn-light border btn-sm"><i class="fa-solid fa-eye"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="topic-detail-item">
+                                    <span class="item-number">4</span>
+                                    <i class="fa-solid fa-book item-icon text-success"></i>
+                                    <a href="materi_detail_siswa.html" class="item-title">Latihan Interaktif</a>
+                                    <span class="item-type">Text lesson</span>
+                                </div>
+                                <div class="topic-detail-item">
+                                    <span class="item-number">5</span>
+                                    <i class="fa-solid fa-download item-icon text-primary"></i>
+                                    <a href="materi_detail_siswa.html" class="item-title">Download Materi</a>
+                                    <span class="item-type">Text lesson</span>
+                                </div>
                             </div>
-                            <h6 class="fw-bold mb-1">Pengenalan Materi Semester 1</h6>
-                            <p class="text-muted small mb-0">Materi pembuka untuk memahami alur belajar, aturan kelas, dan target capaian.</p>
                         </div>
                     </div>
-                    <div class="topic-side">
-                        <div class="topic-actions">
-                            <button class="btn btn-success rounded-pill btn-sm px-3"><i class="fa-solid fa-paper-plane"></i> Publish</button>
-                            <a href="{{ route('guru_topik_edit_materi') }}" class="btn btn-light border btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
-                            <a href="{{ route('guru_topik_detail_materi') }}" class="btn btn-light border btn-sm"><i class="fa-solid fa-eye"></i></a>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="topic-card-modern">
-                    <div class="topic-main">
-                        <span class="create-type-icon text-warning bg-warning-subtle"><i class="fa-solid fa-circle-question"></i></span>
-                        <div>
-                            <div class="topic-meta mb-1">
-                                <span class="text-warning"><i class="fa-solid fa-circle-info"></i> Quiz</span>
+                    <!-- Accordion Item 2: Quiz -->
+                    <div class="accordion-item border-0 border-bottom">
+                        <h2 class="accordion-header" id="headingTopik2">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTopik2">
+                                <div class="d-flex align-items-center gap-4 w-100 pe-3">
+                                    <div class="bg-warning text-white rounded p-3" style="min-width: 50px;">
+                                        <i class="fa-solid fa-circle-question"></i>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <div class="mb-1">
+                                            <span class="badge bg-warning bg-opacity-10 text-warning rounded-pill"><i class="fa-solid fa-spinner"></i> Quiz</span>
+                                        </div>
+                                        <h6 class="fw-bold mb-0">Browser dan CMS</h6>
+                                    </div>
+                                    <span class="small text-muted fw-normal">1 Quiz • 30m</span>
+                                </div>
+                            </button>
+                        </h2>
+                        <div id="collapseTopik2" class="accordion-collapse collapse" data-bs-parent="#topicAccordion">
+                            <div class="accordion-body bg-white">
+                                <div class="topic-detail-item">
+                                    <span class="item-number">1</span>
+                                    <i class="fa-solid fa-circle-question item-icon text-warning"></i>
+                                    <a href="quiz_detail_siswa.html" class="item-title">Browser dan CMS</a>
+                                    <span class="item-type">15 questions</span>
+                                </div>
                             </div>
-                            <h6 class="fw-bold mb-1">Browser dan CMS untuk Digitalisasi Budaya Indonesia</h6>
-                            <p class="text-muted small mb-0">Topik praktik menggunakan browser modern, mesin pencari, dan CMS untuk proyek kelas.</p>
                         </div>
                     </div>
-                    <div class="topic-side">
-                        <div class="topic-actions">
-                            <button class="btn btn-outline-danger rounded-pill btn-sm px-3">Unpublish</button>
-                            <a href="{{ route('guru_topik_edit_quiz') }}" class="btn btn-light border btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
-                            <a href="{{ route('guru_topik_detail_quiz') }}" class="btn btn-light border btn-sm"><i class="fa-solid fa-eye"></i></a>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="topic-card-modern">
-                    <div class="topic-main">
-                        <span class="create-type-icon text-success bg-success-subtle"><i class="fa-solid fa-clipboard-check"></i></span>
-                        <div>
-                            <div class="topic-meta mb-1">
-                                <span class="text-success"><i class="fa-solid fa-circle-info"></i> Tugas</span>
+                    <!-- Accordion Item 3: Tugas -->
+                    <div class="accordion-item border-0 border-bottom">
+                        <h2 class="accordion-header" id="headingTopik3">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTopik3">
+                                <div class="d-flex align-items-center gap-4 w-100 pe-3">
+                                    <div class="bg-secondary text-white rounded p-3" style="min-width: 50px;">
+                                        <i class="fa-solid fa-clipboard-check"></i>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <div class="mb-1">
+                                            <span class="badge bg-secondary bg-opacity-10 text-secondary rounded-pill"><i class="fa-solid fa-lock"></i> Tugas</span>
+                                        </div>
+                                        <h6 class="fw-bold mb-0 text-muted">Algoritma dan Pemrograman Dasar</h6>
+                                    </div>
+                                    <span class="small text-muted fw-normal">2 Tugas</span>
+                                </div>
+                            </button>
+                        </h2>
+                        <div id="collapseTopik3" class="accordion-collapse collapse" data-bs-parent="#topicAccordion">
+                            <div class="accordion-body bg-white">
+                                <div class="topic-detail-item">
+                                    <span class="item-number">1</span>
+                                    <i class="fa-solid fa-clipboard-check item-icon text-secondary"></i>
+                                    <a href="tugas_detail_siswa.html" class="item-title">Tugas 1: Buat Flowchart</a>
+                                    <span class="item-type">Text lesson</span>
+                                </div>
+                                <div class="topic-detail-item">
+                                    <span class="item-number">2</span>
+                                    <i class="fa-solid fa-clipboard-check item-icon text-secondary"></i>
+                                    <a href="tugas_detail_siswa.html" class="item-title">Tugas 2: Program Sederhana</a>
+                                    <span class="item-type">Text lesson</span>
+                                </div>
                             </div>
-                            <h6 class="fw-bold mb-1">Memahami Sistem Komputer: Input, Proses, dan Output</h6>
-                            <p class="text-muted small mb-0">Pembahasan fungsi tiap komponen komputer untuk menerima, menyimpan, memproses, dan menampilkan data.</p>
                         </div>
                     </div>
-                    <div class="topic-side">
-                        <div class="topic-actions">
-                            <button class="btn btn-success rounded-pill btn-sm px-3"><i class="fa-solid fa-paper-plane"></i> Publish</button>
-                            <!-- <button class="btn btn-light border btn-sm"><i class="fa-solid fa-ellipsis"></i></button> -->
-                            <a href="{{ route('guru_topik_edit_tugas') }}" class="btn btn-light border btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
-                            <a href="{{ route('guru_topik_detail_tugas') }}" class="btn btn-light border btn-sm"><i class="fa-solid fa-eye"></i></a>
+
+                    <!-- Accordion Item 4: Materi Terkunci -->
+                    <div class="accordion-item border-0 border-bottom">
+                        <h2 class="accordion-header" id="headingTopik4">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTopik4" disabled>
+                                <div class="d-flex align-items-center gap-4 w-100 pe-3">
+                                    <div class="bg-secondary text-white rounded p-3" style="min-width: 50px; opacity: 0.6;">
+                                        <i class="fa-solid fa-book-open-reader"></i>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <div class="mb-1">
+                                            <span class="badge bg-secondary bg-opacity-10 text-secondary rounded-pill"><i class="fa-solid fa-lock"></i> Materi</span>
+                                        </div>
+                                        <h6 class="fw-bold mb-0 text-muted">Jaringan Komputer</h6>
+                                    </div>
+                                    <span class="small text-muted fw-normal"><i class="fa-solid fa-lock"></i> Terkunci</span>
+                                </div>
+                            </button>
+                        </h2>
+                        <div id="collapseTopik4" class="accordion-collapse collapse" data-bs-parent="#topicAccordion">
+                            <div class="accordion-body bg-white pt-2 pb-2">
+                                <p class="text-muted">Materi ini akan dibuka setelah Anda menyelesaikan modul sebelumnya.</p>
+                            </div>
                         </div>
                     </div>
+
                 </div>
-                <!-- other topic cards omitted for brevity (kept same structure) -->
             </div>
         </div>
     </div>

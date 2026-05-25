@@ -65,6 +65,34 @@
             </div>
         </div>
     </div>
+    <nav class="mobile-bottom-nav">
+        <ul>
+            <li>
+                <a href="{{ route('homepage') }}">
+                <i class="fa-solid fa-house fs-5"></i>
+                <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('homepage') }}#courses-container">
+                <i class="fa-solid fa-table-cells-large fs-5"></i>
+                <span>Course</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('history') }}">
+                <i class="fa-solid fa-clock-rotate-left fs-5"></i>
+                <span>History</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('login') }}" class="active">
+                <i class="fa-solid fa-circle-user fs-5"></i>
+                <span>Login</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 
 </body>
 </html>

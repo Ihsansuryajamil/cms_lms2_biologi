@@ -41,9 +41,9 @@
         <nav class="nav-menu">
             <a href="dashboard_siswa.html" class="nav-link"><i class="fa-solid fa-home text-primary"></i> Dashboard</a>
             <a href="kelas_siswa.html" class="nav-link active"><i class="fa-solid fa-chalkboard-user text-success"></i> Kelas Saya</a>
-            <a href="tugas_siswa.html" class="nav-link"><i class="fa-solid fa-clipboard-list text-warning"></i> Tugas</a>
+            <!-- <a href="tugas_siswa.html" class="nav-link"><i class="fa-solid fa-clipboard-list text-warning"></i> Tugas</a> -->
             <a href="nilai_siswa.html" class="nav-link"><i class="fa-solid fa-star text-danger"></i> Nilai</a>
-            <a href="jadwal_siswa.html" class="nav-link"><i class="fa-solid fa-calendar-days text-info"></i> Jadwal</a>
+            <!-- <a href="jadwal_siswa.html" class="nav-link"><i class="fa-solid fa-calendar-days text-info"></i> Jadwal</a> -->
         </nav>
         
     </div>
@@ -73,7 +73,61 @@
             <div class="row row-cols-2 row-cols-md-2 row-cols-xl-4 g-4">
 
                 <!-- Card Kelas Belum Disetujui 1 -->
-                <div class="col">
+
+                <div class="col course-item-wrapper">
+                    <div class="course-card">
+                        <div class="course-img-container">
+                            <img src="https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&w=600&q=80" alt="Pembelahan Sel">
+                            <span class="badge-status badge-hot">HOT</span>
+                        </div>
+                        <div class="card-body-custom">
+                            <span class="course-category">Genetika</span>
+                            <h6 class="course-title">Pembelahan Sel: Mitosis & Meiosis</h6>
+                        </div>
+                        <div class="card-footer-custom">
+                            <div class="text-warning small">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                <span class="text-dark fw-bold ms-1">4.9</span>
+                            </div>
+                            <div class="fw-bold text-success">Gratis</div>
+                        </div>
+                    </div>
+
+                    <div class="course-popover">
+                        <div class="popover-header d-flex align-items-center gap-3">
+                            <img src="https://ui-avatars.com/api/?name=Dewi+Sartika&background=e11d48&color=fff" alt="Instruktur">
+                            <div>
+                                <h6 class="fw-bold mb-0 text-dark">Mitosis & Meiosis</h6>
+                                <small class="text-muted">Oleh: Dewi Sartika</small>
+                            </div>
+                        </div>
+                        
+                        <p class="small text-muted mt-3 mb-0" style="line-height: 1.5;">
+                            Pelajari siklus hidup sel secara detail melalui materi visual interaktif mengenai tahapan pembelahan mitosis dan meiosis.
+                        </p>
+                        
+                        <div class="popover-specifications">
+                            <div class="spec-item">
+                                <i class="fa-solid fa-layer-group"></i>
+                                Dasar
+                            </div>
+                            <div class="spec-item">
+                                <i class="fa-solid fa-book-open"></i>
+                                12 Materi
+                            </div>
+                            <div class="spec-item">
+                                <i class="fa-regular fa-clock"></i>
+                                3 Jam
+                            </div>
+                        </div>
+
+                        <a href="#" class="btn btn-waiting-course text-center text-decoration-none d-block">
+                            <i class="fa-solid fa-lock"></i> MATERI DIKUNCI
+                        </a>
+                        
+                    </div>
+                </div>
+                <!-- <div class="col">
                     <div class="class-card" style="border: 2px dashed #ffc107;">
                         <div class="card-cover" style="background: linear-gradient(135deg,#fbbf24,#fcd34d); position: relative;">
                             <span class="text-white small opacity-75"><i class="fa-regular fa-file-lines"></i> Menunggu Persetujuan</span>
@@ -93,7 +147,7 @@
                             <button class="btn btn-outline-warning w-100 rounded-pill btn-sm" onclick="withdrawClass('BIO2024')"><i class="fa-solid fa-times"></i> Batalkan Pendaftaran</button>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
             </div>
 
@@ -133,5 +187,27 @@
             }
         }
     </script>
+    <nav class="mobile-bottom-nav">
+    <ul>
+        <li>
+            <a href="dashboard_siswa.html">
+            <i class="fa-solid fa-home fs-5"></i>
+            <span>Dashboard</span>
+            </a>
+        </li>
+        <li>
+            <a href="kelas_siswa.html" class="active">
+            <i class="fa-solid fa-chalkboard-user fs-5"></i>
+            <span>Kelas</span>
+            </a>
+        </li>
+        <li>
+            <a href="nilai_siswa.html">
+            <i class="fa-solid fa-star fs-5"></i>
+            <span>Nilai</span>
+            </a>
+        </li>
+    </ul>
+  </nav>
 </body>
 </html>

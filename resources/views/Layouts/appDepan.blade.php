@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Pendidikan - LMS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ asset('lms_biologi/assets/style.css') }}">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-custom navbar-public fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#0d6efd" stroke-width="2.5">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+                <div class="logo-text">
+                    <span class="fs-6 fw-bold text-dark mb-0">SMP Nama Sekolah</span>
+                    <span class="text-muted" style="font-size: 0.75rem; font-weight: 500;">Portal Pendidikan</span>
+                </div>
+            </a>
+
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0 pt-3 pt-lg-0">
+                    <li class="nav-item"><a class="nav-link {{ Request::is('/') ? 'active' : '' }}"  href="{{ route('homepage') }}">Home</a></li>
+                    <li class="nav-item"><a  class="nav-link {{ Request::is('detail-course') ? 'active' : '' }}"  href="{{ route('homepage') }}#courses-container">Courses</a></li>
+                    <li class="nav-item"><a  class="nav-link {{ Request::is('history') ? 'active' : '' }}" href="{{ route('history') }}">History</a></li>
+                </ul>
+                
+                <div class="d-grid d-lg-flex mt-3 mt-lg-0 pb-3 pb-lg-0">
+                    <a href="{{ route('login') }}" class="btn btn-outline-primary rounded-pill px-4 fw-bold d-flex align-items-center justify-content-center gap-2">
+                        <i class="fa-solid fa-circle-user fs-5"></i> LOGIN / SIGN UP
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    @yield('content')
+    
+    <nav class="mobile-bottom-nav">
+        <ul>
+            <li>
+                <a href="{{ route('homepage') }}" class="{{ Request::is('/') ? 'active' : '' }}">
+                <i class="fa-solid fa-house fs-5"></i>
+                <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('homepage') }}#courses-container" class="{{ Request::is('detail-course') ? 'active' : '' }}">
+                <i class="fa-solid fa-table-cells-large fs-5"></i>
+                <span>Course</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('history') }}" class="{{ Request::is('history') ? 'active' : '' }}">
+                <i class="fa-solid fa-clock-rotate-left fs-5"></i>
+                <span>History</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('login') }}" class="{{ Request::is('login') ? 'active' : '' }}">
+                <i class="fa-solid fa-circle-user fs-5"></i>
+                <span>Login</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

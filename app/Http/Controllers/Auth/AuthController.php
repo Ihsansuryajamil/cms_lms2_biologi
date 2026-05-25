@@ -37,7 +37,7 @@ class AuthController extends Controller
                 return redirect()->route('teachers_dashboard');
             }
 
-            return redirect()->route('students_dashboard');
+            return redirect()->route('students_course');
         }
 
         return back()->withErrors([
@@ -67,7 +67,7 @@ class AuthController extends Controller
             return redirect()->route('teachers_dashboard');
         }
 
-        return redirect()->route('students_dashboard');
+        return redirect()->route('students_course');
     }
 
     public function logout(Request $request)

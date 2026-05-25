@@ -12,13 +12,21 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
-            $table->timestamps();
+            $table->increments('id'); // INT PRIMARY KEY AUTO_INCREMENT
+            $table->string('nama', 100);
+            $table->string('email', 100)->unique(); 
+            $table->string('password', 255);
+            $table->enum('role', ['super_admin', 'teacher', 'student']);
+            $table->string('nis', 20)->unique()->nullable();
+            $table->string('nip', 20)->unique()->nullable();
+            $table->enum('status', ['active', 'inactive', 'suspended'])->default('active');
+            $table->string('avatar', 255)->nullable();
+            $table->string('no_telp', 15)->nullable();
+            $table->text('alamat')->nullable();
+            $table->timestamps(); // Otomatis membuat created_at dan updated_at
+
+            // Membuat index khusus untuk role (email otomatis ter-index karena unique)
+            $table->index('role', 'idx_role');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

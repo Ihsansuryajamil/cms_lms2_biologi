@@ -1,19 +1,28 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Topic extends Model
 {
-    public $timestamps = false; 
-
     protected $fillable = [
-        'class_id',
-        'judul',
-        'deskripsi',
-        'urutan',
-        'status',
-        'created_at'
+        'course_id',
+        'nama_topic',
+        'durasi_pembelajaran',
+        'urutan'
     ];
+
+    // Mengetahui topik ini milik course mana
+    public function course(): BelongsTo
+    {
+        return $this->belongsTo(Course::class, 'course_id');
+    }
+
+    // Topik memiliki banyak Sub-Topik (Materi/Quiz/Tugas)
+    public function subTopics(): HasMany
+    {
+        return $this->hasMany(SubTopic::class, 'topic_id')->orderBy('urutan', 'asc');
+    }
 }

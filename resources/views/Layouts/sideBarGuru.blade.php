@@ -33,9 +33,11 @@
         </div>
 
         <nav class="nav-menu">
-            <a href="{{ route('teachers_dashboard') }}" class="nav-link {{ Request::is('Teachers/Dashboard') ? 'active' : '' }}"><i class="fa-solid fa-home text-primary"></i> Dashboard</a>
-            <a href="{{ route('guru_class_all') }}" class="nav-link {{ Request::is('Teachers/Kelas') ? 'active' : '' }}"><i class="fa-solid fa-chalkboard-user text-success"></i> Kelas</a>
-            <a href="{{ route('guru_user_management') }}" class="nav-link {{ Request::is('Teachers/Users') ? 'active' : '' }}"><i class="fa-solid fa-users text-info"></i> Manajemen User</a>
+            <a href="{{ route('teachers_dashboard') }}" class="nav-link {{ Request::is('Teachers/Dashboard') ? 'active' : '' }}"><i class="fa-solid fa-home"></i> Dashboard</a>
+            
+            <a href="{{ route('guru_course_all') }}" class="nav-link {{ Request::is('Teachers/Materi') ? 'active' : '' }}"><i class="fa-solid fa-book"></i> Materi</a>
+            <a href="{{ route('guru_class_all') }}" class="nav-link {{ Request::is('Teachers/Kelas') ? 'active' : '' }}"><i class="fa-solid fa-chalkboard-user"></i> Kelas</a>
+            <a href="{{ route('guru_user_management') }}" class="nav-link {{ Request::is('Teachers/Users') ? 'active' : '' }}"><i class="fa-solid fa-users"></i> Manajemen User</a>
             <a href="{{ route('guru_pengaturan_website') }}" class="nav-link {{ Request::is('Teachers/Pengaturan') ? 'active' : '' }}"><i class="fa-solid fa-gear"></i> Pengaturan Website</a>
         </nav>
 

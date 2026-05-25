@@ -2,10 +2,17 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\CourseController;
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('homepage');
+})->name('homepage');
+Route::get('/history', function () {
+    return view('history');
+})->name('history');
+Route::get('/detail-course', function () {
+    return view('detail_course');
+})->name('detail_course');
 
 // Authentication Routes
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
@@ -16,13 +23,16 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Siswa Routes (Wajib Login)
 Route::middleware('auth')->group(function () {
-    Route::get('/Students/Dashboard', function () {
-        return view('Dashboard.Siswa.dashboard');
-    })->name('students_dashboard');
+    Route::get('/Students/Course', function () {
+        return view('Dashboard.Siswa.course');
+    })->name('students_course');
     
-    Route::get('/Students/Kelas', function () {
-        return view('Dashboard.Siswa.Kelas.kelasAll');
-    })->name('students_kelas');
+    Route::get('/Students/History', function () {
+        return view('Dashboard.Siswa.history');
+    })->name('students_history');
+    Route::get('/Students/Course/Details', function () {
+        return view('Dashboard.Siswa.detail_course');
+    })->name('students_detail_course');
 });
 
 // Tambahkan Route Dummy untuk Guru jika belum ada, agar redirect tidak error
@@ -30,7 +40,22 @@ Route::middleware('auth')->group(function () {
     Route::get('/Teachers/Dashboard', function () {
         return view('Dashboard.Guru.dashboard'); // Sesuaikan dengan view Anda
     })->name('teachers_dashboard');
+    // === ROUTES UNTUK COURSE (MATERI) ===
+    Route::prefix('Teachers/Materi')->group(function () {
+        // Tampilkan semua materi
+        Route::get('/', [CourseController::class, 'index'])->name('guru_course_all');
+        
+        // Form tambah materi
+        Route::get('/Tambah', [CourseController::class, 'create'])->name('guru_course_tambah');
+        
+        // Proses simpan materi ke database
+        Route::post('/Store', [CourseController::class, 'store'])->name('guru_course_store');
+        
+        // Detail materi (Wajib menggunakan parameter {id})
+        Route::get('/Details/{id}', [CourseController::class, 'show'])->name('guru_course_detail');
+    });
 });
+
 Route::get('/Students/Kelas/BelumDisetujui', function () {
     return view('Dashboard.Siswa.Kelas.kelasAll_belumSetuju');
 })->name('students_kelas_belum_disetujui');
@@ -74,6 +99,23 @@ Route::get('/Students/Profil/Settings', function () {
 // Route::get('/Teachers/Dashboard', function () {
 //     return view('Dashboard.Guru.dashboard');
 // })->name('teachers_dashboard');
+// -----------------------------------------------------------
+// Route::get('/Teachers/Materi', function () {
+//     return view('Dashboard.Guru.Course.course_all');
+// })->name('guru_course_all');
+// Route::get('/Teachers/Materi/Tambah', function () {
+//     return view('Dashboard.Guru.Course.course_tambah');
+// })->name('guru_course_tambah');
+// Route::get('/Teachers/Materi/Details', function () {
+//     return view('Dashboard.Guru.Course.course_detail');
+// })->name('guru_course_detail'); 
+Route::get('/Teachers/Materi/Details/Edit', function () {
+    return view('Dashboard.Guru.Course.course_edit');
+})->name('guru_course_detail_edit');
+Route::get('/Teachers/Materi/Details/Topik/Edit', function () {
+    return view('Dashboard.Guru.Course.course_updateTopik');
+})->name('guru_course_detail_update_topik');
+
 Route::get('/Teachers/Kelas', function () {
     return view('Dashboard.Guru.Kelas.kelas_all');
 })->name('guru_class_all');
