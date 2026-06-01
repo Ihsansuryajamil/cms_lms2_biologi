@@ -21,21 +21,21 @@
                             <input type="text" class="form-control form-control-sm" id="searchUser" placeholder="Cari nama atau email..." onkeyup="searchUsers()">
                         </div>
                         <div class="col-md-3">
-                            <select class="form-select form-select-sm" id="filterRole" onchange="filterByRole()">
+                            <select class="form-select form-select-sm" id="filterRole">
                                 <option value="">Semua Role</option>
                                 <option value="guru">Guru</option>
                                 <option value="siswa">Siswa</option>
                             </select>
                         </div>
                         <div class="col-md-3">
-                            <select class="form-select form-select-sm" id="filterStatus" onchange="filterByStatus()">
+                            <select class="form-select form-select-sm" id="filterStatus">
                                 <option value="">Semua Status</option>
                                 <option value="aktif">Aktif</option>
                                 <option value="nonaktif">Non-Aktif</option>
                             </select>
                         </div>
                         <div class="col-md-2">
-                            <button class="btn btn-outline-secondary btn-sm w-100" onclick="resetFilters()"><i class="fa-solid fa-redo"></i> Reset</button>
+                            <button class="btn btn-outline-secondary btn-sm w-100"><i class="fa-solid fa-redo"></i> Reset</button>
                         </div>
                     </div>
                 </div>
@@ -70,8 +70,8 @@
                                     </div>
                                 </td>
                                 <td>siti.nurhaliza@gmail.com</td>
-                                <td><span class="badge bg-success badge-status">Guru</span></td>
-                                <td><span class="badge bg-success badge-status">Aktif</span></td>
+                                <td><span class="badge bg-success">Guru</span></td>
+                                <td><span class="badge bg-success">Aktif</span></td>
                                 <td class="text-muted small">15 Jul 2025</td>
                                 <td>
                                     <a href="user_detail.html?id=1" class="btn btn-sm btn-outline-primary rounded-pill"><i class="fa-solid fa-eye"></i> Detail</a>
@@ -89,8 +89,8 @@
                                     </div>
                                 </td>
                                 <td>ahmad.wijaya@gmail.com</td>
-                                <td><span class="badge bg-success badge-status">Guru</span></td>
-                                <td><span class="badge bg-success badge-status">Aktif</span></td>
+                                <td><span class="badge bg-success">Guru</span></td>
+                                <td><span class="badge bg-success">Aktif</span></td>
                                 <td class="text-muted small">15 Jul 2025</td>
                                 <td>
                                     <a href="user_detail.html?id=2" class="btn btn-sm btn-outline-primary rounded-pill"><i class="fa-solid fa-eye"></i> Detail</a>
@@ -108,8 +108,8 @@
                                     </div>
                                 </td>
                                 <td>budi.santoso@siswa.sch.id</td>
-                                <td><span class="badge bg-info badge-status">Siswa</span></td>
-                                <td><span class="badge bg-success badge-status">Aktif</span></td>
+                                <td><span class="badge bg-info">Siswa</span></td>
+                                <td><span class="badge bg-success">Aktif</span></td>
                                 <td class="text-muted small">16 Jul 2025</td>
                                 <td>
                                     <a href="user_detail.html?id=3" class="btn btn-sm btn-outline-primary rounded-pill"><i class="fa-solid fa-eye"></i> Detail</a>
@@ -127,8 +127,8 @@
                                     </div>
                                 </td>
                                 <td>allena.aurelia@siswa.sch.id</td>
-                                <td><span class="badge bg-info badge-status">Siswa</span></td>
-                                <td><span class="badge bg-success badge-status">Aktif</span></td>
+                                <td><span class="badge bg-info">Siswa</span></td>
+                                <td><span class="badge bg-success">Aktif</span></td>
                                 <td class="text-muted small">16 Jul 2025</td>
                                 <td>
                                     <a href="user_detail.html?id=4" class="btn btn-sm btn-outline-primary rounded-pill"><i class="fa-solid fa-eye"></i> Detail</a>
@@ -146,8 +146,8 @@
                                     </div>
                                 </td>
                                 <td>dewi.santoso@gmail.com</td>
-                                <td><span class="badge bg-success badge-status">Guru</span></td>
-                                <td><span class="badge bg-danger badge-status">Non-Aktif</span></td>
+                                <td><span class="badge bg-success">Guru</span></td>
+                                <td><span class="badge bg-danger">Non-Aktif</span></td>
                                 <td class="text-muted small">15 Jul 2025</td>
                                 <td>
                                     <a href="user_detail.html?id=5" class="btn btn-sm btn-outline-primary rounded-pill"><i class="fa-solid fa-eye"></i> Detail</a>
@@ -165,8 +165,8 @@
                                     </div>
                                 </td>
                                 <td>eka.putri@gmail.com</td>
-                                <td><span class="badge bg-success badge-status">Guru</span></td>
-                                <td><span class="badge bg-success badge-status">Aktif</span></td>
+                                <td><span class="badge bg-success">Guru</span></td>
+                                <td><span class="badge bg-success">Aktif</span></td>
                                 <td class="text-muted small">18 Jul 2025</td>
                                 <td>
                                     <a href="user_detail.html?id=6" class="btn btn-sm btn-outline-primary rounded-pill"><i class="fa-solid fa-eye"></i> Detail</a>

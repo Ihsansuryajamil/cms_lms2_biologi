@@ -17,44 +17,32 @@
 
         <div class="content-area">
             <ul class="nav nav-tabs mb-4">
-                <li class="nav-item"><a class="nav-link text-muted" href="{{ route('guru_course_detail') }}">Topik</a></li>
-                <!-- <li class="nav-item"><a class="nav-link text-muted" href="{{ route('guru_class_users') }}">Anggota <span class="badge bg-light text-dark">15</span></a></li>
-                <li class="nav-item"><a class="nav-link text-muted" href="{{ route('guru_class_discuss') }}"><i class="fa-regular fa-comments"></i> Diskusi</a></li> -->
-                <li class="nav-item"><a class="nav-link text-muted fw-bold" href="{{ route('guru_course_detail_edit') }}"><i class="fa-solid fa-gear"></i> Pengaturan</a></li>
-                <li class="nav-item"><a class="nav-link active" href="{{ route('guru_course_detail_update_topik') }}"><i class="fa-solid fa-pen-to-square"></i> Update Topik</a></li>
-                <!-- <li class="nav-item ms-auto"><span class="nav-link border-0 text-muted">Informatika</span></li> -->
+                <li class="nav-item"><a class="nav-link text-muted" href="{{ route('guru_course_detail', $course->id) }}">Topik</a></li>
+                <li class="nav-item"><a class="nav-link text-muted fw-bold" href="{{ route('guru_course_edit', $course->id) }}"><i class="fa-solid fa-gear"></i> Pengaturan</a></li>
+                <li class="nav-item"><a class="nav-link active" href="#"><i class="fa-solid fa-pen-to-square"></i> Update Topik</a></li>
             </ul>
 
             <div class="course-edit-form bg-white mx-auto mt-4">
-                <form>
-                    <!-- Form Group: Nama Materi -->
+                <form action="{{ route('guru_course_update_topik', $topic->id) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+
                     <div class="form-group-edit mb-4">
-                        <label class="form-label-edit">NAMA TOPIK</label>
-                        <input type="text" class="form-control form-control-edit" value="IX B-INFORMATIKA (KOMP)">
+                        <label class="form-label-edit fw-bold text-dark mb-2">NAMA TOPIK</label>
+                        <input type="text" name="nama_topik" class="form-control form-control-edit border rounded-3 p-3 text-dark" value="{{ old('nama_topik', $topic->nama_topic) }}" required>
                     </div>
 
-                    <!-- Form Group: Link Materi -->
                     <div class="form-group-edit mb-4">
-                        <label class="form-label-edit">DURASI PEMBELAJARAN</label>
+                        <label class="form-label-edit fw-bold text-dark mb-2">DURASI PEMBELAJARAN (MENIT)</label>
                         <div class="input-group">
-                                <input 
-                                    type="number" 
-                                    class="form-control form-control-modal" 
-                                    id="durasiPembelajaran" 
-                                    name="durasi_pembelajaran" 
-                                    placeholder="45"
-                                    min="1"
-                                    max="999"
-                                    required
-                                >
-                                <span class="input-group-text bg-light border-start-0">menit</span>
-                            </div>
+                            <input type="number" name="durasi_pembelajaran" class="form-control border p-3 text-dark" value="{{ old('durasi_pembelajaran', $topic->durasi_pembelajaran) }}" min="1" required>
+                            <span class="input-group-text bg-light">menit</span>
+                        </div>
                     </div>
 
-                    <!-- Submit Button -->
-                    <div class="form-actions-edit mt-5 pt-3 border-top">
-                        <button type="submit" class="btn btn-primary rounded-pill px-5 fw-bold">
-                            <i class="fa-solid fa-save"></i> Simpan Update
+                    <div class="form-actions-edit mt-5 pt-3 border-top text-end">
+                        <button type="submit" class="btn btn-primary rounded-pill px-5 py-2.5 fw-bold shadow-sm">
+                            <i class="fa-solid fa-save"></i> Simpan Perubahan
                         </button>
                     </div>
                 </form>

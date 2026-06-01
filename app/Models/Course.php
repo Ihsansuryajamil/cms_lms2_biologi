@@ -17,13 +17,12 @@ class Course extends Model
         'avatar'
     ];
 
-    // Hubungan Balik ke Guru yang membuat kelas
     public function pembuat(): BelongsTo
     {
-        return $table->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    // Hubungan Course memiliki banyak Bab/Topic
+    // PASTIKAN FUNGSI INI ADA
     public function topics(): HasMany
     {
         return $this->hasMany(Topic::class, 'course_id')->orderBy('urutan', 'asc');

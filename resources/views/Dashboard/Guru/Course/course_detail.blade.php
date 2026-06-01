@@ -16,11 +16,17 @@
         </div>
 
         <div class="content-area">
+            @if(session('success'))
+                <div class="alert alert-success alert-dismissible fade show rounded-3 mb-4" role="alert">
+                    <i class="fa-solid fa-circle-check me-2"></i> {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
             <ul class="nav nav-tabs mb-4">
                 <li class="nav-item"><a class="nav-link active fw-bold" href="#">Topik</a></li>
                 <!-- <li class="nav-item"><a class="nav-link text-muted" href="{{ route('guru_class_users') }}">Anggota <span class="badge bg-light text-dark">15</span></a></li>
                 <li class="nav-item"><a class="nav-link text-muted" href="{{ route('guru_class_discuss') }}"><i class="fa-regular fa-comments"></i> Diskusi</a></li> -->
-                <li class="nav-item"><a class="nav-link text-muted" href="{{ route('guru_course_detail_edit') }}"><i class="fa-solid fa-gear"></i> Pengaturan</a></li>
+                <li class="nav-item"><a class="nav-link text-muted" href="{{ route('guru_course_edit', $course->id) }}"><i class="fa-solid fa-gear"></i> Pengaturan</a></li>
                 <!-- <li class="nav-item ms-auto"><span class="nav-link border-0 text-muted">Informatika</span></li> -->
             </ul>  
  
@@ -29,9 +35,81 @@
             </button>
             <div id="topik-content" class="tab-content">
                 <!-- Topik List (read-only untuk siswa) -->
-                <div class="accordion mb-4" id="topicAccordion">
+                <div class="accordion" id="accordionTopik">
+    
+                @forelse($course->topics as $topic)
+                    <div class="accordion-item border-0 mb-3 rounded-4 shadow-sm overflow-hidden">
+                        <h2 class="accordion-header" id="headingTopik{{ $topic->id }}">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTopik{{ $topic->id }}" aria-expanded="false">
+                                <div class="d-flex align-items-center gap-4 w-100 pe-3">
+                                    <div class="bg-primary text-white rounded p-3" style="min-width: 50px; text-align: center;">
+                                        <i class="fa-solid fa-book-open-reader"></i>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h6 class="fw-bold mb-0">{{ $topic->nama_topic }}</h6>
+                                        
+                                        <span class="small text-muted fw-normal">{{ $topic->subTopics->count() }} Sub • {{ $topic->durasi_pembelajaran }}m</span>
+                                    </div>
+                                    
+                                    <span class="small text-muted fw-normal">
+                                        <a href="{{ route('guru_course_edit_topik', $topic->id) }}" class="btn btn-light border btn-sm" title="Update Topik">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </a>
+                                    </span>
+                                </div>
+                            </button>
+                        </h2>
+                        <div id="collapseTopik{{ $topic->id }}" class="accordion-collapse collapse" data-bs-parent="#accordionTopik">
+                            <div class="accordion-body bg-white">
+                                @forelse($topic->subTopics as $sub)
+                                <div class="topic-detail-item">
+                                    <span class="item-number">{{ $loop->iteration }}</span>
+                                    @if($sub->jenis == 'materi') 
+                                        <i class="fa-solid fa-file-lines text-primary"></i>
+                                    @elseif($sub->jenis == 'tugas') 
+                                        <i class="fa-solid fa-clipboard-list text-warning"></i>
+                                    @else 
+                                        <i class="fa-solid fa-clipboard-question text-danger"></i> 
+                                    @endif
+                                    <a href="{{ route('guru_topik_detail_materi', $sub->id) }}" class="item-title">{{ Str::limit($sub->judul, 75) }}</a>
+                                    <div class="item-type">
+                                        <div class="topic-actions">
+                                            @if($sub->status == 'publish')
+                                                
+                                                <button class="btn btn-success rounded-pill btn-sm px-3"><i class="fa-solid fa-paper-plane"></i> Publish</button>
+                                            @else
+                                                <button class="btn btn-danger rounded-pill btn-sm px-3"><i class="fa-solid fa-paper-plane"></i> Unpublish</button>
+                                            @endif
+                                            <a href="{{ route('guru_subtopik_edit', $sub->id) }}" class="btn btn-light border btn-sm" title="Edit Sub-Topik">
+                                                <i class="fa-solid fa-pen-to-square"></i>
+                                            </a>
+                                            <a href="{{ route('guru_topik_detail_materi', $sub->id) }}" class="btn btn-light border btn-sm" title="Pratinjau Tampilan Siswa">
+                                                <i class="fa-solid fa-eye"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                @empty
+                                    <p class="text-muted small text-center mb-3">Belum ada materi, kuis, atau tugas di topik ini.</p>
+                                @endforelse
+                                <div class="topic-detail-item mt-3">
+                                    
+                                    <a href="{{ route('guru_subtopik_tambah', $topic->id) }}" class="btn btn-success w-100 text-white item-title">
+                                                    <i class="fa-solid fa-plus"></i> Tambah Sub Topik
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                @empty
+                    <div class="text-center py-4 text-muted">
+                        Belum ada topik pembelajaran. Silakan buat topik baru.
+                    </div>
+                @endforelse
+                </div>
+                <!-- <div class="accordion mb-4" id="topicAccordion">
                     
-                    <!-- Accordion Item 1: Materi -->
                     <div class="accordion-item border-0 border-bottom">
                         <h2 class="accordion-header" id="headingTopik1">
                             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTopik1" aria-expanded="true">
@@ -43,7 +121,7 @@
                                         <h6 class="fw-bold mb-0">Pengenalan Komputer dan Sistem Operasi</h6>
                                         <span class="small text-muted fw-normal">5 Sub • 45m</span>
                                     </div>
-                                    <span class="small text-muted fw-normal"><a href="{{ route('guru_course_detail_update_topik') }}" class="btn btn-light border btn-sm" title="Update Topik"><i class="fa-solid fa-pen-to-square"></i></a></span>
+                                    <span class="small text-muted fw-normal"><a href="#" class="btn btn-light border btn-sm" title="Update Topik"><i class="fa-solid fa-pen-to-square"></i></a></span>
                                 </div>
                             </button>
                         </h2>
@@ -56,8 +134,8 @@
                                     <div class="item-type">
                                         <div class="topic-actions">
                                             <button class="btn btn-success rounded-pill btn-sm px-3"><i class="fa-solid fa-paper-plane"></i> Publish</button>
-                                            <a href="{{ route('guru_topik_edit_materi') }}" class="btn btn-light border btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
-                                            <a href="{{ route('guru_topik_detail_materi') }}" class="btn btn-light border btn-sm"><i class="fa-solid fa-eye"></i></a>
+                                            <a href="#" class="btn btn-light border btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
+                                            <a href="#" class="btn btn-light border btn-sm"><i class="fa-solid fa-eye"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -68,7 +146,7 @@
                                     <div class="item-type">
                                         <div class="topic-actions">
                                             <button class="btn btn-success rounded-pill btn-sm px-3"><i class="fa-solid fa-paper-plane"></i> Publish</button>
-                                            <!-- <button class="btn btn-light border btn-sm"><i class="fa-solid fa-ellipsis"></i></button> -->
+                                            
                                             <a href="{{ route('guru_topik_edit_tugas') }}" class="btn btn-light border btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
                                             <a href="{{ route('guru_topik_detail_tugas') }}" class="btn btn-light border btn-sm"><i class="fa-solid fa-eye"></i></a>
                                         </div>
@@ -118,8 +196,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Accordion Item 2: Quiz -->
                     <div class="accordion-item border-0 border-bottom">
                         <h2 class="accordion-header" id="headingTopik2">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTopik2">
@@ -132,7 +208,7 @@
                                         <h6 class="fw-bold mb-0">Browser dan CMS</h6>
                                         <span class="small text-muted fw-normal">1 Quiz • 30m</span>
                                     </div>
-                                    <span class="small text-muted fw-normal"><a href="{{ route('guru_course_detail_update_topik') }}" class="btn btn-light border btn-sm" title="Update Topik"><i class="fa-solid fa-pen-to-square"></i></a></span>
+                                    <span class="small text-muted fw-normal"><a href="#" class="btn btn-light border btn-sm" title="Update Topik"><i class="fa-solid fa-pen-to-square"></i></a></span>
                                 </div>
                             </button>
                         </h2>
@@ -151,16 +227,14 @@
                                     </div>
                                 </div>
                                 <div class="topic-detail-item">
-                                    <button class="btn btn-success w-100 text-white item-title" data-bs-toggle="modal" data-bs-target="#createSubTopikModal">
+                                    <a href="#" class="btn btn-success w-100 text-white item-title">
                                         <i class="fa-solid fa-plus"></i> Tambah Sub Topik
-                                    </button>
+                                    </a>
                                     
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Accordion Item 3: Tugas -->
                     <div class="accordion-item border-0 border-bottom">
                         <h2 class="accordion-header" id="headingTopik3">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTopik3">
@@ -172,7 +246,7 @@
                                         <h6 class="fw-bold mb-0">Algoritma dan Pemrograman Dasar</h6>
                                     <span class="small text-muted fw-normal">1 Quiz • 30m</span>
                                     </div>
-                                    <span class="small text-muted fw-normal"><a href="{{ route('guru_course_detail_update_topik') }}" class="btn btn-light border btn-sm" title="Update Topik"><i class="fa-solid fa-pen-to-square"></i></a></span>
+                                    <span class="small text-muted fw-normal"><a href="#" class="btn btn-light border btn-sm" title="Update Topik"><i class="fa-solid fa-pen-to-square"></i></a></span>
                                 </div>
                             </button>
                         </h2>
@@ -191,7 +265,7 @@
                                     </div>
                                 </div>
                                 <div class="topic-detail-item">
-                                    <span class="item-number">2</span>
+                                    <span class="item-number">2</span> 
                                     <i class="fa-solid fa-clipboard-check item-icon text-secondary"></i>
                                     <a href="tugas_detail_siswa.html" class="item-title">Tugas 2: Program Sederhana</a>
                                     <div class="item-type">
@@ -203,10 +277,9 @@
                                     </div>
                                 </div>
                                 <div class="topic-detail-item">
-                                    <button class="btn btn-success w-100 text-white item-title" data-bs-toggle="modal" data-bs-target="#createSubTopikModal">
+                                    <a href="#" class="btn btn-success w-100 text-white item-title">
                                         <i class="fa-solid fa-plus"></i> Tambah Sub Topik
-                                    </button>
-                                    
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -214,65 +287,44 @@
 
                     
 
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
 
     <!-- Modal: Buat Topik Baru -->
-    <div class="modal fade" id="createTopikModal" tabindex="-1" aria-labelledby="createTopikModalLabel" aria-hidden="true">
+    <div class="modal fade" id="createTopikModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0 shadow-lg rounded-4">
                 <div class="modal-header border-0 pb-0">
-                    <h5 class="modal-title fw-bold" id="createTopikModalLabel">Buat Topik Baru</h5>
+                    <h5 class="modal-title fw-bold">Buat Topik Baru</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body pt-3">
-                    <form id="formCreateTopik">
-                        <!-- Nama Topik -->
+                
+                <form action="{{ route('guru_course_store_topik', $course->id) }}" method="POST">
+                    @csrf
+                    <div class="modal-body pt-3">
                         <div class="mb-4">
-                            <label for="namaTopik" class="form-label fw-semibold mb-2">
-                                <i class="fa-solid fa-book"></i> Nama Topik
-                            </label>
-                            <input 
-                                type="text" 
-                                class="form-control form-control-modal" 
-                                id="namaTopik" 
-                                name="nama_topik" 
-                                placeholder="Contoh: Pengenalan Komputer dan Sistem Operasi"
-                                required
-                            >
-                            <small class="text-muted d-block mt-1">Masukkan nama topik atau judul pembelajaran</small>
+                            <label class="form-label fw-semibold mb-2"><i class="fa-solid fa-book"></i> Nama Topik</label>
+                            <input type="text" class="form-control form-control-modal" name="nama_topik" placeholder="Contoh: Pengenalan Komputer" required>
                         </div>
 
-                        <!-- Durasi Pembelajaran -->
                         <div class="mb-4">
-                            <label for="durasiPembelajaran" class="form-label fw-semibold mb-2">
-                                <i class="fa-solid fa-clock"></i> Durasi Pembelajaran
-                            </label>
+                            <label class="form-label fw-semibold mb-2"><i class="fa-solid fa-clock"></i> Durasi Pembelajaran</label>
                             <div class="input-group">
-                                <input 
-                                    type="number" 
-                                    class="form-control form-control-modal" 
-                                    id="durasiPembelajaran" 
-                                    name="durasi_pembelajaran" 
-                                    placeholder="45"
-                                    min="1"
-                                    max="999"
-                                    required
-                                >
+                                <input type="number" class="form-control form-control-modal" name="durasi_pembelajaran" placeholder="45" min="1" required>
                                 <span class="input-group-text bg-light border-start-0">menit</span>
                             </div>
-                            <small class="text-muted d-block mt-1">Estimasi waktu pembelajaran topik ini</small>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer border-0 pt-0">
-                    <button type="button" class="btn btn-light rounded-pill px-4" data-bs-dismiss="modal">Batal</button>
-                    <button type="button" class="btn btn-primary rounded-pill px-4" id="btnSimpanTopik">
-                        <i class="fa-solid fa-save"></i> Simpan Topik
-                    </button>
-                </div>
+                    </div>
+                    
+                    <div class="modal-footer border-0 pt-0">
+                        <button type="button" class="btn btn-light rounded-pill px-4" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary rounded-pill px-4">
+                            <i class="fa-solid fa-save"></i> Simpan Topik
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -287,7 +339,7 @@
                 </div>
                 <div class="modal-body pt-3">
                     <p class="text-muted small mb-3">Pilih jenis konten yang ingin ditambahkan ke topik kelas:</p>
-                    <a href="{{ route('guru_topik_tambah_materi') }}" class="create-type-card text-decoration-none">
+                    <a href="#" class="create-type-card text-decoration-none">
                         <span class="create-type-icon text-primary bg-primary-subtle"><i class="fa-solid fa-book-open-reader"></i></span>
                         <span>
                             <strong class="d-block text-dark">Materi Baru</strong>

@@ -30,9 +30,9 @@
                     <div class="col-md-4">
                         <label class="form-section-label mb-2">Tipe Materi</label>
                         <select class="form-select">
-                            <option>Video</option>
-                            <option selected>Dokumen</option>
-                            <option>Teks</option>
+                            <option>Materi Pembelajaran</option>
+                            <option selected>Tugas</option>
+                            <option>Quiz</option>
                         </select>
                     </div>
                     <div class="col-md-4">
@@ -42,8 +42,8 @@
                     <div class="col-md-4">
                         <label class="form-section-label mb-2">Status Publikasi</label>
                         <select class="form-select">
-                            <option>Draft</option>
                             <option selected>Publish</option>
+                            <option>UnPublish</option>
                         </select>
                     </div>
                     <div class="col-12">

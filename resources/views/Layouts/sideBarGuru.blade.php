@@ -9,8 +9,8 @@
         <div class="user-profile">
             <img src="https://ui-avatars.com/api/?name=Staff+Komputer&background=e0e0e0&color=333" alt="User">
             <div>
-                <div class="fw-bold">Staff Komputer</div>
-                <div class="text-muted small">Super Admin</div>
+                <div class="fw-bold">{{ auth()->user()->nama ?? 'User' }}</div>
+                <div class="text-muted small">{{ auth()->user()->role ?? 'Role' }}</div>
             </div>
         </div>
 

@@ -40,9 +40,9 @@
                             @endif
                         </div>
                         <div class="card-body-custom">
-                            <h6 class="course-title">{{ $course->nama_course }}</h6>
-                            <span class="course-category">{{ Auth::user()->nama }}</span>
-                            <a href="{{ route('guru_course_detail', $course->id) }}" class="btn btn-light mt-3 w-100 text-primary border border-primary-subtle">Masuk Kelas</a>
+                            <h6 class="course-title">{{ Str::limit($course->nama_course, 25) }}</h6>
+                            <span> <i class="fa-solid fa-user"></i><span class="course-category"> {{ Auth::user()->nama }}</span></span>
+                            <a href="{{ route('guru_course_detail', $course->id) }}" class="btn btn-light mt-3 w-100 text-primary border border-primary-subtle">Lihat Materi</a>
                         </div>
                         
                     </div>
@@ -57,7 +57,7 @@
                         </div>
                         
                         <p class="small text-muted mt-3 mb-0" style="line-height: 1.5;">
-                            {{ $course->deskripsi }}
+                            {{ Str::limit($course->deskripsi, 350) }}
                         </p>
                         
                         <!-- <div class="popover-specifications">

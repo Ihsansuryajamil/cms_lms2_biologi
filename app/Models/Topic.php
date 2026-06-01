@@ -14,13 +14,14 @@ class Topic extends Model
         'urutan'
     ];
 
-    // Mengetahui topik ini milik course mana
+    // Relasi ke atas: Mengetahui topik ini milik course mana
     public function course(): BelongsTo
     {
         return $this->belongsTo(Course::class, 'course_id');
     }
 
-    // Topik memiliki banyak Sub-Topik (Materi/Quiz/Tugas)
+    // Relasi ke bawah: Topik memiliki banyak Sub-Topik (Materi/Quiz/Tugas)
+    // PASTIKAN FUNGSI INI ADA DAN TEPAT PENULISANNYA: subTopics
     public function subTopics(): HasMany
     {
         return $this->hasMany(SubTopic::class, 'topic_id')->orderBy('urutan', 'asc');

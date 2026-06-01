@@ -3,16 +3,16 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\DepanController;
 
-Route::get('/', function () {
-    return view('homepage');
-})->name('homepage');
+// Route::get('/', function () {
+//     return view('homepage');
+// })->name('homepage');
+Route::get('/', [DepanController::class, 'index'])->name('homepage');
 Route::get('/history', function () {
     return view('history');
 })->name('history');
-Route::get('/detail-course', function () {
-    return view('detail_course');
-})->name('detail_course');
+Route::get('/Course/{id}', [DepanController::class, 'show'])->name('detail_course');
 
 // Authentication Routes
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
@@ -53,8 +53,34 @@ Route::middleware('auth')->group(function () {
         
         // Detail materi (Wajib menggunakan parameter {id})
         Route::get('/Details/{id}', [CourseController::class, 'show'])->name('guru_course_detail');
+        Route::get('/Details/{id}/Edit', [CourseController::class, 'edit'])->name('guru_course_edit');
+        Route::put('/Update/{id}', [CourseController::class, 'update'])->name('guru_course_update');
+        Route::delete('/Delete/{id}', [CourseController::class, 'destroy'])->name('guru_course_destroy');
+        Route::post('/Details/{course_id}/Topik', [CourseController::class, 'storeTopic'])->name('guru_course_store_topik');
+        Route::get('/Topik/{id}/Edit', [CourseController::class, 'editTopic'])->name('guru_course_edit_topik');
+        Route::put('/Topik/{id}', [CourseController::class, 'updateTopic'])->name('guru_course_update_topik');
+        Route::get('/Topik/{topic_id}/Sub-Topik/Tambah', [CourseController::class, 'createSubTopic'])->name('guru_subtopik_tambah');
+        Route::post('/Topik/{topic_id}/Sub-Topik/Store', [CourseController::class, 'storeSubTopic'])->name('guru_subtopik_store');
+        
+        Route::get('/Sub-Topik/{id}/Edit', [CourseController::class, 'editSubTopic'])->name('guru_subtopik_edit');
+        Route::put('/Sub-Topik/{id}', [CourseController::class, 'updateSubTopic'])->name('guru_subtopik_update');
+        Route::delete('/Sub-Topik/{id}', [CourseController::class, 'destroySubTopic'])->name('guru_subtopik_destroy');
+
+        Route::get('/Sub-Topik/{id}/Detail', [CourseController::class, 'showSubTopic'])->name('guru_topik_detail_materi');
     });
 });
+// Route::get('/Teachers/Materi/Sub-Topik/Detail', function () {
+//     return view('Dashboard.Guru.Topik.sub_topik_detail');
+// })->name('guru_topik_detail_materi');
+// Route::get('/Teachers/Sub-Topik/Update', function () {
+//     return view('Dashboard.Guru.Topik.sub_topik_update');
+// })->name('guru_subtopik_update');
+// Route::get('/Teachers/Materi/Details/Topik/Edit', function () {
+//     return view('Dashboard.Guru.Course.course_updateTopik');
+// })->name('guru_course_detail_update_topik');
+// Route::get('/Teachers/Materi/Details/Edit', function () {
+//     return view('Dashboard.Guru.Course.course_edit');
+// })->name('guru_course_detail_edit');
 
 Route::get('/Students/Kelas/BelumDisetujui', function () {
     return view('Dashboard.Siswa.Kelas.kelasAll_belumSetuju');
@@ -109,12 +135,12 @@ Route::get('/Students/Profil/Settings', function () {
 // Route::get('/Teachers/Materi/Details', function () {
 //     return view('Dashboard.Guru.Course.course_detail');
 // })->name('guru_course_detail'); 
-Route::get('/Teachers/Materi/Details/Edit', function () {
-    return view('Dashboard.Guru.Course.course_edit');
-})->name('guru_course_detail_edit');
-Route::get('/Teachers/Materi/Details/Topik/Edit', function () {
-    return view('Dashboard.Guru.Course.course_updateTopik');
-})->name('guru_course_detail_update_topik');
+// Route::get('/Teachers/Materi/Details/Edit', function () {
+//     return view('Dashboard.Guru.Course.course_edit');
+// })->name('guru_course_detail_edit');
+// Route::get('/Teachers/Materi/Details/Topik/Edit', function () {
+//     return view('Dashboard.Guru.Course.course_updateTopik');
+// })->name('guru_course_detail_update_topik');
 
 Route::get('/Teachers/Kelas', function () {
     return view('Dashboard.Guru.Kelas.kelas_all');
@@ -148,9 +174,9 @@ Route::get('/Teachers/Topik/Tugas', function () {
     return view('Dashboard.Guru.Topik.topik_edit_tugas');
 })->name('guru_topik_edit_tugas');
 
-Route::get('/Teachers/Topik/Materi/Detail', function () {
-    return view('Dashboard.Guru.Topik.topik_detail_materi');
-})->name('guru_topik_detail_materi');
+// Route::get('/Teachers/Topik/Materi/Detail', function () {
+//     return view('Dashboard.Guru.Topik.sub_topik_detail');
+// })->name('guru_topik_detail_materi');
 Route::get('/Teachers/Topik/Quiz/Detail', function () {
     return view('Dashboard.Guru.Topik.topik_detail_quiz');
 })->name('guru_topik_detail_quiz');
@@ -158,9 +184,9 @@ Route::get('/Teachers/Topik/Tugas/Detail', function () {
     return view('Dashboard.Guru.Topik.topik_detail_tugas');
 })->name('guru_topik_detail_tugas');
 
-Route::get('/Teachers/Topik/Tambah/Materi', function () {
-    return view('Dashboard.Guru.Topik.topik_tambah_materi');
-})->name('guru_topik_tambah_materi');
+// Route::get('/Teachers/Topik/Tambah/Materi', function () {
+//     return view('Dashboard.Guru.Topik.sub_topik_tambah');
+// })->name('guru_subtopik_tambah');
 Route::get('/Teachers/Topik/Tambah/Quiz', function () {
     return view('Dashboard.Guru.Topik.topik_tambah_quiz');
 })->name('guru_topik_tambah_quiz');

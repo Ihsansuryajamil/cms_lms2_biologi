@@ -35,7 +35,7 @@
                 
                 <div class="dropdown d-grid d-lg-flex mt-3 mt-lg-0 pb-3 pb-lg-0">
                     <a href="#" class="btn rounded-pill px-4 fw-bold d-flex align-items-center justify-content-center gap-2 dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa-solid fa-circle-user fs-5"></i> Natnica S
+                        <i class="fa-solid fa-circle-user fs-5"></i> {{ auth()->user()->nama ?? 'User' }}
                     </a>
                     
                     <ul class="dropdown-menu dropdown-menu-end shadow mt-2 border-0 w-100" style="border-radius: 12px;">
@@ -71,7 +71,7 @@
             <li class="dropup position-relative">
                 <a href="#" class="d-flex flex-column align-items-center" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: none; color: #888; cursor: pointer;">
                     <i class="fa-solid fa-user fs-5"></i>
-                    <span>Natnica</span>
+                    <span> {{ auth()->user()->nama ?? 'User' }}</span>
                 </a>    
                 
                 <ul class="dropdown-menu shadow border-0 mb-2 text-center" style="border-radius: 12px; min-width: 120px; position: absolute; bottom: 100%; left: 50%;">

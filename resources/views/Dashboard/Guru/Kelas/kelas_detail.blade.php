@@ -210,7 +210,7 @@
                 </div>
                 <div class="modal-body pt-3">
                     <p class="text-muted small mb-3">Pilih jenis konten yang ingin ditambahkan ke topik kelas:</p>
-                    <a href="{{ route('guru_topik_tambah_materi') }}" class="create-type-card text-decoration-none">
+                    <a href="{{ route('guru_subtopik_tambah') }}" class="create-type-card text-decoration-none">
                         <span class="create-type-icon text-primary bg-primary-subtle"><i class="fa-solid fa-book-open-reader"></i></span>
                         <span>
                             <strong class="d-block text-dark">Materi Baru</strong>

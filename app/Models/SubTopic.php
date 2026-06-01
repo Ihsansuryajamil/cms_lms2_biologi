@@ -28,4 +28,8 @@ class SubTopic extends Model
     {
         return $this->belongsTo(Topic::class, 'topic_id');
     }
+    public function quizQuestions()
+    {
+        return $this->hasMany(QuizQuestion::class, 'sub_topic_id');
+    }
 }
