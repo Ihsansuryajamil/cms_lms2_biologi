@@ -1,190 +1,158 @@
 @extends('Layouts.app')
+
 @section('sidebar')
     @include('Layouts.sideBarGuru')
 @endsection
+
 @section('content')
-<div class="topbar d-flex justify-content-between align-items-center w-100">
-            <div class="d-flex align-items-center gap-3">
-                <h5 class="mb-0 fw-bold"><i class="fa-solid fa-users"></i> Manajemen User</h5>
+        <div class="topbar d-flex justify-content-between align-items-center w-100">
+            <div class="d-flex align-items-center gap-2">
+                <h6 class="mb-0 fw-bold" style="font-size: 0.95rem;"><i class="fa-solid fa-users"></i> Manajemen User</h6>
             </div>
-            <div class="d-flex align-items-center gap-3">
-                <button  class="btn btn-sm border-3 rounded-pill text-white"  style="background: #0d6efd;"><i class="fa-solid fa-user-plus"></i> Tambah User</button>
+            <div class="d-flex align-items-center gap-2">
+                <a href="{{ route('guru_user_tambah') }}" class="btn btn-sm border-2 rounded-pill text-white" style="background: #0d6efd; font-size: 0.85rem; padding: 6px 16px;">
+                    <i class="fa-solid fa-user-plus"></i> Tambah User
+                </a>
             </div>
         </div>
 
         <div class="content-area p-4">
-            <!-- Filter & Search -->
-            <div class="card border-0 shadow-sm mb-4">
-                <div class="card-body p-4">
-                    <div class="row g-3">
-                        <div class="col-md-4">
-                            <input type="text" class="form-control form-control-sm" id="searchUser" placeholder="Cari nama atau email..." onkeyup="searchUsers()">
+            @if(session('success'))
+                <div class="alert alert-success alert-dismissible fade show rounded-3 mb-4" role="alert">
+                    <i class="fa-solid fa-circle-check me-2"></i> {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
+            @if ($errors->any())
+                <div class="alert alert-danger mb-4 rounded-3 border-0">
+                    <ul class="mb-0 small">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            
+            <div class="card border-0 shadow-sm mb-3">
+                <div class="card-body p-3">
+                    <form action="{{ route('guru_user_management') }}" method="GET" id="filterForm">
+                        <div class="row g-2">
+                            <div class="col-md-4">
+                                <input type="text" name="search" class="form-control form-control-sm" placeholder="Cari nama atau email..." value="{{ request('search') }}" style="font-size: 0.85rem;">
+                            </div>
+                            <div class="col-md-2">
+                                <select name="role" class="form-select form-select-sm" onchange="document.getElementById('filterForm').submit();" style="font-size: 0.85rem;">
+                                    <option value="">Semua Role</option>
+                                    <option value="teacher" {{ request('role') == 'teacher' ? 'selected' : '' }}>Guru</option>
+                                    <option value="student" {{ request('role') == 'student' ? 'selected' : '' }}>Siswa</option>
+                                    <option value="super_admin" {{ request('role') == 'super_admin' ? 'selected' : '' }}>Super Admin</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <select name="status" class="form-select form-select-sm" onchange="document.getElementById('filterForm').submit();" style="font-size: 0.85rem;">
+                                    <option value="">Semua Status</option>
+                                    <option value="active" {{ request('status') == 'active' ? 'selected' : '' }}>Aktif</option>
+                                    <option value="inactive" {{ request('status') == 'inactive' ? 'selected' : '' }}>Nonaktif</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <select name="kelas_id" class="form-select form-select-sm" onchange="document.getElementById('filterForm').submit();" style="font-size: 0.85rem;">
+                                    <option value="">Semua Kelas</option>
+                                    @foreach($classes as $kelas)
+                                        <option value="{{ $kelas->id }}" {{ request('kelas_id') == $kelas->id ? 'selected' : '' }}>
+                                            {{ $kelas->nama_kelas }} ({{ $kelas->tahun_ajar }})
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-1">
+                                <button type="submit" class="btn btn-sm btn-warning border-2 rounded-pill text-black w-100" style="font-size: 0.85rem; padding: 6px 16px;"><i class="fa-solid fa-magnifying-glass"></i> Cari</button>
+                            </div>
                         </div>
-                        <div class="col-md-3">
-                            <select class="form-select form-select-sm" id="filterRole">
-                                <option value="">Semua Role</option>
-                                <option value="guru">Guru</option>
-                                <option value="siswa">Siswa</option>
-                            </select>
-                        </div>
-                        <div class="col-md-3">
-                            <select class="form-select form-select-sm" id="filterStatus">
-                                <option value="">Semua Status</option>
-                                <option value="aktif">Aktif</option>
-                                <option value="nonaktif">Non-Aktif</option>
-                            </select>
-                        </div>
-                        <div class="col-md-2">
-                            <button class="btn btn-outline-secondary btn-sm w-100"><i class="fa-solid fa-redo"></i> Reset</button>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
 
-            <!-- User Table -->
             <div class="card border-0 shadow-sm">
                 <div class="table-responsive">
-                    <table class="table table-hover mb-0 user-table">
-                        <thead class="table-light">
-                            <tr>
-                                <th width="50">#</th>
-                                <th width="250">NAMA USER</th>
-                                <th>EMAIL</th>
-                                <th width="100">ROLE</th>
-                                <th width="100">STATUS</th>
-                                <th width="120">TERDAFTAR</th>
-                                <th width="100">AKSI</th>
+                    <table class="table table-hover align-middle mb-0" style="font-size: 0.85rem;">
+                        <thead class="bg-light">
+                            <tr style="font-size: 0.8rem;">
+                                <th class="text-center" style="width: 5%; padding: 8px 10px;">No</th>
+                                <th style="width: 20%; padding: 8px 8px;">Nama Pengguna</th>
+                                <th style="width: 12%; padding: 8px 8px;">Role</th>
+                                <th style="width: 12%; padding: 8px 8px;">Status</th>
+                                <th style="width: 15%; padding: 8px 8px;">Kelas</th>
+                                <th class="text-center" style="width: 15%; padding: 8px 8px;">Tanggal Daftar</th>
+                                <th class="text-center" style="width: 15%; padding: 8px 8px;">Aksi</th>
                             </tr>
                         </thead>
-                        <tbody id="userTableBody">
-                            <!-- Data dinamis akan ditampilkan di sini -->
-                            <tr>
-                                <td class="text-muted fw-bold">1</td>
-                                <td>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img src="https://ui-avatars.com/api/?name=Ibu+Siti&background=27ae60&color=fff" class="rounded-circle" width="36" height="36" alt="Avatar">
-                                        <div>
-                                            <div class="fw-bold">Ibu Siti Nurhaliza</div>
-                                            <small class="text-muted">NIP: 198505121999032002</small>
+                        <tbody>
+                            @forelse($users as $user)
+                                <tr>
+                                    <td class="text-center" style="padding: 6px 4px;">{{ $loop->iteration }}</td>
+                                    <td style="padding: 6px 8px;">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <div>
+                                                <div class="mb-0 fw-bold" style="font-size: 0.9rem;">{{ $user->nama }}</div>
+                                                <small class="text-muted text-uppercase" style="font-size: 0.7rem;">
+                                                    {{ $user->nis ?? $user->nip ?? '-' }}
+                                                </small>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <td>siti.nurhaliza@gmail.com</td>
-                                <td><span class="badge bg-success">Guru</span></td>
-                                <td><span class="badge bg-success">Aktif</span></td>
-                                <td class="text-muted small">15 Jul 2025</td>
-                                <td>
-                                    <a href="user_detail.html?id=1" class="btn btn-sm btn-outline-primary rounded-pill"><i class="fa-solid fa-eye"></i> Detail</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-muted fw-bold">2</td>
-                                <td>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img src="https://ui-avatars.com/api/?name=Bapak+Ahmad&background=3498db&color=fff" class="rounded-circle" width="36" height="36" alt="Avatar">
-                                        <div>
-                                            <div class="fw-bold">Bapak Ahmad Wijaya</div>
-                                            <small class="text-muted">NIP: 198612151997031003</small>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>ahmad.wijaya@gmail.com</td>
-                                <td><span class="badge bg-success">Guru</span></td>
-                                <td><span class="badge bg-success">Aktif</span></td>
-                                <td class="text-muted small">15 Jul 2025</td>
-                                <td>
-                                    <a href="user_detail.html?id=2" class="btn btn-sm btn-outline-primary rounded-pill"><i class="fa-solid fa-eye"></i> Detail</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-muted fw-bold">3</td>
-                                <td>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img src="https://ui-avatars.com/api/?name=Budi+Santoso&background=4f46e5&color=fff" class="rounded-circle" width="36" height="36" alt="Avatar">
-                                        <div>
-                                            <div class="fw-bold">Budi Santoso</div>
-                                            <small class="text-muted">NIS: 2024001</small>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>budi.santoso@siswa.sch.id</td>
-                                <td><span class="badge bg-info">Siswa</span></td>
-                                <td><span class="badge bg-success">Aktif</span></td>
-                                <td class="text-muted small">16 Jul 2025</td>
-                                <td>
-                                    <a href="user_detail.html?id=3" class="btn btn-sm btn-outline-primary rounded-pill"><i class="fa-solid fa-eye"></i> Detail</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-muted fw-bold">4</td>
-                                <td>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img src="https://ui-avatars.com/api/?name=Allena+Aurelia&background=e67e22&color=fff" class="rounded-circle" width="36" height="36" alt="Avatar">
-                                        <div>
-                                            <div class="fw-bold">Allena Aurelia Gunawan</div>
-                                            <small class="text-muted">NIS: 2024002</small>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>allena.aurelia@siswa.sch.id</td>
-                                <td><span class="badge bg-info">Siswa</span></td>
-                                <td><span class="badge bg-success">Aktif</span></td>
-                                <td class="text-muted small">16 Jul 2025</td>
-                                <td>
-                                    <a href="user_detail.html?id=4" class="btn btn-sm btn-outline-primary rounded-pill"><i class="fa-solid fa-eye"></i> Detail</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-muted fw-bold">5</td>
-                                <td>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img src="https://ui-avatars.com/api/?name=Dewi+Santoso&background=d35400&color=fff" class="rounded-circle" width="36" height="36" alt="Avatar">
-                                        <div>
-                                            <div class="fw-bold">Ibu Dewi Santoso</div>
-                                            <small class="text-muted">NIP: 197809241998032001</small>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>dewi.santoso@gmail.com</td>
-                                <td><span class="badge bg-success">Guru</span></td>
-                                <td><span class="badge bg-danger">Non-Aktif</span></td>
-                                <td class="text-muted small">15 Jul 2025</td>
-                                <td>
-                                    <a href="user_detail.html?id=5" class="btn btn-sm btn-outline-primary rounded-pill"><i class="fa-solid fa-eye"></i> Detail</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-muted fw-bold">6</td>
-                                <td>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img src="https://ui-avatars.com/api/?name=Eka+Putri&background=16a34a&color=fff" class="rounded-circle" width="36" height="36" alt="Avatar">
-                                        <div>
-                                            <div class="fw-bold">Ibu Eka Putri</div>
-                                            <small class="text-muted">NIP: 198902152001032003</small>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>eka.putri@gmail.com</td>
-                                <td><span class="badge bg-success">Guru</span></td>
-                                <td><span class="badge bg-success">Aktif</span></td>
-                                <td class="text-muted small">18 Jul 2025</td>
-                                <td>
-                                    <a href="user_detail.html?id=6" class="btn btn-sm btn-outline-primary rounded-pill"><i class="fa-solid fa-eye"></i> Detail</a>
-                                </td>
-                            </tr>
+                                    </td>
+                                    <!-- <td style="padding: 6px 8px;"><small>{{ $user->email }}</small></td> -->
+                                    <td style="padding: 6px 8px;">
+                                        @if($user->role == 'teacher')
+                                            <span class="badge bg-primary text-uppercase" style="font-size: 0.7rem;">{{ $user->role }}</span>
+                                        @elseif($user->role == 'super_admin')
+                                            <span class="badge bg-danger text-uppercase" style="font-size: 0.7rem;">Super Admin</span>
+                                        @else
+                                            <span class="badge bg-success text-uppercase" style="font-size: 0.7rem;">{{ $user->role }}</span>
+                                        @endif
+                                    </td>
+                                    <td style="padding: 6px 8px;">
+                                        @if($user->status == 'active')
+                                            <span class="badge bg-success-subtle text-success border border-success" style="font-size: 0.7rem;">Aktif</span>
+                                        @else
+                                            <span class="badge bg-secondary-subtle text-secondary border border-secondary" style="font-size: 0.7rem;">Nonaktif</span>
+                                        @endif
+                                    </td>
+                                    <td style="padding: 6px 8px;">
+                                        @if($user->kelasJoined)
+                                            <span class="badge bg-primary-subtle text-primary border border-primary" style="font-size: 0.7rem;">
+                                                {{ $user->kelasJoined->nama_kelas }}
+                                            </span>
+                                        @else
+                                            <span class="badge bg-light text-secondary border" style="font-size: 0.7rem;">
+                                                Tanpa Kelas
+                                            </span>
+                                        @endif
+                                    </td>
+                                    <td class="text-center" style="padding: 6px 8px;"><small class="text-muted">{{ $user->created_at->format('d M Y') }} <br> {{ $user->created_at->format('H:i') }}</small></td>
+                                    <td class="text-center" style="padding: 6px 8px;">
+                                        <a href="{{ route('guru_user_detail', $user->id) }}" class="btn btn-sm btn-outline-primary rounded-pill" style="font-size: 0.75rem; padding: 4px 10px;"><i class="fa-solid fa-eye me-1"></i> Detail</a>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="7" class="text-center py-4 text-muted">
+                                        <i class="fa-solid fa-users-slash" style="font-size: 1.5rem; opacity: 0.5; display: block; margin-bottom: 8px;"></i>
+                                        <small>Tidak ada data pengguna yang ditemukan.</small>
+                                    </td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
-                <div class="card-footer bg-light border-top py-3">
-                    <nav aria-label="Table pagination">
-                        <ul class="pagination mb-0 justify-content-center">
-                            <li class="page-item disabled"><a class="page-link" href="#">Sebelumnya</a></li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">Selanjutnya</a></li>
-                        </ul>
-                    </nav>
-                </div>
+                
+                @if($users->hasPages())
+                    <div class="card-footer bg-white border-top py-2 d-flex justify-content-center" style="font-size: 0.85rem;">
+                        {{ $users->withQueryString()->links('pagination::bootstrap-5') }}
+                    </div>
+                @endif
+                
             </div>
         </div>
 @endsection

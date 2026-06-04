@@ -28,7 +28,7 @@
                             $namaGuru = $course->pembuat->nama ?? 'Instruktur';
                         @endphp
                         <span>Dibuat oleh <a href="#" class="text-warning text-decoration-none fw-bold">{{ $namaGuru }}</a></span>
-                        <span><i class="fa-solid fa-circle-exclamation text-white"></i> Terakhir diperbarui {{$course->updated_at}}</span>
+                        <span><i class="fa-solid fa-circle-exclamation text-white"></i> Terakhir diperbarui {{$course->updated_at->format('d M Y')}}</span>
                         <span><i class="fa-solid fa-globe text-white"></i> Bahasa Indonesia</span>
                     </div>
                     <!-- <div class="course-meta">

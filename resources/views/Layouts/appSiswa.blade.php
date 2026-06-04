@@ -28,10 +28,14 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarNav">
+                
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0 pt-3 pt-lg-0">
+                    @if(Auth::user()->status === 'active')
                     <li class="nav-item"><a  class="nav-link {{ Request::is('Students/Course') ? 'active' : '' }}"  href="{{ route('students_course') }}">Courses</a></li>
                     <li class="nav-item"><a  class="nav-link {{ Request::is('Students/History') ? 'active' : '' }}" href="{{ route('students_history') }}">History</a></li>
+                    @endif
                 </ul>
+                
                 
                 <div class="dropdown d-grid d-lg-flex mt-3 mt-lg-0 pb-3 pb-lg-0">
                     <a href="#" class="btn rounded-pill px-4 fw-bold d-flex align-items-center justify-content-center gap-2 dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -56,6 +60,7 @@
     
     <nav class="mobile-bottom-nav">
         <ul>
+            @if(Auth::user()->status === 'active')
             <li>
                 <a href="{{ route('students_course') }}" class="{{ Request::is('Students/Course') ? 'active' : '' }}">
                 <i class="fa-solid fa-table-cells-large fs-5"></i>
@@ -68,6 +73,7 @@
                 <span>History</span>
                 </a>
             </li>
+            @endif
             <li class="dropup position-relative">
                 <a href="#" class="d-flex flex-column align-items-center" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: none; color: #888; cursor: pointer;">
                     <i class="fa-solid fa-user fs-5"></i>

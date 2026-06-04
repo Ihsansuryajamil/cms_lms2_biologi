@@ -1,11 +1,12 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kesalahan Server - LMS Biologi</title>
+    <title>Akses Ditolak - LMS Biologi</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="stylesheet" href="{{ asset('lms_biologi/assets/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,36 +20,31 @@
                     <div class="card-body p-5">
                         <div class="d-flex flex-column flex-md-row error-header gap-4">
                             <div>
-                                <span class="badge bg-danger-subtle text-danger py-2 px-3 rounded-pill mb-3">Error 500</span>
-                                <h1 class="error-code mb-1">500</h1>
-                                <h2 class="error-title mb-3">Kesalahan Server Internal</h2>
+                                <span class="badge bg-primary-subtle text-primary py-2 px-3 rounded-pill mb-3">Error 403</span>
+                                <h1 class="error-code mb-1">403</h1>
+                                <h2 class="error-title mb-3">Akses Ditolak</h2>
                             </div>
                             <div class="text-md-end">
-                                <div class="error-icon text-danger" style="background: rgba(220, 38, 38, 0.08); color: #dc2626;">
-                                    <i class="fas fa-exclamation-triangle"></i>
+                                <div class="error-icon mb-2">
+                                    <i class="fas fa-search"></i>
                                 </div>
                             </div>
                         </div>
 
                         <p class="error-text mb-4">
-                            Terjadi kesalahan pada server. Tim teknis kami sedang memperbaiki masalah ini. Silakan coba lagi beberapa saat lagi.
+                            Maaf, Anda tidak memiliki izin untuk mengakses halaman yang diminta. Silakan kembali ke halaman utama atau hubungi administrator jika Anda merasa ini adalah kesalahan.
                         </p>
 
-                        <div class="alert alert-info mb-4" role="alert">
-                            <i class="fas fa-info-circle me-2"></i>
-                            Jika diperlukan, hubungi administrator untuk mempercepat penanganan.
-                        </div>
-
                         <div class="d-flex flex-wrap gap-3 mb-4">
-                            <button onclick="window.location.reload()" class="btn btn-danger btn-lg">Coba Lagi</button>
-                            <a href="../index.html" class="btn btn-outline-secondary btn-lg">Beranda</a>
+                            <a href="{{ route('homepage') }}" class="btn btn-primary btn-lg">Beranda</a>
+                            <button onclick="history.back()" class="btn btn-outline-secondary btn-lg">Kembali</button>
                         </div>
 
                         <hr>
 
                         <div class="d-flex flex-column flex-md-row justify-content-between gap-3">
-                            <div class="text-muted small">Kalau error masih muncul, silakan laporkan kepada tim IT dengan screenshot halaman ini.</div>
-                            <span class="text-muted small">Error ID: SRV-500-000000000000</span>
+                            <div class="text-muted small">Jika masalah ini terus berulang, silakan hubungi admin untuk memeriksa tautan.</div>
+                            <a href="{{ route('login') }}" class="text-decoration-none">Masuk ke Sistem <i class="fa-solid fa-arrow-right ms-1"></i></a>
                         </div>
                     </div>
                 </div>

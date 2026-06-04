@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Layanan Tidak Tersedia - LMS Biologi</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="stylesheet" href="{{ asset('lms_biologi/assets/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -41,14 +41,14 @@
 
                         <div class="d-flex flex-wrap gap-3 mb-4">
                             <button onclick="window.location.reload()" class="btn btn-secondary btn-lg">Periksa Status</button>
-                            <a href="../index.html" class="btn btn-outline-primary btn-lg">Beranda</a>
+                            <a href="{{ route('homepage') }}" class="btn btn-outline-primary btn-lg">Beranda</a>
                         </div>
 
                         <hr>
 
                         <div class="d-flex flex-column flex-md-row justify-content-between gap-3">
                             <div class="text-muted small">Terima kasih atas kesabaran Anda. Jika perlu, coba lagi beberapa menit kemudian.</div>
-                            <a href="../login.html" class="text-decoration-none">Masuk ke Sistem <i class="fa-solid fa-arrow-right ms-1"></i></a>
+                            <a href="{{ route('login') }}" class="text-decoration-none">Masuk ke Sistem <i class="fa-solid fa-arrow-right ms-1"></i></a>
                         </div>
                     </div>
                 </div>

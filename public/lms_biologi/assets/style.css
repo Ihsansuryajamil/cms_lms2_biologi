@@ -2868,6 +2868,124 @@ body.sidebar-collapsed .main-content {
 .score-cell.low {
     color: #ef4444;
 }
+/* Quiz Header Section */
+.quiz-header {
+    background-color: #063375;
+    color: #ffffff;
+    padding: 50px 0 60px 0;
+    margin-top: 72px;
+    
+    /* UTAMA: Memaksa background biru memenuhi batas paling bawah layar */
+    min-height: calc(100vh - 72px); 
+}
+
+.breadcrumb-custom {
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+}
+
+.breadcrumb-custom a {
+    color: #9ca3af;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.breadcrumb-custom a:hover {
+    color: #ffffff;
+}
+
+.quiz-header-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    line-height: 1.3;
+}
+
+.quiz-header-desc {
+    font-size: 1.1rem;
+    color: #d1d5db;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    max-width: 90%;
+}
+/* Item Tombol Opsi Standar */
+.quiz-option-item {
+    border-color: #e5e7eb !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Efek Sorot saat Kursor Mendekat */
+.quiz-option-item:hover {
+    background-color: #f8fafc !important;
+    border-color: #cbd5e1 !important;
+    transform: translateY(-1px);
+}
+
+/* State Aktif/Terpilih (Selected) Sesuai Gambar 2 */
+.quiz-option-item.selected {
+    background-color: #e2e8f0 !important; /* Warna latar abu-abu/lavender lembut */
+    border: 2px solid #1e293b !important; /* Border gelap tebal mengunci */
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05) !important;
+}
+
+/* Pembatas Garis Transparan di Atas Batas Navigasi */
+.border-white-10 {
+    border-color: rgba(255, 255, 255, 0.15) !important;
+}
+/* Konfigurasi Grid 5 Kolom Sejajar */
+.quiz-number-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    max-height: 280px;
+    overflow-y: auto; /* Otomatis memunculkan scrollbar jika baris melebihi batas */
+    padding-right: 2px;
+}
+
+/* Item Kotak Nomor */
+.num-item {
+    aspect-ratio: 1; /* Memastikan bentuk kotak sempurna (1:1) */
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.15s, all 0.2s;
+    border: 1px solid #e5e7eb;
+}
+
+.num-item:hover {
+    transform: scale(1.08);
+}
+
+/* Variasi Status Warna Kotak Soal */
+.num-item.blank {
+    background-color: #ffffff;
+    color: #4b5563;
+}
+
+.num-item.done {
+    background-color: #198754 !important; /* Hijau Sukses */
+    color: #ffffff !important;
+    border-color: #198754 !important;
+}
+
+.num-item.current {
+    background-color: #ffc107 !important; /* Kuning Peringatan / Aktif */
+    color: #000000 !important;
+    border-color: #ffc107 !important;
+}
+
+/* Bulatan Keterangan Indikator */
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
 /* DETAIL MATERI PUBLIC STYLES */
 /* Course Header Section */
 .course-header {
@@ -2931,18 +3049,31 @@ body.sidebar-collapsed .main-content {
 }
 
 /* Floating Sidebar Card */
+/* Container Kolom Sidebar */
 .course-sidebar-wrapper {
     position: relative;
+    z-index: 15; /* Naikkan tingkatan agar berada di atas element header banner */
 }
 
+/* Trik Overlap: Hanya aktif di layar komputer/desktop (min-width: 992px) */
+@media (min-width: 992px) {
+    .course-sidebar-wrapper {
+        /* Tarik box sidebar ke atas langsung sejak awal halaman dimuat */
+        margin-top: -400px; 
+    }
+}
+
+/* Card Utama Sidebar */
 .sidebar-card {
     background: #ffffff;
     border-radius: 12px;
     border: 1px solid var(--border-color);
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
     overflow: hidden;
+    
+    /* Tetap pertahankan sticky agar ketika di-scroll ke bawah, card mengunci di atas screen */
     position: sticky;
-    top: 100px;
+    top: 90px; /* Jarak pas dari topbar atas saat di-scroll */
     z-index: 10;
 }
 
@@ -2985,7 +3116,7 @@ body.sidebar-collapsed .main-content {
 .sidebar-content {
     padding: 24px;
 }
-
+ 
 .price-tag {
     font-size: 2rem;
     font-weight: 700;
@@ -3220,9 +3351,9 @@ body.sidebar-collapsed .main-content {
 }
 
 /* Responsiveness */
-@media (min-width: 992px) {
+/* @media (min-width: 992px) {
     .course-sidebar-wrapper {
-        margin-top: -300px;
+        margin-top: -200px; 
     }
 }
 
@@ -3236,7 +3367,7 @@ body.sidebar-collapsed .main-content {
     .course-header-title {
         font-size: 1.8rem;
     }
-}
+} */
 /* Efek animasi meluncur ke bawah untuk dropdown Bootstrap */
 .dropdown-menu {
     animation: slideDown 0.25s ease-out;

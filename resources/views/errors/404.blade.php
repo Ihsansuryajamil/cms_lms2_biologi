@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sesi Kadaluarsa - LMS Biologi</title>
+    <title>Halaman Tidak Ditemukan - LMS Biologi</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="stylesheet" href="{{ asset('lms_biologi/assets/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,31 +19,31 @@
                     <div class="card-body p-5">
                         <div class="d-flex flex-column flex-md-row error-header gap-4">
                             <div>
-                                <span class="badge bg-warning-subtle text-warning py-2 px-3 rounded-pill mb-3">Error 419</span>
-                                <h1 class="error-code mb-1">419</h1>
-                                <h2 class="error-title mb-3">Sesi Kadaluarsa</h2>
+                                <span class="badge bg-primary-subtle text-primary py-2 px-3 rounded-pill mb-3">Error 404</span>
+                                <h1 class="error-code mb-1">404</h1>
+                                <h2 class="error-title mb-3">Halaman Tidak Ditemukan</h2>
                             </div>
                             <div class="text-md-end">
-                                <div class="error-icon text-warning" style="background: rgba(255, 193, 7, 0.12); color: #d97706;">
-                                    <i class="fas fa-clock"></i>
+                                <div class="error-icon mb-2">
+                                    <i class="fas fa-search"></i>
                                 </div>
                             </div>
                         </div>
 
                         <p class="error-text mb-4">
-                            Sesi Anda telah berakhir untuk alasan keamanan. Silakan masuk kembali untuk melanjutkan ke dashboard atau tugas Anda.
+                            Maaf, halaman yang Anda tuju tidak tersedia atau sudah dipindahkan. Silakan kembali ke halaman utama atau coba lagi nanti.
                         </p>
 
                         <div class="d-flex flex-wrap gap-3 mb-4">
-                            <a href="../login.html" class="btn btn-warning btn-lg">Masuk Kembali</a>
-                            <button onclick="window.location.reload()" class="btn btn-outline-secondary btn-lg">Muat Ulang</button>
+                            <a href="{{ route('homepage') }}" class="btn btn-primary btn-lg">Beranda</a>
+                            <button onclick="history.back()" class="btn btn-outline-secondary btn-lg">Kembali</button>
                         </div>
 
                         <hr>
 
                         <div class="d-flex flex-column flex-md-row justify-content-between gap-3">
-                            <div class="text-muted small">Bersihkan cache browser jika Anda masih melihat halaman yang sama setelah login ulang.</div>
-                            <a href="../index.html" class="text-decoration-none">Kembali ke Beranda <i class="fa-solid fa-arrow-right ms-1"></i></a>
+                            <div class="text-muted small">Jika masalah ini terus berulang, silakan hubungi admin untuk memeriksa tautan.</div>
+                            <a href="{{ route('login') }}" class="text-decoration-none">Masuk ke Sistem <i class="fa-solid fa-arrow-right ms-1"></i></a>
                         </div>
                     </div>
                 </div>

@@ -47,27 +47,32 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
+        // 1. Validasi field dengan menambahkan aturan 'unique:users,nis'
         $validated = $request->validate([
-            'name' => ['required', 'string', 'max:255'], // Ini mencocokkan input dari form HTML
-            'email' => ['required', 'email', 'unique:users,email'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'role' => ['required', 'in:teacher,student'],
+            'nama'     => ['required', 'string', 'max:255'],
+            'nis'      => ['required', 'string', 'max:50', 'unique:users,nis'], // <-- Tambahkan unique:nama_tabel,nama_kolom
+            'email'    => ['required', 'email', 'unique:users,email'],
+            'password' => ['required', 'string', 'min:6'], 
+        ], [
+            // JAWABAN ANDA: Pesan kustom agar tampil cantik di view saat data kembar
+            'nis.unique'   => 'NIS / NIM tersebut sudah terdaftar di sistem. Silakan gunakan nomor induk Anda yang benar!',
+            'email.unique' => 'Alamat email otomatis ini sudah pernah tergenerasi sebelumnya. Silakan coba generate ulang atau ubah variasi nama Anda!',
+            'nama.required' => 'Nama lengkap wajib diisi.',
+            'nis.required'  => 'NIS / NIM wajib diisi.',
         ]);
 
-        $user = User::create([
-            'nama' => $validated['name'], // <-- PASTIKAN KEY-NYA 'nama' (sesuai DB), BUKAN 'name'
-            'email' => $validated['email'],
-            'password' => bcrypt($validated['password']),
-            'role' => $validated['role'],
+        // 2. Simpan ke database (Sistem hanya berjalan ke sini jika lolos validasi di atas)
+        User::create([
+            'nama'     => $validated['nama'], 
+            'nis'      => $validated['nis'],
+            'email'    => $validated['email'],
+            'password' => bcrypt($validated['password']), 
+            'role'     => 'student',  
+            'status'   => 'inactive', 
+            'xyz'      => $validated['password'], 
         ]);
 
-        Auth::login($user);
-
-        if (Str::lower((string) $user->role) === 'teacher') {
-            return redirect()->route('teachers_dashboard');
-        }
-
-        return redirect()->route('students_course');
+        return redirect()->route('login')->with('success', 'Pendaftaran berhasil! Akun Anda dinonaktifkan sementara. Silakan hubungi Administrator untuk proses aktivasi.');
     }
 
     public function logout(Request $request)

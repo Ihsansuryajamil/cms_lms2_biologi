@@ -487,7 +487,7 @@ class CourseController extends Controller
 
         return redirect()->route('guru_course_detail', $courseId)
                          ->with('success', 'Sub-Topik berhasil dihapus!');
-    }
+    } 
     public function showSubTopic($id)
     {
         // Tambahkan 'quizQuestions' ke dalam array with() agar data soal ikut ditarik

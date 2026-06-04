@@ -24,10 +24,7 @@
             @endif
             <ul class="nav nav-tabs mb-4">
                 <li class="nav-item"><a class="nav-link active fw-bold" href="#">Topik</a></li>
-                <!-- <li class="nav-item"><a class="nav-link text-muted" href="{{ route('guru_class_users') }}">Anggota <span class="badge bg-light text-dark">15</span></a></li>
-                <li class="nav-item"><a class="nav-link text-muted" href="{{ route('guru_class_discuss') }}"><i class="fa-regular fa-comments"></i> Diskusi</a></li> -->
                 <li class="nav-item"><a class="nav-link text-muted" href="{{ route('guru_course_edit', $course->id) }}"><i class="fa-solid fa-gear"></i> Pengaturan</a></li>
-                <!-- <li class="nav-item ms-auto"><span class="nav-link border-0 text-muted">Informatika</span></li> -->
             </ul>  
  
             <button class="btn btn-light w-100 border border-dashed text-primary py-3 mb-4 border-2" style="border-style: dashed !important;" data-bs-toggle="modal" data-bs-target="#createTopikModal">

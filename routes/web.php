@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DepanController;
+use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\UserController;
 
 // Route::get('/', function () {
 //     return view('homepage');
@@ -21,18 +23,26 @@ Route::get('/register', [AuthController::class, 'showRegister'])->name('register
 Route::post('/register', [AuthController::class, 'register'])->name('register.post');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// Siswa Routes (Wajib Login)
 Route::middleware('auth')->group(function () {
-    Route::get('/Students/Course', function () {
-        return view('Dashboard.Siswa.course');
-    })->name('students_course');
-    
+    // Route::get('/Students/Course', function () {
+    //     return view('Dashboard.Siswa.course');
+    // })->name('students_course');
+    Route::get('/Students/Course', [SiswaController::class, 'index'])->name('students_course');
     Route::get('/Students/History', function () {
         return view('Dashboard.Siswa.history');
     })->name('students_history');
-    Route::get('/Students/Course/Details', function () {
-        return view('Dashboard.Siswa.detail_course');
-    })->name('students_detail_course');
+    
+    Route::get('/Students/Course/{id}', [SiswaController::class, 'show'])->name('students_detail_course');
+    Route::get('/Students/Course/{id}/Detail', [SiswaController::class, 'showSubTopic'])->name('students_detail_subtopik');
+    
+    // Route::get('/Students/Course/Quiz/Details', function () {
+    //     return view('Dashboard.Siswa.quiz_input');
+    // })->name('students_quiz_input');
+    // Rute Ujian Sederhana (Tanpa AJAX)
+Route::post('/Students/Course/Quiz/{sub_topic_id}/Start', [SiswaController::class, 'startQuiz'])->name('students_quiz_start');
+Route::get('/Students/Course/Quiz/{attempt_id}/Play', [SiswaController::class, 'playQuiz'])->name('students_quiz_play');
+Route::post('/Students/Course/Quiz/{attempt_id}/Submit', [SiswaController::class, 'submitQuiz'])->name('students_quiz_submit');
+    
 });
 
 // Tambahkan Route Dummy untuk Guru jika belum ada, agar redirect tidak error
@@ -40,6 +50,30 @@ Route::middleware('auth')->group(function () {
     Route::get('/Teachers/Dashboard', function () {
         return view('Dashboard.Guru.dashboard'); // Sesuaikan dengan view Anda
     })->name('teachers_dashboard');
+    // === ROUTES UNTUK USER MANAGEMENT (KHUSUS SUPER ADMIN) ===
+    Route::prefix('Teachers/Users')->group(function () {
+        Route::get('/', [UserController::class, 'index'])->name('guru_user_management');
+
+        Route::get('/Tambah', [UserController::class, 'create'])->name('guru_user_tambah');
+        Route::post('/Store', [UserController::class, 'store'])->name('guru_user_store');
+
+        Route::get('/{id}/Details', [UserController::class, 'edit'])->name('guru_user_detail');
+        Route::put('/{id}', [UserController::class, 'update'])->name('guru_user_update');
+
+        Route::delete('/{id}', [UserController::class, 'destroy'])->name('guru_user_destroy');
+    });
+    Route::prefix('Teachers/Kelas')->group(function () {
+        Route::get('/', [UserController::class, 'indexKelas'])->name('guru_class_all');
+        
+        Route::get('/Tambah', [UserController::class, 'createKelas'])->name('guru_kelas_tambah');
+        Route::post('/Store', [UserController::class, 'storeKelas'])->name('guru_kelas_store');
+
+        Route::get('/{id}/Details', [UserController::class, 'showKelas'])->name('guru_class_detail');
+        
+        Route::get('/{id}/Update', [UserController::class, 'editKelas'])->name('guru_class_update');
+        Route::put('/{id}', [UserController::class, 'updateKelas'])->name('guru_class_update_put');
+        Route::delete('/{id}', [UserController::class, 'destroyKelas'])->name('guru_class_destroy');
+    });
     // === ROUTES UNTUK COURSE (MATERI) ===
     Route::prefix('Teachers/Materi')->group(function () {
         // Tampilkan semua materi
@@ -142,27 +176,7 @@ Route::get('/Students/Profil/Settings', function () {
 //     return view('Dashboard.Guru.Course.course_updateTopik');
 // })->name('guru_course_detail_update_topik');
 
-Route::get('/Teachers/Kelas', function () {
-    return view('Dashboard.Guru.Kelas.kelas_all');
-})->name('guru_class_all');
-Route::get('/Teachers/Kelas/Tambah', function () {
-    return view('Dashboard.Guru.Kelas.kelas_tambah');
-})->name('guru_kelas_tambah');
-Route::get('/Teachers/Kelas/Details', function () {
-    return view('Dashboard.Guru.Kelas.kelas_detail');
-})->name('guru_class_detail');
-Route::get('/Teachers/Kelas/Details/users', function () {
-    return view('Dashboard.Guru.Kelas.kelas_detail_user');
-})->name('guru_class_users');
-Route::get('/Teachers/Kelas/Details/users/requests', function () {
-    return view('Dashboard.Guru.Kelas.kelas_detail_user_request');
-})->name('guru_class_user_request');
-Route::get('/Teachers/Kelas/Details/discuss', function () {
-    return view('Dashboard.Guru.Kelas.kelas_detail_discuss');
-})->name('guru_class_discuss');
-Route::get('/Teachers/Kelas/Details/edit', function () {
-    return view('Dashboard.Guru.Kelas.kelas_edit');
-})->name('guru_class_edit');
+
 
 Route::get('/Teachers/Topik/Materi', function () {
     return view('Dashboard.Guru.Topik.topik_edit_materi');
@@ -194,10 +208,6 @@ Route::get('/Teachers/Topik/Tambah/Tugas', function () {
     return view('Dashboard.Guru.Topik.topik_tambah_tugas');
 })->name('guru_topik_tambah_tugas');
 
-Route::get('/Teachers/Users', function () {
-    return view('Dashboard.Guru.UserManagement.user_management');
-})->name('guru_user_management');
-
 
 Route::get('/Teachers/Notifikasi', function () {
     return view('Dashboard.Guru.notifikasi');
@@ -208,9 +218,9 @@ Route::get('/Teachers/Profil', function () {
 Route::get('/Teachers/Profil/Settings', function () {
     return view('Dashboard.Guru.profile_setting');
 })->name('guru_profile_setting');
-Route::get('/Teachers/Users/Details', function () {
-    return view('Dashboard.Guru.UserManagement.user_detail');
-})->name('guru_user_detail');
+// Route::get('/Teachers/Users/Details', function () {
+//     return view('Dashboard.Guru.UserManagement.user_detail');
+// })->name('guru_user_detail');
 Route::get('/Teachers/Pengaturan', function () {
     return view('Dashboard.Guru.pengaturan_website');
 })->name('guru_pengaturan_website');

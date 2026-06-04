@@ -6,6 +6,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\BelongsTo; // <-- Tambahkan ini
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -28,6 +30,8 @@ class User extends Authenticatable
         'avatar',
         'no_telp',
         'alamat',
+        'xyz',
+        'kelas_id',
     ];
 
     /**
@@ -51,5 +55,17 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+    public function kelasJoined(): BelongsTo
+    {
+        return $this->belongsTo(KelasUser::class, 'kelas_id');
+    }
+
+    /**
+     * Relasi untuk Guru: Mengetahui daftar kelas yang dibuat oleh guru ini
+     */
+    public function kelasCreated(): HasMany
+    {
+        return $this->hasMany(KelasUser::class, 'teacher_id');
     }
 }
