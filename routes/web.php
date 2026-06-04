@@ -34,7 +34,7 @@ Route::middleware('auth')->group(function () {
     
     Route::get('/Students/Course/{id}', [SiswaController::class, 'show'])->name('students_detail_course');
     Route::get('/Students/Course/{id}/Detail', [SiswaController::class, 'showSubTopic'])->name('students_detail_subtopik');
-    
+    Route::post('/Students/Course/Materi/{id}/Submit', [SiswaController::class, 'storeMateriSubmission'])->name('students_materi_submit');
     // Route::get('/Students/Course/Quiz/Details', function () {
     //     return view('Dashboard.Siswa.quiz_input');
     // })->name('students_quiz_input');

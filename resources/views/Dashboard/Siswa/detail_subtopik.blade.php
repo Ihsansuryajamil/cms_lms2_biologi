@@ -12,7 +12,29 @@
                         <span class="text-white">{{ $subTopic->judul }}</span>
                     </div> 
 
-                    <h1 class="course-header-title">{{ $subTopic->judul }}</h1>
+                        <div class="d-flex align-items-center gap-3 pb-3">
+                            <div class="p-3 rounded-3 text-white
+                                @if($subTopic->jenis == 'materi')
+                                    bg-primary
+                                @elseif($subTopic->jenis == 'tugas')
+                                    bg-warning text-dark
+                                @else
+                                    bg-danger
+                                @endif
+                            ">
+                                @if($subTopic->jenis == 'materi')
+                                    <i class="fa-solid fa-book-open-reader fa-xl"></i>
+                                @elseif($subTopic->jenis == 'tugas')
+                                    <i class="fa-solid fa-clipboard-list fa-xl"></i>
+                                @else
+                                    <i class="fa-solid fa-circle-question fa-xl"></i>
+                                @endif
+                            </div>
+                            <div>
+                                <span class="badge bg-light text-primary text-uppercase mb-1 fw-bold">{{ $subTopic->jenis }}</span>
+                                <h4 class="mb-0 fw-bold  text-white">{{ $subTopic->judul }}</h4>
+                            </div>
+                        </div>
 
                     <div class="card border-0 shadow-sm rounded-4 bg-white">
                         <div class="card-body p-4">
@@ -64,7 +86,7 @@
                     <div class="col-lg-8 pe-lg-5">
                         
                         <div class="card border-0 shadow-sm rounded-4 p-4 bg-white mb-4">
-                            <h6 class="fw-bold text-dark mb-2"><i class="fa-solid fa-paperclip me-2 text-primary"></i> Berkas Lampiran (Max 3)</h6>
+                            <h6 class="fw-bold text-dark mb-2"><i class="fa-solid fa-paperclip me-2 text-primary"></i> Berkas Lampiran</h6>
                             <div class="d-flex flex-column">
                                 @php $hasFiles = false; @endphp
                                 @for($i = 1; $i <= 3; $i++)
@@ -100,7 +122,7 @@
                         </div>
 
                         <div class="card border-0 shadow-sm rounded-4 p-4 bg-white">
-                            <h6 class="fw-bold text-dark mb-2"><i class="fa-solid fa-globe me-2 text-success"></i> Tautan Pendukung (Max 3)</h6>
+                            <h6 class="fw-bold text-dark mb-2"><i class="fa-solid fa-globe me-2 text-success"></i> Tautan Pendukung</h6>
                             <div class="d-flex flex-column">
                                 @php $hasLinks = false; @endphp
                                 @for($i = 1; $i <= 3; $i++)
@@ -214,12 +236,74 @@
                                         @endif
 
                                     </div>
+                                @elseif($subTopic->jenis == 'materi')
+                                    <div class="card-body p-3 text-center">
+                                        
+                                        {{-- KONDISI A: JIKA SISWA SUDAH PERNAH MENGIRIMKAN FEEDBACK --}}
+                                        @if($materiSubmission)
+                                            <div class="mb-3 text-primary">
+                                                <i class="fa-solid fa-circle-check" style="font-size: 3.5rem; opacity: 0.9;"></i>
+                                            </div>
+                                            <h5 class="fw-bold text-dark mb-1">Materi Telah Dibaca</h5>
+                                            <p class="text-muted small mb-3">Anda telah mengirimkan laporan tingkat pemahaman untuk aktivitas pembelajaran ini.</p>
+
+                                            <div class="p-3 rounded-4 border text-start bg-light mb-2">
+                                                <small class="text-muted d-block mb-1 small text-uppercase fw-bold" style="font-size: 0.65rem;">Respon Pemahaman Anda:</small>
+                                                
+                                                @if($materiSubmission->status === 'sangat_mengerti')
+                                                    <span class="badge bg-success px-2.5 py-1.5 rounded-3 mb-2"><i class="fa-solid fa-face-laugh-beam me-1"></i> Sangat Mengerti</span>
+                                                @elseif($materiSubmission->status === 'sudah_mengerti')
+                                                    <span class="badge bg-primary px-2.5 py-1.5 rounded-3 mb-2"><i class="fa-solid fa-face-smile me-1"></i> Sudah Mengerti</span>
+                                                @else
+                                                    <span class="badge bg-danger px-2.5 py-1.5 rounded-3 mb-2"><i class="fa-solid fa-face-frown me-1"></i> Belum Mengerti</span>
+                                                @endif
+
+                                                <p class="mb-0 text-dark small font-monospace bg-white p-2 rounded-3 border" style="font-size: 0.8rem; max-height: 100px; overflow-y: auto;">
+                                                    "{{ $materiSubmission->catatan_siswa }}"
+                                                </p>
+                                            </div>
+                                            <small class="text-muted d-block" style="font-size: 0.7rem;">Dikirim pada: {{ $materiSubmission->updated_at->translatedFormat('d M Y, H:i') }} WIB</small>
+
+                                        {{-- KONDISI B: JIKA SISWA BELUM MENGISI FORM EVALUASI MATERI --}}
+                                        @else
+                                            <div class="text-primary mb-2">
+                                                <i class="fa-solid fa-book-reader" style="font-size: 3.5rem; opacity: 0.9;"></i>
+                                            </div>
+                                            <h5 class="fw-bold text-dark mb-1">Konfirmasi Membaca</h5>
+                                            <p class="text-muted small mb-3" style="font-size: 0.8rem;">Selesai mempelajari materi? Berikan tanggapan Anda untuk membantu Guru memantau perkembangan belajar Anda.</p>
+
+                                            <form action="{{ route('students_materi_submit', $subTopic->id) }}" method="POST" class="text-start">
+                                                @csrf
+                                                
+                                                <div class="form-group mb-3">
+                                                    <label class="fw-bold small text-dark mb-2">Tingkat Pemahaman Uraian:</label>
+                                                    <select name="status" class="form-select form-select-sm rounded-3 fw-medium text-dark" required>
+                                                        <option value="" disabled selected>-- Pilih Tingkat Pemahaman --</option>
+                                                        <option value="sangat_mengerti">🟢 Sangat Mengerti Materi Ini</option>
+                                                        <option value="sudah_mengerti">🟡 Sudah Mengerti Cukup Baik</option>
+                                                        <option value="belum_mengerti">🔴 Belum Mengerti (Butuh Bimbingan)</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group mb-3">
+                                                    <label class="fw-bold small text-dark mb-2">Pertanyaan / Poin Penting Materi:</label>
+                                                    <textarea name="catatan_siswa" class="form-control rounded-3 p-2 text-dark" rows="3" 
+                                                            style="font-size: 0.8rem;" placeholder="Tuliskan poin penting yang kamu dapatkan atau bagian yang belum kamu pahami dari materi ini..." required></textarea>
+                                                </div>
+
+                                                <button type="submit" class="btn btn-primary rounded-pill w-100 py-2 fw-bold shadow-sm" style="font-size: 0.8rem;">
+                                                    <i class="fa-solid fa-paper-plane me-1.5"></i> Kirim Tanggapan Materi
+                                                </button>
+                                            </form>
+                                        @endif
+
+                                    </div>
                                 @endif
                             </div>
 
-                            <div class="sidebar-content p-4 bg-white" style="border-radius: 0 0 12px 12px;">
+                            <!-- <div class="sidebar-content p-4 bg-white" style="border-radius: 0 0 12px 12px;">
                                 {{-- Tempat untuk konten tambahan bawah seperti tombol share atau log waktu pengerjaan --}}
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>

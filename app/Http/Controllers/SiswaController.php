@@ -9,6 +9,7 @@ use App\Models\SubTopic;
 use App\Models\QuizAttempt;
 use App\Models\QuizQuestion;
 use App\Models\QuizStudentAnswer;
+use App\Models\MateriSubmission;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 class SiswaController extends Controller
@@ -81,13 +82,41 @@ class SiswaController extends Controller
         // 2. Tarik data sub-topik beserta seluruh relasi bab, materi, dan soal kuis terkait
         $subTopic = SubTopic::with(['topic.course', 'quizQuestions'])->findOrFail($id);
 
-        // ✨ TAMBAHAN: Tarik data pengerjaan kuis siswa yang sedang login (jika ada)
+        // Tarik data pengerjaan kuis siswa yang sedang login (jika ada)
         $quizAttempt = QuizAttempt::where('sub_topic_id', $id)
-                                ->where('student_id', Auth::id())
-                                ->first();
+                                    ->where('student_id', Auth::id())
+                                    ->first();
 
-        // Kirim variabel $quizAttempt ke dalam view
-        return view('Dashboard.Siswa.detail_subtopik', compact('subTopic', 'quizAttempt'));
+        // ✨ TAMBAHAN BARU: Tarik rekam jejak pengisian materi siswa ini (jika ada)
+        $materiSubmission = MateriSubmission::where('sub_topic_id', $id)
+                                            ->where('student_id', Auth::id())
+                                            ->first();
+
+        // Kirim variabel $materiSubmission ke dalam view
+        return view('Dashboard.Siswa.detail_subtopik', compact('subTopic', 'quizAttempt', 'materiSubmission'));
+    }
+
+    // ✨ FUNGSI BARU: Untuk menyimpan kiriman feedback pemahaman materi siswa
+    public function storeMateriSubmission(Request $request, $sub_topic_id)
+    {
+        $request->validate([
+            'catatan_siswa' => 'required|string|min:5',
+            'status'        => 'required|in:belum_mengerti,sudah_mengerti,sangat_mengerti',
+        ]);
+
+        // Menggunakan updateOrCreate agar jika siswa ingin memperbarui statusnya, data tidak duplikat
+        MateriSubmission::updateOrCreate(
+            [
+                'sub_topic_id' => $sub_topic_id,
+                'student_id'   => Auth::id(),
+            ],
+            [
+                'catatan_siswa' => $request->catatan_siswa,
+                'status'        => $request->status,
+            ]
+        );
+
+        return back()->with('success', 'Refleksi pemahaman materi berhasil dikirim ke Guru!');
     }
     public function startQuiz($sub_topic_id)
     {
