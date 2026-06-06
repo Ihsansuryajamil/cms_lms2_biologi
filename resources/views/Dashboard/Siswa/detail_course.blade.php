@@ -195,10 +195,10 @@
                             </div>
 
                             <div class="sidebar-content p-4 bg-white" style="border-radius: 0 0 12px 12px;">
-                                <div class="price-tag fw-bold fs-3 text-dark mb-3">Gratis</div>
+                                <!-- <div class="price-tag fw-bold fs-3 text-dark mb-3">Gratis</div> -->
                                 
                                 <button type="button" class="btn btn-enroll text-center text-decoration-none d-block w-100 py-3 rounded-pill fw-bold text-white bg-success border-0" style="cursor: default;">
-                                    <i class="fa-solid fa-circle-check me-1"></i> TERDAFTAR AKURAT
+                                    <i class="fa-solid fa-circle-check me-1"></i> AKUN TERDAFTAR
                                 </button>
                                 
                                 <p class="text-center text-muted small mt-3 mb-4">Akses materi selamanya setelah mendaftar</p>

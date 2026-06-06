@@ -92,21 +92,59 @@
                                 @for($i = 1; $i <= 3; $i++)
                                     @php $fileKey = 'file_' . $i; @endphp
                                     @if($subTopic->$fileKey)
-                                        @php $hasFiles = true; @endphp
+                                        @php 
+                                            $hasFiles = true; 
+                                            $fileName = $subTopic->$fileKey;
+                                            
+                                            // 1. Ambil ekstensi file (pdf, docx, xlsx, dll)
+                                            $ext = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+                                            
+                                            // 2. Tentukan Icon dan Aksi Default
+                                            $iconClass = 'fa-solid fa-file text-secondary';
+                                            $btnText = 'Buka';
+                                            $btnIcon = 'fa-solid fa-eye';
+                                            $fileUrl = asset('uploads/sub_topics/' . $fileName);
+                                            $isDownload = false;
+
+                                            // 3. Logika Pengecekan Ekstensi
+                                            if($ext == 'pdf') {
+                                                $iconClass = 'fa-solid fa-file-pdf text-danger';
+                                                $btnText = 'Buka';
+                                                $btnIcon = 'fa-solid fa-eye';
+                                                // Jika PDF, arahkan ke halaman pdf.blade.php
+                                                $fileUrl = route('students_pdf', ['filename' => $fileName]);
+                                            } elseif(in_array($ext, ['doc', 'docx'])) {
+                                                $iconClass = 'fa-solid fa-file-word text-primary';
+                                                $btnText = 'Download';
+                                                $btnIcon = 'fa-solid fa-download';
+                                                $isDownload = true;
+                                            } elseif(in_array($ext, ['xls', 'xlsx', 'csv'])) {
+                                                $iconClass = 'fa-solid fa-file-excel text-success';
+                                                $btnText = 'Download';
+                                                $btnIcon = 'fa-solid fa-download';
+                                                $isDownload = true;
+                                            } elseif(in_array($ext, ['ppt', 'pptx'])) {
+                                                $iconClass = 'fa-solid fa-file-powerpoint text-warning';
+                                                $btnText = 'Download';
+                                                $btnIcon = 'fa-solid fa-download';
+                                                $isDownload = true;
+                                            }
+                                        @endphp
+
                                         <div class="d-flex align-items-center justify-content-between py-3 border-bottom border-light">
                                             <div class="d-flex align-items-center gap-3">
                                                 <span class="text-muted small fw-bold" style="min-width: 20px;">{{ $i }}</span>
                                                 
-                                                <i class="fa-solid fa-file-pdf text-danger fs-5"></i>
+                                                <i class="{{ $iconClass }} fs-5"></i>
                                                 
                                                 <span class="text-dark small fw-medium">
                                                     <b class="text-uppercase" style="letter-spacing: 0.5px; color: #212529;">FILE LAMPIRAN {{ $i }}</b> 
-                                                    <br><span class="text-muted d-block text-truncate" style="font-size: 0.75rem; max-width: 300px;" title="{{ $subTopic->$fileKey }}">{{ $subTopic->$fileKey }}</span>
+                                                    <br><span class="text-muted d-block text-truncate" style="font-size: 0.75rem; max-width: 300px;" title="{{ $fileName }}">{{ $fileName }}</span>
                                                 </span>
                                             </div>
                                             <div>
-                                                <a href="{{ asset('uploads/sub_topics/' . $subTopic->$fileKey) }}" target="_blank" class="btn btn-light border btn-sm" title="Buka Berkas">
-                                                    <i class="fa-solid fa-eye"></i> Materi
+                                                <a href="{{ $fileUrl }}" class="btn btn-light border btn-sm" title="{{ $btnText }} Berkas" {{ $isDownload ? 'download' : '' }}>
+                                                    <i class="{{ $btnIcon }}"></i> {{ $btnText }}
                                                 </a>
                                             </div>
                                         </div>
@@ -142,7 +180,7 @@
                                             </div>
                                             <div>
                                                 <a href="{{ $subTopic->$linkKey }}" target="_blank" class="btn btn-light border btn-sm" title="Hubungkan Link">
-                                                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Hubungkan
+                                                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Buka Tautan
                                                 </a>
                                             </div>
                                         </div>

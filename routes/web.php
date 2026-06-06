@@ -42,7 +42,12 @@ Route::middleware('auth')->group(function () {
 Route::post('/Students/Course/Quiz/{sub_topic_id}/Start', [SiswaController::class, 'startQuiz'])->name('students_quiz_start');
 Route::get('/Students/Course/Quiz/{attempt_id}/Play', [SiswaController::class, 'playQuiz'])->name('students_quiz_play');
 Route::post('/Students/Course/Quiz/{attempt_id}/Submit', [SiswaController::class, 'submitQuiz'])->name('students_quiz_submit');
-    
+    // Route::get('/Students/Print/Nama_File', function () {
+    //     return view('Dashboard.Siswa.pdf');
+    // })->name('students_pdf');
+    Route::get('/Students/Print/{filename}', function ($filename) {
+        return view('Dashboard.Siswa.pdf', compact('filename'));
+    })->name('students_pdf');
 });
 
 // Tambahkan Route Dummy untuk Guru jika belum ada, agar redirect tidak error

@@ -60,16 +60,16 @@
                             {{ Str::limit($course->deskripsi, 350) }}
                         </p>
                         
-                        <!-- <div class="popover-specifications">
-                            <div class="spec-item">
-                                <i class="fa-solid fa-book-open"></i>
-                                26 Materi
-                            </div>
-                            <div class="spec-item">
-                                <i class="fa-regular fa-clock"></i>
-                                4 Jam
-                            </div>
-                        </div> -->
+                        <div class="popover-specifications">
+                                    <div class="spec-item">
+                                        <i class="fa-solid fa-book-open"></i>
+                                        {{ $course->topics->count() }} Topik
+                                    </div>
+                                    <div class="spec-item">
+                                        <i class="fa-regular fa-clock"></i>
+                                        Materi Online
+                                    </div>
+                                </div>
 
                         <a href="{{ route('guru_course_detail', $course->id) }}" class="btn btn-preview-course text-center text-decoration-none d-block">LIHAT MATERI</a>
                         

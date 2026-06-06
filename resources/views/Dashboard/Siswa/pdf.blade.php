@@ -10,8 +10,7 @@
     <link rel="stylesheet" href="{{ asset('lms_biologi/assets/style.css') }}">
 </head>
 <body>
-
-    <nav class="navbar navbar-expand-lg navbar-custom navbar-public fixed-top">
+  <nav class="navbar navbar-expand-lg navbar-custom navbar-public fixed-top">
         <div class="container">
             <a class="navbar-brand" href="#">
                 <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#0d6efd" stroke-width="2.5">
@@ -30,6 +29,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0 pt-3 pt-lg-0">
+                  <li class="nav-item"><a  class="nav-link {{ Request::is('Students/Course') ? 'active' : '' }}"  href="javascript:history.back()"><i class="fa-solid fa-arrow-left"></i><span>Back</a></li>
                     @if(Auth::user()->status === 'active')
                     <li class="nav-item"><a  class="nav-link {{ Request::is('Students/Course') ? 'active' : '' }}"  href="{{ route('students_course') }}">Courses</a></li>
                     <li class="nav-item"><a  class="nav-link {{ Request::is('Students/History') ? 'active' : '' }}" href="{{ route('students_history') }}">History</a></li>
@@ -56,10 +56,20 @@
             </div>
         </div>
     </nav>
-    @yield('content')
-    
-    <nav class="mobile-bottom-nav">
+    <section class="history-content mt-5 pt-4">
+      <div class="file-viewer-area bg-light rounded-3 d-flex align-items-center justify-content-center border" style="height: 90vh; overflow: hidden;">
+          <iframe src="{{ asset('uploads/sub_topics/' . $filename) }}" width="100%" height="100%" style="border: none;"></iframe>
+      </div>
+    </section>
+  
+  <nav class="mobile-bottom-nav">
         <ul>
+            <li>
+                <a href="javascript:history.back()" class="text-danger">
+                <i class="fa-solid fa-arrow-left"></i> <span> Back</span>
+                </a>
+                <!-- <button onclick="history.back()"> <i class="fa-solid fa-arrow-left"></i> <span> Kembali</span></button> -->
+            </li>
             @if(Auth::user()->status === 'active')
             <li>
                 <a href="{{ route('students_course') }}" class="{{ Request::is('Students/Course') ? 'active' : '' }}">

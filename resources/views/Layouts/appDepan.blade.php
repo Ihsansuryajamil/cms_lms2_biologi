@@ -18,7 +18,7 @@
                     <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
                 </svg>
                 <div class="logo-text">
-                    <span class="fs-6 fw-bold text-dark mb-0">SMP Nama Sekolah</span>
+                    <span class="fs-6 fw-bold text-dark mb-0">Nama Sekolah</span>
                     <span class="text-muted" style="font-size: 0.75rem; font-weight: 500;">Portal Pendidikan</span>
                 </div>
             </a>
