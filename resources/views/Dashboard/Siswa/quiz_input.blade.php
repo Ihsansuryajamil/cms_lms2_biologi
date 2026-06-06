@@ -3,6 +3,7 @@
 
     <header class="quiz-header">
         <div class="container">
+            @if(Auth::user()->status === 'active')
             <form action="{{ route('students_quiz_submit', $attempt->id) }}" method="POST" id="main-quiz-form">
                 @csrf
                 <div class="row">
@@ -93,6 +94,27 @@
                     </div>
                 </div>
             </form>
+            @else
+            <div class="row justify-content-center py-4">
+                    <div class="col-md-8 text-center">
+                        <div class="card border-0 shadow-sm p-5 rounded-4 bg-white">
+                            <div class="card-body">
+                                <div class="text-danger mb-4">
+                                    <i class="fa-solid fa-user-lock" style="font-size: 4.5rem; opacity: 0.8;"></i>
+                                </div>
+                                <h4 class="fw-bold text-dark mb-2">Akses Quiz Terkunci!</h4>
+                                <p class="text-muted small mb-4 mx-auto" style="max-width: 500px; line-height: 1.6;">
+                                    Status akun Anda saat ini masih <strong class="text-danger">Nonaktif (Inactive)</strong>. Anda tidak diperbolehkan melihat isi bab materi, sub-topik, tugas, kuis, maupun video penunjang di dalam kelas ini.
+                                </p>
+                                <div class="alert alert-warning border-0 rounded-3 small p-3 mb-0 text-start d-flex gap-3 align-items-center" style="background-color: #fff3cd; color: #664d03;">
+                                    <i class="fa-solid fa-circle-info fs-5 text-warning flex-shrink-0"></i>
+                                    <span><strong>Petunjuk:</strong> Silakan hubungi Guru Pengajar atau pihak Administrator untuk mengaktifkan status kepesertaan Anda agar kunci materi ini terbuka otomatis.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
         </div>
     </header>
 

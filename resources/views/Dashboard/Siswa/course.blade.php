@@ -3,7 +3,7 @@
 @section('content')
     <section id="courses-container" class="toolbar-section" style="height: auto; padding-top: 6rem;">
         <div class="container">
-            @if(Auth::user()->status === 'active')
+            @if(Auth::user()->status === 'active') 
                 <form action="{{ route('students_course') }}" method="GET">
                     <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
                         

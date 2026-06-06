@@ -3,6 +3,7 @@
 
     <header class="course-header">
         <div class="container">
+            @if(Auth::user()->status === 'active')
             <div class="row">
                 <div class="col-lg-8 pe-lg-5">
                     
@@ -52,6 +53,11 @@
 
                 </div>
             </div>
+            @else
+                <div class="d-flex align-items-center gap-2 text-muted">
+                    <span class="small text-white fw-semibold"><i class="fa-solid fa-lock me-2"></i> Portal Pembelajaran Terkunci sementara</span>
+                </div>
+            @endif
         </div>
     </header>
 
