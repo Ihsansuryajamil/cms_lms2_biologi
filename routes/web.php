@@ -73,6 +73,12 @@ Route::middleware('auth')->group(function () {
 
         Route::delete('/{id}', [UserController::class, 'destroy'])->name('guru_user_destroy');
         Route::get('/{id}/History/Pembelajaran', [UserController::class, 'userHistoryPembelajaran'])->name('guru_user_history');
+        // Route::get('/{id}/History/Pembelajaran/Details', function () {
+        //     return view('Dashboard.Guru.UserManagement.user_detailHistoryPembelajaran');
+        // })->name('guru_user_history_detail');
+        Route::get('/{id}/History/Pembelajaran/{sub_topic_id}/{type}', [UserController::class, 'userHistoryPembelajaranDetail'])->name('guru_user_history_detail');
+        Route::post('/History/Pembelajaran/Task/{id}/Grade', [UserController::class, 'updateTaskScore'])->name('guru_user_history_grade_task');
+        Route::post('/History/Pembelajaran/Quiz/{id}/Grade', [UserController::class, 'updateQuizEssayScore'])->name('guru_user_history_grade_quiz');
     });
     Route::prefix('Teachers/Kelas')->group(function () {
         Route::get('/', [UserController::class, 'indexKelas'])->name('guru_class_all');

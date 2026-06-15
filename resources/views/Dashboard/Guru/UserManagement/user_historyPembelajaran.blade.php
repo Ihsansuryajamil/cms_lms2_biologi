@@ -192,7 +192,8 @@
                                     </td>
                                     <td class="text-center">
                                         {{-- TOMBOL MENUJU DETAIL SUB-TOPIK --}}
-                                        <a href="#" class="btn btn-sm btn-outline-secondary rounded-pill px-3 fw-bold" style="font-size: 0.75rem;">
+                                        <a href="{{ route('guru_user_history_detail', ['id' => $student->id, 'sub_topic_id' => $item->sub_topic_id, 'type' => $item->activity_type]) }}" 
+                                        class="btn btn-sm btn-outline-secondary rounded-pill px-3 fw-bold" style="font-size: 0.75rem;">
                                             <i class="fa-solid fa-arrow-right-to-bracket me-1"></i> Buka
                                         </a>
                                     </td>

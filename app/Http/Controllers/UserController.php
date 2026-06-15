@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\KelasUser;
+use App\Models\SubTopic;
+use App\Models\MateriSubmission;
+use App\Models\TaskSubmission;
+use App\Models\QuizAttempt;
+use App\Models\QuizStudentAnswer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -450,5 +455,101 @@ class UserController extends Controller
 
         // Sertakan variabel $student agar nama siswa bisa dimunculkan di judul halaman guru
         return view('Dashboard.Guru.UserManagement.user_historyPembelajaran', compact('historyCollection', 'coursesList', 'student'));
+    }
+    public function userHistoryPembelajaranDetail($id, $sub_topic_id, $type)
+    {
+        // 1. Proteksi Akses Hak Jabatan
+        if (!in_array(Auth::user()->role, ['super_admin', 'teacher'])) {
+            abort(403, 'Akses Ditolak. Anda tidak memiliki izin melihat halaman ini.');
+        }
+
+        // 2. Ambil data inti siswa dan sub-topik pembelajaran
+        $student = User::findOrFail($id);
+        $subTopic = SubTopic::with(['topic.course'])->findOrFail($sub_topic_id);
+
+        // 3. Inisialisasi variabel penampung data respons pengerjaan
+        $materiSubmission = null;
+        $taskSubmission   = null;
+        $quizAttempt      = null;
+        $quizAnswers      = collect();
+
+        // 4. Tarik data secara spesifik sesuai jenis aktivitas yang dipilih
+        if ($type === 'materi') {
+            $materiSubmission = MateriSubmission::where('student_id', $id)
+                                                ->where('sub_topic_id', $sub_topic_id)
+                                                ->firstOrFail();
+        } 
+        elseif ($type === 'tugas') {
+            $taskSubmission = TaskSubmission::where('student_id', $id)
+                                            ->where('sub_topic_id', $sub_topic_id)
+                                            ->firstOrFail();
+        } 
+        elseif (in_array($type, ['quiz_pg', 'quiz_essay'])) {
+            $quizAttempt = QuizAttempt::where('student_id', $id)
+                                    ->where('sub_topic_id', $sub_topic_id)
+                                    ->where('status', '!=', 'mengerjakan')
+                                    ->firstOrFail();
+
+            // Ambal seluruh butir soal kuis beserta detail rekam jawaban milik siswa tersebut
+            $quizAnswers = QuizStudentAnswer::with('question')
+                                            ->where('quiz_attempt_id', $quizAttempt->id)
+                                            ->get();
+        }
+
+        // 5. Kirim seluruh paket data ke view detail
+        return view('Dashboard.Guru.UserManagement.user_detailHistoryPembelajaran', compact(
+            'student', 'subTopic', 'type', 'materiSubmission', 'taskSubmission', 'quizAttempt', 'quizAnswers'
+        ));
+    }
+    // ✨ FUNGSI ACTION 1: Memproses Inputan Nilai & Catatan Tugas Siswa
+    public function updateTaskScore(Request $request, $id)
+    {
+        if (!in_array(Auth::user()->role, ['super_admin', 'teacher'])) abort(403);
+
+        $request->validate([
+            'nilai'        => 'required|integer|min:0|max:100',
+            'catatan_guru' => 'nullable|string',
+        ]);
+
+        $task = \App\Models\TaskSubmission::findOrFail($id);
+        $task->update([
+            'nilai'        => $request->nilai,
+            'catatan_guru' => $request->catatan_guru,
+            'status'       => 'dinilai', // Ubah status enum dari 'terkirim' ke 'dinilai'
+        ]);
+
+        return redirect()->route('guru_user_history', $task->student_id)
+                        ->with('success', 'Berhasil memberikan penilaian dan umpan balik tugas siswa!');
+    }
+
+    // ✨ FUNGSI ACTION 2: Memproses Inputan Nilai Lembar Essay Kuis Siswa
+    public function updateQuizEssayScore(Request $request, $id)
+    {
+        if (!in_array(Auth::user()->role, ['super_admin', 'teacher'])) abort(403);
+
+        $attempt = \App\Models\QuizAttempt::findOrFail($id);
+        $inputScores = $request->input('essay_scores', []); // Menangkap array [answer_id => nilai]
+
+        foreach ($inputScores as $answerId => $score) {
+            $answer = \App\Models\QuizStudentAnswer::where('quiz_attempt_id', $attempt->id)
+                                                ->findOrFail($answerId);
+            
+            // Update skor per butir soal essay
+            $answer->update([
+                'nilai_didapat' => $score,
+                'is_correct'    => $score > 0 ? 1 : 0, // Jika mendapat poin, otomatis set benar
+            ]);
+        }
+
+        // Hitung ulang akumulasi total_nilai seluruh soal (PG + Essay yang baru dinilai)
+        $totalNilaiSemuaSoal = \App\Models\QuizStudentAnswer::where('quiz_attempt_id', $attempt->id)->sum('nilai_didapat');
+
+        $attempt->update([
+            'total_nilai' => $totalNilaiSemuaSoal,
+            'status'      => 'dinilai_lengkap', // Ubah status ujian sesi ini menjadi dinilai lengkap
+        ]);
+
+        return redirect()->route('guru_user_history', $attempt->student_id)
+                        ->with('success', 'Berhasil memperbarui akumulasi nilai kuis essay siswa!');
     }
 }
