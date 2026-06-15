@@ -85,7 +85,7 @@
                                             @forelse($topic->subTopics as $sub)
                                                 <div class="d-flex align-items-center justify-content-between py-3 border-bottom border-light">
                                                     <div class="d-flex align-items-center gap-3">
-                                                        <span class="text-muted small fw-bold" style="min-width: 20px;">{{ $sub->urutan }}</span>
+                                                        <span class="text-muted small fw-bold" style="min-width: 20px;">{{ $loop->iteration }}</span>
                                                         
                                                         @if($sub->jenis == 'materi')
                                                             <i class="fa-solid fa-file-lines text-primary"></i>
@@ -102,7 +102,7 @@
                                                     </div>
                                                     <div>
                                                         <a href="{{ route('students_detail_subtopik', $sub->id) }}" class="btn btn-light border btn-sm" title="Pratinjau Tampilan Siswa">
-                                                            <i class="fa-solid fa-eye"></i> Materi
+                                                            <i class="fa-solid fa-eye"></i> Buka
                                                         </a>
                                                     </div>
                                                 </div>

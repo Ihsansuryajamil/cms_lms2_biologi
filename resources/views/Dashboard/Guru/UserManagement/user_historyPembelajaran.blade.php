@@ -1,19 +1,81 @@
-@extends('Layouts.appSiswa')
+@extends('Layouts.app')
+
+@section('sidebar')
+    @include('Layouts.sideBarGuru')
+@endsection
+
 @section('content')
-
-    <header class="history-header">
-        <div class="container">
-            <h1><i class="fa-solid fa-history me-3"></i>Riwayat Pengerjaan</h1>
-            <p class="mb-0 text-light">Lihat semua riwayat pengerjaan tugas, nilai, dan pencapaian Anda</p>
+        <div class="topbar d-flex justify-content-between align-items-center w-100">
+            <div class="d-flex align-items-center gap-2">
+                <a href="javascript:history.back()" class="btn btn-sm btn-outline-secondary rounded-pill px-3">
+                    <i class="fa-solid fa-arrow-left"></i> Kembali
+                </a>
+                <h6 class="mb-0 fw-bold" style="font-size: 0.95rem;"><i class="fa-solid fa-users"></i> Riwayat Pembelajaran</h6>
+            </div>
+            <div class="d-flex align-items-center gap-2"> 
+                <span class="badge bg-primary rounded-pill px-3 py-2 fw-bold">
+                    <i class="fa-solid fa-graduation-cap me-1"></i> Siswa: {{ $student->nama }}
+                </span>
+            </div>
         </div>
-    </header>
 
-    <section class="history-content">
-        <div class="container">
-            
-            <!-- Filter Section -->
-            <div class="filter-section">
-                <form action="{{ route('students_history') }}" method="GET">
+        <div class="content-area p-4">
+            @if(session('success'))
+                <div class="alert alert-success alert-dismissible fade show rounded-3 mb-4" role="alert">
+                    <i class="fa-solid fa-circle-check me-2"></i> {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
+            @if ($errors->any())
+                <div class="alert alert-danger mb-4 rounded-3 border-0">
+                    <ul class="mb-0 small">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            <div class="card border-0 shadow-sm mb-3">
+                <div class="card-body p-3">
+                    <form action="{{ route('guru_user_history', $student->id) }}" method="GET" id="filterForm">
+                        <div class="row g-2">
+                            <div class="col-md-6">
+                                <!-- <label class="form-label small fw-600">Mata Pelajaran ( Course )</label> -->
+                                <select class="form-select form-select-sm" name="course" onchange="this.form.submit()">
+                                    <option value="">Semua Mata Pelajaran ( Course )</option>
+                                    @foreach($coursesList as $c)
+                                        <option value="{{ $c->nama_course }}" {{ request('course') == $c->nama_course ? 'selected' : '' }}>
+                                            {{ $c->nama_course }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <!-- <label class="form-label small fw-600">Jenis Tugas</label> -->
+                                <select class="form-select form-select-sm" name="activity_type" onchange="this.form.submit()">
+                                    <option value="">Semua Jenis</option>
+                                    <option value="materi" {{ request('activity_type') == 'materi' ? 'selected' : '' }}>Materi</option>
+                                    <option value="tugas" {{ request('activity_type') == 'tugas' ? 'selected' : '' }}>Tugas</option>
+                                    <option value="quiz" {{ request('activity_type') == 'quiz' ? 'selected' : '' }}>Quiz / Ujian</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <!-- <label class="form-label small fw-600">Urutkan Tanggal</label> -->
+                                <select class="form-select form-select-sm" name="sort_date" onchange="this.form.submit()">
+                                    <option value="newest" {{ request('sort_date') == 'newest' ? 'selected' : '' }}>Terbaru</option>
+                                    <option value="oldest" {{ request('sort_date') == 'oldest' ? 'selected' : '' }}>Terlama</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-sm btn-warning border-2 rounded-pill text-black w-100" style="font-size: 0.85rem; padding: 6px 16px;"><i class="fa-solid fa-magnifying-glass"></i> Cari</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- <div class="filter-section">
+                <form action="{{ route('guru_user_history', $student->id) }}" method="GET">
                     <div class="row g-3">
                         <div class="col-md-6">
                             <label class="form-label small fw-600">Mata Pelajaran ( Course )</label>
@@ -44,7 +106,7 @@
                         </div>
                     </div>
                 </form>
-            </div>
+            </div> -->
 
             <!-- History Table -->
             <div class="table-container">
@@ -130,7 +192,7 @@
                                     </td>
                                     <td class="text-center">
                                         {{-- TOMBOL MENUJU DETAIL SUB-TOPIK --}}
-                                        <a href="{{ route('students_detail_subtopik', $item->sub_topic_id) }}" class="btn btn-sm btn-outline-secondary rounded-pill px-3 fw-bold" style="font-size: 0.75rem;">
+                                        <a href="#" class="btn btn-sm btn-outline-secondary rounded-pill px-3 fw-bold" style="font-size: 0.75rem;">
                                             <i class="fa-solid fa-arrow-right-to-bracket me-1"></i> Buka
                                         </a>
                                     </td>
@@ -141,7 +203,6 @@
                                         <div class="mb-2"><i class="fa-solid fa-folder-open fs-1 opacity-25"></i></div>
                                         <span class="small">Belum ada riwayat pengerjaan atau aktivitas belajar yang tercatat pada akun Anda.</span>
                                     </td>
-                                endforeach
                             @endforelse
                         </tbody>
                     </table>
@@ -152,13 +213,5 @@
                     </div>
                 @endif
             </div>
-
         </div>
-    </section>
-    <style>
-        .bg-success-subtle { background-color: #d1e7dd !important; color: #0f5132 !important; }
-        .bg-primary-subtle { background-color: #cfe2ff !important; color: #084298 !important; }
-        .bg-danger-subtle { background-color: #f8d7da !important; color: #842029 !important; }
-        .bg-warning-subtle { background-color: #fff3cd !important; color: #664d03 !important; }
-    </style>
 @endsection

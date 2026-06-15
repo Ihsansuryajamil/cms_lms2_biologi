@@ -38,7 +38,7 @@
                 <div class="card-body p-3">
                     <form action="{{ route('guru_user_management') }}" method="GET" id="filterForm">
                         <div class="row g-2">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <input type="text" name="search" class="form-control form-control-sm" placeholder="Cari nama atau email..." value="{{ request('search') }}" style="font-size: 0.85rem;">
                             </div>
                             <div class="col-md-2">
@@ -66,7 +66,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-md-1">
+                            <div class="col-md-2">
                                 <button type="submit" class="btn btn-sm btn-warning border-2 rounded-pill text-black w-100" style="font-size: 0.85rem; padding: 6px 16px;"><i class="fa-solid fa-magnifying-glass"></i> Cari</button>
                             </div>
                         </div>
@@ -83,8 +83,9 @@
                                 <th style="width: 20%; padding: 8px 8px;">Nama Pengguna</th>
                                 <th style="width: 12%; padding: 8px 8px;">Role</th>
                                 <th style="width: 12%; padding: 8px 8px;">Status</th>
-                                <th style="width: 15%; padding: 8px 8px;">Kelas</th>
-                                <th class="text-center" style="width: 15%; padding: 8px 8px;">Tanggal Daftar</th>
+                                <th style="width: 12%; padding: 8px 8px;">Kelas</th>
+                                <th class="text-center" style="width: 10%; padding: 8px 8px;">Tanggal Daftar</th>
+                                <th class="text-center" style="width: 15%; padding: 8px 8px;">History</th>
                                 <th class="text-center" style="width: 15%; padding: 8px 8px;">Aksi</th>
                             </tr>
                         </thead>
@@ -131,6 +132,11 @@
                                         @endif
                                     </td>
                                     <td class="text-center" style="padding: 6px 8px;"><small class="text-muted">{{ $user->created_at->format('d M Y') }} <br> {{ $user->created_at->format('H:i') }}</small></td>
+                                    <td class="text-center" style="padding: 6px 8px;">
+                                        <a href="{{ route('guru_user_history', $user->id) }}" class="btn btn-sm btn-outline-primary rounded-pill" style="font-size: 0.75rem; padding: 4px 10px;">
+                                            <i class="fa-solid fa-clock me-1"></i> Pembelajaran
+                                        </a>
+                                    </td>
                                     <td class="text-center" style="padding: 6px 8px;">
                                         <a href="{{ route('guru_user_detail', $user->id) }}" class="btn btn-sm btn-outline-primary rounded-pill" style="font-size: 0.75rem; padding: 4px 10px;"><i class="fa-solid fa-eye me-1"></i> Detail</a>
                                     </td>

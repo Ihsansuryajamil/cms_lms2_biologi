@@ -165,7 +165,7 @@
                             </div>
                         </div>
 
-                        <div class="card border-0 shadow-sm rounded-4 p-4 bg-white">
+                        <div class="card border-0 shadow-sm rounded-4 p-4 mb-4 bg-white">
                             <h6 class="fw-bold text-dark mb-2"><i class="fa-solid fa-globe me-2 text-success"></i> Tautan Pendukung</h6>
                             <div class="d-flex flex-column">
                                 @php $hasLinks = false; @endphp
@@ -337,6 +337,129 @@
 
                                                 <button type="submit" class="btn btn-primary rounded-pill w-100 py-2 fw-bold shadow-sm" style="font-size: 0.8rem;">
                                                     <i class="fa-solid fa-paper-plane me-1.5"></i> Kirim Tanggapan Materi
+                                                </button>
+                                            </form>
+                                        @endif
+
+                                    </div>
+                                @elseif($subTopic->jenis == 'tugas')
+                                    <div class="card-body p-0 text-center">
+                                        
+                                        {{-- KONDISI A: JIKA SISWA SUDAH MENGIRIMKAN TUGAS --}}
+                                        @if($taskSubmission)
+                                            <div class="mb-3 text-success">
+                                                <i class="fa-solid fa-cloud-arrow-up" style="font-size: 3.5rem; opacity: 0.9;"></i>
+                                            </div>
+                                            <h5 class="fw-bold text-dark mb-1">Tugas Berhasil Dikirim</h5>
+                                            <p class="text-muted small mb-4">Jawaban Anda sudah masuk ke sistem dan sedang menunggu penilaian dari Guru.</p>
+
+                                            <div class="p-3 rounded-4 border text-start bg-light mb-3">
+                                                <small class="text-muted d-block mb-2 small text-uppercase fw-bold" style="font-size: 0.65rem;">Rekam Pengumpulan Anda:</small>
+                                                
+                                                @if($taskSubmission->file_jawaban)
+                                                    @php 
+                                                        $tugasFile = $taskSubmission->file_jawaban;
+                                                        $tugasExt = strtolower(pathinfo($tugasFile, PATHINFO_EXTENSION));
+                                                        
+                                                        $tugasIconClass = 'fa-solid fa-file text-secondary';
+                                                        $tugasBtnText = 'Buka';
+                                                        $tugasBtnIcon = 'fa-solid fa-eye';
+                                                        $tugasFileUrl = asset('uploads/tugas_submissions/' . $tugasFile);
+                                                        $tugasIsDownload = false;
+
+                                                        if($tugasExt == 'pdf') {
+                                                            $tugasIconClass = 'fa-solid fa-file-pdf text-danger';
+                                                            $tugasBtnText = 'Buka';
+                                                            $tugasBtnIcon = 'fa-solid fa-eye';
+                                                            // PENTING: Tambahkan parameter 'folder' agar PDF Viewer tahu lokasi file
+                                                            $tugasFileUrl = route('students_uploud_pdf', ['filename' => $tugasFile]);
+                                                        } elseif(in_array($tugasExt, ['doc', 'docx'])) {
+                                                            $tugasIconClass = 'fa-solid fa-file-word text-primary';
+                                                            $tugasBtnText = 'Download';
+                                                            $tugasBtnIcon = 'fa-solid fa-download';
+                                                            $tugasIsDownload = true;
+                                                        } elseif(in_array($tugasExt, ['xls', 'xlsx', 'csv'])) {
+                                                            $tugasIconClass = 'fa-solid fa-file-excel text-success';
+                                                            $tugasBtnText = 'Download';
+                                                            $tugasBtnIcon = 'fa-solid fa-download';
+                                                            $tugasIsDownload = true;
+                                                        } elseif(in_array($tugasExt, ['ppt', 'pptx'])) {
+                                                            $tugasIconClass = 'fa-solid fa-file-powerpoint text-warning';
+                                                            $tugasBtnText = 'Download';
+                                                            $tugasBtnIcon = 'fa-solid fa-download';
+                                                            $tugasIsDownload = true;
+                                                        }
+                                                    @endphp
+
+                                                    <div class="d-flex align-items-center justify-content-between mb-2 p-2 bg-white border rounded-3">
+                                                        <div class="d-flex align-items-center gap-2 overflow-hidden">
+                                                            <i class="{{ $tugasIconClass }} fs-5"></i>
+                                                            <span class="small fw-medium text-dark text-truncate" style="max-width: 180px;" title="{{ $tugasFile }}">
+                                                                {{ $tugasFile }}
+                                                            </span>
+                                                        </div>
+                                                        <a href="{{ $tugasFileUrl }}" class="btn btn-light border btn-sm" title="{{ $tugasBtnText }} File Jawaban" {{ $tugasIsDownload ? 'download' : '' }}>
+                                                            <i class="{{ $tugasBtnIcon }}"></i> {{ $tugasBtnText }}
+                                                        </a>
+                                                    </div>
+                                                @endif
+
+                                                @if($taskSubmission->link_jawaban)
+                                                    <div class="d-flex align-items-center gap-2 mb-2 p-2 bg-white border rounded-3">
+                                                        <i class="fa-solid fa-link text-success fs-5"></i>
+                                                        <a href="{{ $taskSubmission->link_jawaban }}" target="_blank" class="small fw-medium text-decoration-none text-truncate" style="max-width: 200px;">
+                                                            Buka Tautan Jawaban
+                                                        </a>
+                                                    </div>
+                                                @endif
+
+                                                @if($taskSubmission->jawaban_teks)
+                                                    <div class="bg-white p-2 rounded-3 border small text-dark mt-2" style="font-size: 0.8rem; max-height: 100px; overflow-y: auto;">
+                                                        {{ $taskSubmission->jawaban_teks }}
+                                                    </div>
+                                                @endif
+                                            </div>
+                                            
+                                            <div class="d-flex justify-content-between align-items-center bg-white border rounded-pill px-3 py-2">
+                                                <span class="small fw-bold text-muted">Status:</span>
+                                                @if($taskSubmission->status == 'dinilai')
+                                                    <span class="badge bg-success rounded-pill px-3">Dinilai (Skor: {{ $taskSubmission->nilai }})</span>
+                                                @else
+                                                    <span class="badge bg-warning text-dark rounded-pill px-3"><i class="fa-regular fa-clock me-1"></i> Menunggu Dinilai</span>
+                                                @endif
+                                            </div>
+                                            
+                                            <small class="text-muted d-block mt-3" style="font-size: 0.7rem;">Dikirim pada: {{ $taskSubmission->created_at->translatedFormat('d M Y, H:i') }} WIB</small>
+
+                                        {{-- KONDISI B: JIKA SISWA BELUM MENGIRIM TUGAS --}}
+                                        @else
+                                            <div class="text-warning mb-2">
+                                                <i class="fa-solid fa-file-pen" style="font-size: 3.5rem; opacity: 0.9;"></i>
+                                            </div>
+                                            <h5 class="fw-bold text-dark mb-1">Pengumpulan Tugas</h5>
+                                            <p class="text-muted small mb-4" style="font-size: 0.8rem;">Silakan kumpulkan hasil pekerjaan Anda. Anda dapat mengisi teks, melampirkan file dokumen, atau menautkan link (Pilih yang sesuai).</p>
+
+                                            <form action="{{ route('students_tugas_submit', $subTopic->id) }}" method="POST" enctype="multipart/form-data" class="text-start">
+                                                @csrf
+                                                
+                                                <div class="form-group mb-3">
+                                                    <label class="fw-bold small text-dark mb-2"><i class="fa-solid fa-align-left text-muted me-1"></i> Jawaban Teks (Opsional):</label>
+                                                    <textarea name="jawaban_teks" class="form-control rounded-3 p-2 text-dark" rows="3" style="font-size: 0.8rem;" placeholder="Ketikkan jawaban uraian Anda di sini..."></textarea>
+                                                </div>
+
+                                                <div class="form-group mb-3">
+                                                    <label class="fw-bold small text-dark mb-2"><i class="fa-solid fa-link text-success me-1"></i> Tautan / Link URL (Opsional):</label>
+                                                    <input type="url" name="link_jawaban" class="form-control form-control-sm rounded-3 p-2" placeholder="https://drive.google.com/...">
+                                                </div>
+
+                                                <div class="form-group mb-4">
+                                                    <label class="fw-bold small text-dark mb-2"><i class="fa-solid fa-paperclip text-primary me-1"></i> Lampiran Dokumen (Opsional):</label>
+                                                    <input type="file" name="file_jawaban" class="form-control form-control-sm rounded-3">
+                                                    <small class="text-muted mt-1 d-block" style="font-size: 0.65rem;">*Max 10MB (PDF, Word, Excel, PPT, Image, ZIP)</small>
+                                                </div>
+
+                                                <button type="submit" class="btn btn-warning rounded-pill w-100 py-2 fw-bold text-dark shadow-sm" style="font-size: 0.85rem;">
+                                                    <i class="fa-solid fa-cloud-arrow-up me-1.5"></i> Kirim Jawaban Tugas
                                                 </button>
                                             </form>
                                         @endif

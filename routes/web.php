@@ -28,13 +28,16 @@ Route::middleware('auth')->group(function () {
     //     return view('Dashboard.Siswa.course');
     // })->name('students_course');
     Route::get('/Students/Course', [SiswaController::class, 'index'])->name('students_course');
-    Route::get('/Students/History', function () {
-        return view('Dashboard.Siswa.history');
-    })->name('students_history');
+    // Route::get('/Students/History', function () {
+    //     return view('Dashboard.Siswa.history');
+    // })->name('students_history');
+    // Cari rute lama Anda dan ubah menjadi seperti ini:
+    Route::get('/Students/History', [SiswaController::class, 'history'])->name('students_history');
     
     Route::get('/Students/Course/{id}', [SiswaController::class, 'show'])->name('students_detail_course');
     Route::get('/Students/Course/{id}/Detail', [SiswaController::class, 'showSubTopic'])->name('students_detail_subtopik');
     Route::post('/Students/Course/Materi/{id}/Submit', [SiswaController::class, 'storeMateriSubmission'])->name('students_materi_submit');
+    Route::post('/Students/Course/Tugas/{id}/Submit', [SiswaController::class, 'submitTugas'])->name('students_tugas_submit');
     // Route::get('/Students/Course/Quiz/Details', function () {
     //     return view('Dashboard.Siswa.quiz_input');
     // })->name('students_quiz_input');
@@ -48,6 +51,9 @@ Route::post('/Students/Course/Quiz/{attempt_id}/Submit', [SiswaController::class
     Route::get('/Students/Print/{filename}', function ($filename) {
         return view('Dashboard.Siswa.pdf', compact('filename'));
     })->name('students_pdf');
+    Route::get('/Students/Print-PDF/{filename}', function ($filename) {
+        return view('Dashboard.Siswa.pdf_siswa', compact('filename'));
+    })->name('students_uploud_pdf');
 });
 
 // Tambahkan Route Dummy untuk Guru jika belum ada, agar redirect tidak error
@@ -66,6 +72,7 @@ Route::middleware('auth')->group(function () {
         Route::put('/{id}', [UserController::class, 'update'])->name('guru_user_update');
 
         Route::delete('/{id}', [UserController::class, 'destroy'])->name('guru_user_destroy');
+        Route::get('/{id}/History/Pembelajaran', [UserController::class, 'userHistoryPembelajaran'])->name('guru_user_history');
     });
     Route::prefix('Teachers/Kelas')->group(function () {
         Route::get('/', [UserController::class, 'indexKelas'])->name('guru_class_all');

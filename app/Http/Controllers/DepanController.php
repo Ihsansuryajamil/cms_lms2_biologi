@@ -23,7 +23,9 @@ class DepanController extends Controller
                 $query->orderBy('urutan', 'asc');
             },
             'topics.subTopics' => function ($query) {
-                $query->orderBy('urutan', 'asc');
+                // Menyaring sub-topik yang hanya berstatus 'publish' dan diurutkan secara asc
+                $query->where('status', 'publish')
+                      ->orderBy('urutan', 'asc');
             }
         ])->findOrFail($id); 
 

@@ -78,6 +78,16 @@
                 <p class="small text-muted mt-3 mb-0" style="line-height: 1.5;">
                     {{ Str::limit($course->deskripsi, 350) }}
                 </p>
+                <div class="popover-specifications">
+                    <div class="spec-item">
+                        <i class="fa-solid fa-book-open"></i>
+                        {{ $course->topics->count() }} Topik
+                    </div>
+                    <div class="spec-item">
+                        <i class="fa-regular fa-clock"></i>
+                        Materi Online
+                    </div>
+                </div>
                 
                 <a href="{{ route('detail_course', $course->id) }}" class="btn btn-preview-course text-center text-decoration-none d-block">LIHAT MATERI</a>
             </div>

@@ -348,4 +348,107 @@ class UserController extends Controller
 
         return redirect()->route('guru_class_all')->with('success', 'Kelas berhasil dihapus permanen! Semua murid di dalam kelas tersebut kini berstatus Tanpa Kelas.');
     }
+
+    public function userHistoryPembelajaran(Request $request, $id)
+    {
+        // ✨ PERBAIKAN SINTAKS ROLE: Izinkan super_admin dan teacher mengakses halaman ini
+        if (!in_array(Auth::user()->role, ['super_admin', 'teacher'])) {
+            abort(403, 'Akses Ditolak. Anda tidak memiliki izin melihat halaman ini.');
+        }
+
+        // ✨ AMBIL DATA SISWA YANG AKAN DIPERIKSA (Bukan ID Guru yang sedang login)
+        $student = User::findOrFail($id);
+        $studentId = $student->id;
+
+        // 1. Tangkap Data Input Filter dari View
+        $courseFilter = $request->input('course');
+        $dateFilter   = $request->input('sort_date', 'newest');
+        $typeFilter   = $request->input('activity_type');
+
+        // 2. Query Riwayat Feedback Materi
+        $materiQuery = \App\Models\MateriSubmission::with('subTopic.topic.course')->where('student_id', $studentId);
+        if (!empty($courseFilter)) {
+            $materiQuery->whereHas('subTopic.topic.course', function($q) use ($courseFilter) {
+                $q->where('nama_course', $courseFilter);
+            });
+        }
+        $materiData = collect();
+        if (empty($typeFilter) || $typeFilter === 'materi') {
+            $materiData = $materiQuery->get()->map(function ($item) {
+                $item->activity_type = 'materi';
+                $item->history_date  = $item->created_at;
+                return $item;
+            });
+        }
+
+        // 3. Query Riwayat Pengumpulan Tugas
+        $tugasQuery = \App\Models\TaskSubmission::with('subTopic.topic.course')->where('student_id', $studentId);
+        if (!empty($courseFilter)) {
+            $tugasQuery->whereHas('subTopic.topic.course', function($q) use ($courseFilter) {
+                $q->where('nama_course', $courseFilter);
+            });
+        }
+        $tugasData = collect();
+        if (empty($typeFilter) || $typeFilter === 'tugas') {
+            $tugasData = $tugasQuery->get()->map(function ($item) {
+                $item->activity_type = 'tugas';
+                $item->history_date  = $item->created_at;
+                return $item;
+            });
+        }
+
+        // 4. Query Riwayat Penyelesaian Kuis
+        $quizQuery = \App\Models\QuizAttempt::with(['subTopic.topic.course', 'subTopic.quizQuestions'])
+            ->where('student_id', $studentId)
+            ->where('status', '!=', 'mengerjakan');
+        if (!empty($courseFilter)) {
+            $quizQuery->whereHas('subTopic.topic.course', function($q) use ($courseFilter) {
+                $q->where('nama_course', $courseFilter);
+            });
+        }
+        $quizData = collect();
+        if (empty($typeFilter) || $typeFilter === 'quiz' || $typeFilter === 'ujian') {
+            $quizData = $quizQuery->get()->map(function ($item) {
+                $hasEssay = $item->subTopic->quizQuestions->where('tipe', 'essay')->count() > 0;
+                $item->activity_type = $hasEssay ? 'quiz_essay' : 'quiz_pg';
+                $item->history_date  = $item->finished_at ?? $item->updated_at;
+                return $item;
+            });
+        }
+
+        // 5. Gabungkan Seluruh Koleksi Data
+        $mergedCollection = collect()
+            ->concat($materiData)
+            ->concat($tugasData)
+            ->concat($quizData);
+
+        // 6. Jalankan Logika Sorting Tanggal
+        if ($dateFilter === 'oldest') {
+            $mergedCollection = $mergedCollection->sortBy('history_date');
+        } else {
+            $mergedCollection = $mergedCollection->sortByDesc('history_date');
+        }
+
+        // 7. IMPLEMENTASI PAGINASI MANUAL UNTUK LARAVEL COLLECTION
+        $currentPage = \Illuminate\Pagination\Paginator::resolveCurrentPage() ?: 1;
+        $perPage     = 10;
+        $currentPageItems = $mergedCollection->slice(($currentPage - 1) * $perPage, $perPage)->values();
+
+        $historyCollection = new \Illuminate\Pagination\LengthAwarePaginator(
+            $currentPageItems,
+            $mergedCollection->count(),
+            $perPage,
+            $currentPage,
+            [
+                'path'  => \Illuminate\Pagination\Paginator::resolveCurrentPath(),
+                'query' => $request->query()
+            ]
+        );
+
+        // Ambil semua daftar mata pelajaran asli untuk mengisi menu dropdown filter secara otomatis
+        $coursesList = \App\Models\Course::orderBy('nama_course', 'asc')->get();
+
+        // Sertakan variabel $student agar nama siswa bisa dimunculkan di judul halaman guru
+        return view('Dashboard.Guru.UserManagement.user_historyPembelajaran', compact('historyCollection', 'coursesList', 'student'));
+    }
 }
