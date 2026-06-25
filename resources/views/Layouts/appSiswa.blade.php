@@ -13,13 +13,18 @@
 
     <nav class="navbar navbar-expand-lg navbar-custom navbar-public fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">
-                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#0d6efd" stroke-width="2.5">
-                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                </svg>
-                <div class="logo-text">
-                    <span class="fs-6 fw-bold text-dark mb-0">Nama Sekolah</span>
-                    <span class="text-muted" style="font-size: 0.75rem; font-weight: 500;">Portal Pendidikan</span>
+            <a class="navbar-brand d-flex align-items-center gap-2.5" href="{{ route('students_course') }}">
+                @if($webSettings->logo)
+                    <img src="{{ asset('image/website/' . $webSettings->logo) }}" alt="Logo" class="object-fit-contain" style="width: 32px; height: 32px;">
+                @else
+                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#0d6efd" stroke-width="2.5">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                @endif
+                
+                <div class="logo-text text-start" style="line-height: 1.3;">
+                    <span class="fs-6 fw-bold text-dark d-block mb-0">{{ $webSettings->nama_website }}</span>
+                    <span class="text-muted fw-semibold" style="font-size: 0.72rem; letter-spacing: 0.3px;">{{ $webSettings->nama_institusi }}</span>
                 </div>
             </a>
 
@@ -33,6 +38,7 @@
                     @if(Auth::user()->status === 'active')
                     <li class="nav-item"><a  class="nav-link {{ Request::is('Students/Course') ? 'active' : '' }}"  href="{{ route('students_course') }}">Courses</a></li>
                     <li class="nav-item"><a  class="nav-link {{ Request::is('Students/History') ? 'active' : '' }}" href="{{ route('students_history') }}">History</a></li>
+                    <li class="nav-item"><a  class="nav-link {{ Request::is('Students/Profil') ? 'active' : '' }}" href="{{ route('students_profile') }}">Pengaturan</a></li>
                     @endif
                 </ul>
                 
@@ -73,6 +79,13 @@
                 <span>History</span>
                 </a>
             </li>
+            <li>
+                <a href="{{ route('students_profile') }}" class="{{ Request::is('Students/Profil') ? 'active' : '' }}">
+                <i class="fa-solid fa-gear fs-5"></i>
+                <span>Pengaturan</span>
+                </a>
+            </li>
+                    
             @endif
             <li class="dropup position-relative">
                 <a href="#" class="d-flex flex-column align-items-center" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: none; color: #888; cursor: pointer;">

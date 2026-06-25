@@ -8,7 +8,7 @@
             <a href="{{ route('guru_user_management') }}" class="btn btn-outline-secondary rounded-pill">
                 <i class="fa-solid fa-arrow-left"></i> Kembali
             </a>
-            <h5 class="mb-0 fw-bold">Detail Pengguna</h5>
+           <h6 class="mb-0 fw-bold" style="font-size: 0.95rem;">Detail Pengguna</h6>
         </div>
         <div class="d-flex align-items-center gap-2">
             <button type="submit" form="updateUserForm" class="btn btn-primary btn-sm rounded-pill px-4 py-2 fw-bold shadow-sm">
@@ -80,7 +80,7 @@
                                     <small class="text-muted" style="font-size: 0.7rem;">Hanya isi yang sesuai dengan peran pengguna.</small>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="form-label small fw-bold text-secondary">No. Telepon / WhatsApp</label>
+                                    <label class="form-label small fw-bold text-secondary">No. Telepon</label>
                                     <input type="text" name="no_telp" class="form-control border p-2.5 bg-light" value="{{ old('no_telp', $user->no_telp) }}">
                                 </div>
                                 

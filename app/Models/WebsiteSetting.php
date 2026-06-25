@@ -6,10 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class WebsiteSetting extends Model
 {
-    public $timestamps = false; 
+    protected $table = 'website_settings';
 
     protected $fillable = [
-        'setting_key', 'setting_value', 'description', 
-        'updated_by', 'updated_at'
+        'nama_website',
+        'nama_institusi',
+        'tagline',
+        'logo',
+        'favicon'
     ];
 }

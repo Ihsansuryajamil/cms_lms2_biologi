@@ -9,10 +9,10 @@
             <div class="position-relative z-1">
                 <div class="row align-items-center mb-5">
                     <div class="col-lg-5">
-                        <h2 class="fw-bold mb-3">Hi, Staff Komputer</h2>
+                        <h2 class="fw-bold mb-3">Hi, {{ auth()->user()->nama ?? 'User' }}</h2>
                         <div class="d-flex align-items-center gap-2">
                             <i class="fa-solid fa-circle-user"></i>
-                            <span class="fw-medium">Selamat datang di aplikasi pintar LMS!</span>
+                            <span class="fw-medium">Selamat datang di website {{ $webSettings->nama_website }}!</span>
                         </div>
                     </div>
                     
@@ -21,19 +21,19 @@
                             <div class="stat-box d-flex align-items-center justify-content-between p-2 px-3 rounded-pill" style="min-width: 250px;">
                                 <span class="fw-bold me-3">kelas</span>
                                 <span class="fw-bold fs-5 me-3">9</span>
-                                <button class="btn btn-light btn-sm rounded-pill fw-bold text-dark px-3 py-1">Lihat Kelas</button>
+                                <a href="{{ route('guru_class_all') }}" class="btn btn-light btn-sm rounded-pill fw-bold text-dark px-3 py-1">Lihat Kelas</a>
                             </div>
                             
                             <div class="stat-box d-flex align-items-center justify-content-between p-2 px-3 rounded-pill" style="min-width: 250px;">
                                 <span class="fw-bold me-3">Siswa</span>
-                                <span class="fw-bold fs-5 me-3">100</span>
-                                <button class="btn btn-light btn-sm rounded-pill fw-bold text-dark px-3 py-1">Lihat Kelas</button>
+                                <span class="fw-bold fs-5 me-3">10</span>
+                                <a href="{{ route('guru_user_management') }}" class="btn btn-light btn-sm rounded-pill fw-bold text-dark px-3 py-1">Lihat Siswa</a>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <hr class="border-white opacity-25 mb-4">
+                <!-- <hr class="border-white opacity-25 mb-4">
 
                 <div class="row g-4 pb-3">
                     <div class="col-md-6">
@@ -71,63 +71,55 @@
                             </div>
                         </div>
                     </div>
+                </div> -->
+                <div class="card card-custom p-4 border-0 mb-3">
+                    <h5 class="fw-bold text-dark mb-3">{{ $webSettings->nama_website }}</h5>
+                    <p class="text-muted" style="line-height: 1.8; font-size: 0.95rem; text-align: justify;">
+                        LMS Biologi School adalah aplikasi Learning Management System yang dirancang untuk merencanakan, mendistribusikan, mengelola, dan melacak aktivitas pembelajaran secara online. Sistem ini berfungsi layaknya ruang kelas virtual untuk kegiatan pendidikan, pelatihan, atau pengembangan keterampilan.
+                    </p>
                 </div>
             </div>
         </div>
-
+        
         <div class="content-area">
-            <div class="notification-list">
-                <div class="notification-item unread">
-                    <span class="notification-icon bg-primary-subtle text-primary"><i class="fa-solid fa-user-plus"></i></span>
-                    <div class="flex-grow-1">
-                        <div class="d-flex justify-content-between align-items-start gap-2">
-                            <div>
-                                <div class="fw-semibold">Permintaan bergabung kelas baru</div>
-                                <div class="text-muted small">12 siswa meminta akses ke kelas "IX-B Informatika".</div>
-                            </div>
-                            <small class="text-muted">Baru saja</small>
-                        </div>
+            <div class="container-fluid p-0">
+            <div class="card card-custom p-4 border-0 mb-3">
+                <div class="row">
+                    <div class="col-lg-8">
+                        
+                    <h5 class="fw-bold text-dark mb-3">Panduan Aplikasi</h5>
+                    </div>
+                    <div class="col-lg-4">
+                        
+                    <!-- <a href="panduan.html" class="btn btn-primary text-white d-none d-sm-block">
+                        <i class="bi bi-pen me-1"></i> Update Panduan
+                    </a> -->
                     </div>
                 </div>
-
-                <div class="notification-item unread">
-                    <span class="notification-icon bg-success-subtle text-success"><i class="fa-solid fa-clipboard-check"></i></span>
-                    <div class="flex-grow-1">
-                        <div class="d-flex justify-content-between align-items-start gap-2">
-                            <div>
-                                <div class="fw-semibold">Tugas telah dipublikasikan</div>
-                                <div class="text-muted small">Tugas "Laporan Praktikum Sistem Komputer" berhasil dipublikasikan.</div>
+                <div class="card border-0 shadow h-100 mt-2">
+                    <div class="card-body p-0">
+                        <iframe 
+                            src="{{ asset('lms_biologi/Manual_Book_USER_KKN_UNFARI.pdf') }}" 
+                            width="100%" 
+                            height="500px" 
+                            style="border: none;"
+                            allowfullscreen>
+                            
+                            <div class="text-center p-5">
+                                <p>Browser Anda tidak mendukung tampilan PDF secara langsung.</p>
+                                <a href="../assets/Panduan_Penggunaan.pdf" class="btn btn-primary">Klik untuk Download PDF</a>
                             </div>
-                            <small class="text-muted">5 menit lalu</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="notification-item">
-                    <span class="notification-icon bg-warning-subtle text-warning"><i class="fa-solid fa-circle-exclamation"></i></span>
-                    <div class="flex-grow-1">
-                        <div class="d-flex justify-content-between align-items-start gap-2">
-                            <div>
-                                <div class="fw-semibold">Ada 4 tugas terlambat dikumpulkan</div>
-                                <div class="text-muted small">Periksa detail pengumpulan pada kelas "IX-B Matematika".</div>
-                            </div>
-                            <small class="text-muted">1 jam lalu</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="notification-item">
-                    <span class="notification-icon bg-info-subtle text-info"><i class="fa-solid fa-gear"></i></span>
-                    <div class="flex-grow-1">
-                        <div class="d-flex justify-content-between align-items-start gap-2">
-                            <div>
-                                <div class="fw-semibold">Pengaturan website berhasil diperbarui</div>
-                                <div class="text-muted small">Nama website dan hero index diperbarui oleh Super Admin.</div>
-                            </div>
-                            <small class="text-muted">Kemarin</small>
-                        </div>
+                        </iframe>
                     </div>
                 </div>
             </div>
+            
+            
+            
+        </div>
+
+        <footer class="mt-auto text-muted small">
+            <p>Copyright &copy; 2026 Arini rahmadana</p>
+        </footer>
         </div>
 @endsection

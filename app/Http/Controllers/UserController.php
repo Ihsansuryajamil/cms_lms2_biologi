@@ -9,13 +9,69 @@ use App\Models\MateriSubmission;
 use App\Models\TaskSubmission;
 use App\Models\QuizAttempt;
 use App\Models\QuizStudentAnswer;
+use App\Models\WebsiteSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 class UserController extends Controller
 {
     // Menampilkan halaman manajemen user
     // Menampilkan halaman manajemen user
+    // ✨ FUNGSI BARU 1: Menampilkan halaman settings profil dengan data user yang sedang login
+    public function profileSettings()
+    {
+        $user = Auth::user(); // Mengambil data akun yang sedang login saat ini
+        return view('Dashboard.Guru.profile_setting', compact('user'));
+    }
+
+    // ✨ FUNGSI BARU 2: Memproses update profil mandiri milik guru/admin
+    public function updateProfile(Request $request)
+    {
+        $user = User::findOrFail(Auth::id()); // Proteksi ID pencarian murni dari token login session
+        $id = $user->id;
+
+        $request->validate([
+            'nama'    => 'required|string|max:255',
+            'email'   => 'required|email|unique:users,email,' . $id,
+            'no_telp' => 'nullable|string|max:20',
+            'alamat'  => 'nullable|string',
+            'xyz'     => 'required|string|min:6', 
+            'nis'     => 'nullable|string|max:50|unique:users,nis,' . $id,
+            'nip'     => 'nullable|string|max:50|unique:users,nip,' . $id,
+        ], [
+            'nama.required' => 'Nama lengkap wajib diisi.',
+            'email.unique'  => 'Alamat email tersebut sudah terdaftar di sistem. Silakan gunakan email lain!',
+            'nis.unique'    => 'NIS / NIM tersebut sudah terdaftar di sistem.',
+            'nip.unique'    => 'NIP tersebut sudah terdaftar di sistem.',
+            'xyz.required'  => 'Password wajib diisi.',
+            'xyz.min'       => 'Password minimal terdiri dari 6 karakter.',
+        ]);
+
+        $data = [
+            'nama'    => $request->nama,
+            'email'   => $request->email,
+            'no_telp' => $request->no_telp,
+            'alamat'  => $request->alamat,
+            'xyz'     => $request->xyz, 
+        ];
+
+        // Simpan nomor induk dinamis sesuai field role yang diisi
+        if ($user->role === 'student') {
+            $data['nis'] = $request->nis;
+        } else {
+            $data['nip'] = $request->nip;
+        }
+
+        // Koreksi enkripsi password otomatis jika password diubah dari sebelumnya
+        if ($request->xyz !== $user->xyz) {
+            $data['password'] = bcrypt($request->xyz);
+        }
+
+        $user->update($data);
+
+        return back()->with('success', 'Profil pribadi Anda berhasil diperbarui!');
+    }
     public function index(Request $request)
     {
         // Proteksi: Hanya role 'super_admin' yang diizinkan mengakses halaman ini
@@ -551,5 +607,134 @@ class UserController extends Controller
 
         return redirect()->route('guru_user_history', $attempt->student_id)
                         ->with('success', 'Berhasil memperbarui akumulasi nilai kuis essay siswa!');
+    }
+    public function editWebsiteSettings()
+    {
+        if (Auth::user()->role !== 'super_admin') {
+            abort(403, 'Akses Ditolak. Halaman ini hanya diperuntukkan bagi Super Admin.');
+        }
+
+        // Ambil data ID 1, jika tidak ada otomatis buat baru berdasarkan default
+        $settings = WebsiteSetting::firstOrCreate(['id' => 1]);
+
+        return view('Dashboard.Guru.pengaturan_website', compact('settings'));
+    }
+
+    // =========================================================================
+    // 2. Memproses Update Tampilan & Kompresi File Gambar ke WebP
+    // =========================================================================
+    public function updateWebsiteSettings(Request $request)
+    {
+        if (Auth::user()->role !== 'super_admin') {
+            abort(403, 'Akses Ditolak.');
+        }
+
+        $settings = WebsiteSetting::firstOrCreate(['id' => 1]);
+
+        $request->validate([
+            'nama_website'   => 'required|string|max:150',
+            'nama_institusi' => 'required|string|max:150',
+            'tagline'        => 'nullable|string|max:255',
+            'logo'           => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
+            'favicon'        => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+        ]);
+
+        $data = [
+            'nama_website'   => $request->nama_website,
+            'nama_institusi' => $request->nama_institusi,
+            'tagline'        => $request->tagline,
+        ];
+
+        // Folder penyimpanan aset tampilan website
+        $destinationPath = public_path('image/website');
+
+        // Handling Upload & Kompresi LOGO WEBSITE
+        if ($request->hasFile('logo')) {
+            // Hapus logo WebP lama di server jika ada berkasnya
+            if ($settings->logo && File::exists($destinationPath . '/' . $settings->logo)) {
+                @unlink($destinationPath . '/' . $settings->logo);
+            }
+            $data['logo'] = $this->processImage($request->file('logo'), $destinationPath);
+        }
+
+        // Handling Upload & Kompresi FAVICON WEBSITE
+        if ($request->hasFile('favicon')) {
+            // Hapus favicon WebP lama di server jika ada berkasnya
+            if ($settings->favicon && File::exists($destinationPath . '/' . $settings->favicon)) {
+                @unlink($destinationPath . '/' . $settings->favicon);
+            }
+            $data['favicon'] = $this->processImage($request->file('favicon'), $destinationPath);
+        }
+
+        $settings->update($data);
+
+        return back()->with('success', 'Konfigurasi identitas visual website berhasil diperbarui!');
+    }
+
+    // =========================================================================
+    // HELPER: Image Compression to WebP (Maks resolusi lebar 854px)
+    // =========================================================================
+    private function processImage($file, $destinationPath)
+    {
+        if (!File::exists($destinationPath)) {
+            File::makeDirectory($destinationPath, 0755, true);
+        }
+
+        $filename = uniqid() . '_' . Str::random(8) . '.webp';
+        $extension = strtolower($file->getClientOriginalExtension());
+        $img = null;
+
+        try {
+            switch ($extension) {
+                case 'jpeg':
+                case 'jpg':
+                    $img = @imagecreatefromjpeg($file->getRealPath());
+                    break;
+                case 'png':
+                    $img = @imagecreatefrompng($file->getRealPath());
+                    if ($img) {
+                        imagepalettetotruecolor($img);
+                        imagealphablending($img, true);
+                        imagesavealpha($img, false);
+                    }
+                    break;
+                case 'webp':
+                    $img = @imagecreatefromwebp($file->getRealPath());
+                    break;
+                default:
+                    $string = file_get_contents($file->getRealPath());
+                    $img = @imagecreatefromstring($string);
+                    break;
+            }
+        } catch (\Exception $e) {
+            return time() . '.webp'; 
+        }
+
+        if (!$img) {
+            return time() . '.webp';
+        }
+
+        $maxWidth = 854; 
+        $widthOrig = imagesx($img);
+        $heightOrig = imagesy($img);
+
+        if ($widthOrig > $maxWidth) {
+            $ratio = $maxWidth / $widthOrig;
+            $newWidth = $maxWidth;
+            $newHeight = $heightOrig * $ratio;
+
+            $newImg = imagecreatetruecolor($newWidth, $newHeight);
+            imagealphablending($newImg, false);
+            imagesavealpha($newImg, true);
+            
+            imagecopyresampled($newImg, $img, 0, 0, 0, 0, $newWidth, $newHeight, $widthOrig, $heightOrig);
+            imagedestroy($img);
+            $img = $newImg;     
+        }
+
+        imagewebp($img, $destinationPath . '/' . $filename, 75);
+        imagedestroy($img);
+
+        return $filename;
     }
 }

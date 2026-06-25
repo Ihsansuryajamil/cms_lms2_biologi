@@ -77,8 +77,8 @@
                                 <!-- <th style="padding: 8px 8px;">Email</th> -->
                                 <th style="padding: 8px 8px;">Role</th>
                                 <th style="padding: 8px 8px;">Status</th>
-                                <th class="text-center" style="width: 12%; padding: 8px 8px;">Tanggal Masuk</th>
-                                <th class="text-center" style="width: 12%; padding: 8px 8px;">History</th>
+                                <!-- <th class="text-center" style="width: 12%; padding: 8px 8px;">Tanggal Masuk</th> -->
+                                <th class="text-center" style="width: 15%; padding: 8px 8px;">History</th>
                                 <th class="text-center" style="width: 12%; padding: 8px 8px;">Aksi</th>
                             </tr>
                         </thead>
@@ -113,7 +113,7 @@
                                             <span class="badge bg-secondary-subtle text-secondary border border-secondary" style="font-size: 0.7rem;">Nonaktif</span>
                                         @endif
                                     </td> -->
-                                    <td class="text-center" style="padding: 6px 8px;"><small class="text-muted">{{ $user->created_at->format('d M Y') }}</small></td>
+                                    <!-- <td class="text-center" style="padding: 6px 8px;"><small class="text-muted">{{ $user->created_at->format('d M Y') }}</small></td> -->
                                     <td class="text-center" style="padding: 6px 8px;">
                                         <a href="{{ route('guru_user_history', $user->id) }}" class="btn btn-sm btn-outline-primary rounded-pill" style="font-size: 0.75rem; padding: 4px 10px;">
                                             <i class="fa-solid fa-clock me-1"></i> Pembelajaran

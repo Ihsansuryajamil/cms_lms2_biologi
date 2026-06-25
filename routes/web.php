@@ -6,6 +6,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DepanController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ForumController;
 
 // Route::get('/', function () {
 //     return view('homepage');
@@ -28,10 +29,8 @@ Route::middleware('auth')->group(function () {
     //     return view('Dashboard.Siswa.course');
     // })->name('students_course');
     Route::get('/Students/Course', [SiswaController::class, 'index'])->name('students_course');
-    // Route::get('/Students/History', function () {
-    //     return view('Dashboard.Siswa.history');
-    // })->name('students_history');
-    // Cari rute lama Anda dan ubah menjadi seperti ini:
+    Route::get('/Students/Profil', [SiswaController::class, 'profileSettings'])->name('students_profile');
+    Route::put('/Students/Profil/Update', [SiswaController::class, 'updateProfile'])->name('students_profile_update');
     Route::get('/Students/History', [SiswaController::class, 'history'])->name('students_history');
     
     Route::get('/Students/Course/{id}', [SiswaController::class, 'show'])->name('students_detail_course');
@@ -42,9 +41,9 @@ Route::middleware('auth')->group(function () {
     //     return view('Dashboard.Siswa.quiz_input');
     // })->name('students_quiz_input');
     // Rute Ujian Sederhana (Tanpa AJAX)
-Route::post('/Students/Course/Quiz/{sub_topic_id}/Start', [SiswaController::class, 'startQuiz'])->name('students_quiz_start');
-Route::get('/Students/Course/Quiz/{attempt_id}/Play', [SiswaController::class, 'playQuiz'])->name('students_quiz_play');
-Route::post('/Students/Course/Quiz/{attempt_id}/Submit', [SiswaController::class, 'submitQuiz'])->name('students_quiz_submit');
+    Route::post('/Students/Course/Quiz/{sub_topic_id}/Start', [SiswaController::class, 'startQuiz'])->name('students_quiz_start');
+    Route::get('/Students/Course/Quiz/{attempt_id}/Play', [SiswaController::class, 'playQuiz'])->name('students_quiz_play');
+    Route::post('/Students/Course/Quiz/{attempt_id}/Submit', [SiswaController::class, 'submitQuiz'])->name('students_quiz_submit');
     // Route::get('/Students/Print/Nama_File', function () {
     //     return view('Dashboard.Siswa.pdf');
     // })->name('students_pdf');
@@ -79,6 +78,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/{id}/History/Pembelajaran/{sub_topic_id}/{type}', [UserController::class, 'userHistoryPembelajaranDetail'])->name('guru_user_history_detail');
         Route::post('/History/Pembelajaran/Task/{id}/Grade', [UserController::class, 'updateTaskScore'])->name('guru_user_history_grade_task');
         Route::post('/History/Pembelajaran/Quiz/{id}/Grade', [UserController::class, 'updateQuizEssayScore'])->name('guru_user_history_grade_quiz');
+    });
+    Route::prefix('Teachers/Forum')->group(function () {
+        Route::get('/', [ForumController::class, 'index'])->name('guru_forum_index');
     });
     Route::prefix('Teachers/Kelas')->group(function () {
         Route::get('/', [UserController::class, 'indexKelas'])->name('guru_class_all');
@@ -120,6 +122,11 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/Sub-Topik/{id}/Detail', [CourseController::class, 'showSubTopic'])->name('guru_topik_detail_materi');
     });
+    
+    Route::get('/Teachers/Pengaturan', [UserController::class, 'editWebsiteSettings'])->name('guru_pengaturan_website');
+    Route::put('/Teachers/Pengaturan/Update', [UserController::class, 'updateWebsiteSettings'])->name('guru_pengaturan_website_update');
+    Route::get('/Teachers/Profil/Settings', [UserController::class, 'profileSettings'])->name('guru_profile_setting');
+    Route::put('/Teachers/Profil/Settings/Update', [UserController::class, 'updateProfile'])->name('guru_profile_update');
 });
 // Route::get('/Teachers/Materi/Sub-Topik/Detail', function () {
 //     return view('Dashboard.Guru.Topik.sub_topik_detail');
@@ -161,12 +168,6 @@ Route::get('/Students/Jadwal', function () {
 Route::get('/Students/Notifikasi', function () {
     return view('Dashboard.Siswa.notifikasi');
 })->name('students_notifikasi');
-Route::get('/Students/Profil', function () {
-    return view('Dashboard.Siswa.profil');
-})->name('students_profil');
-Route::get('/Students/Profil/Settings', function () {
-    return view('Dashboard.Siswa.profile_setting');
-})->name('students_profile_setting');
 
 
 
@@ -230,15 +231,7 @@ Route::get('/Teachers/Topik/Tambah/Tugas', function () {
 Route::get('/Teachers/Notifikasi', function () {
     return view('Dashboard.Guru.notifikasi');
 })->name('guru_notifikasi');
-Route::get('/Teachers/Profil', function () {
-    return view('Dashboard.Guru.profile');
-})->name('guru_profil');
-Route::get('/Teachers/Profil/Settings', function () {
-    return view('Dashboard.Guru.profile_setting');
-})->name('guru_profile_setting');
+
 // Route::get('/Teachers/Users/Details', function () {
 //     return view('Dashboard.Guru.UserManagement.user_detail');
 // })->name('guru_user_detail');
-Route::get('/Teachers/Pengaturan', function () {
-    return view('Dashboard.Guru.pengaturan_website');
-})->name('guru_pengaturan_website');

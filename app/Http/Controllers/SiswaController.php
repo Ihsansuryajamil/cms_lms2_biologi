@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
+use App\Models\User;
 use App\Models\Course;
 use App\Models\Topic;
 use App\Models\SubTopic;
@@ -356,5 +357,55 @@ class SiswaController extends Controller
 
         return view('Dashboard.Siswa.history', compact('historyCollection', 'coursesList'));
     }
-    
+    // ✨ FUNGSI BARU 1: Menampilkan Halaman Pengaturan Profil Siswa
+    public function profileSettings()
+    {
+        if (Auth::user()->role !== 'student') abort(403);
+
+        $user = Auth::user(); // Mengambil data siswa yang sedang login saat ini
+        return view('Dashboard.Siswa.profile', compact('user'));
+    }
+
+    // ✨ FUNGSI BARU 2: Memproses Pembaruan Data Profil Mandiri Siswa
+    public function updateProfile(Request $request)
+    {
+        if (Auth::user()->role !== 'student') abort(403);
+
+        $user = User::findOrFail(Auth::id()); // Mengunci pencarian murni pada ID session login
+        $id = $user->id;
+
+        // Validasi data inputan sesuai aturan duplikasi database
+        $request->validate([
+            'nama'    => 'required|string|max:255',
+            'email'   => 'required|email|unique:users,email,' . $id,
+            'xyz'     => 'required|string|min:6',
+            'nis'     => 'nullable|string|max:50|unique:users,nis,' . $id,
+            'no_telp' => 'nullable|string|max:20',
+            'alamat'  => 'nullable|string',
+        ], [
+            'nama.required' => 'Nama lengkap wajib diisi.',
+            'email.unique'  => 'Alamat email tersebut sudah terdaftar di sistem. Silakan gunakan email lain!',
+            'nis.unique'    => 'NIS / NIM tersebut sudah terdaftar di sistem. Gunakan nomor induk Anda sendiri!',
+            'xyz.required'  => 'Password wajib diisi.',
+            'xyz.min'       => 'Password minimal terdiri dari 6 karakter.',
+        ]);
+
+        $data = [
+            'nama'    => $request->nama,
+            'email'   => $request->email,
+            'nis'     => $request->nis,
+            'no_telp' => $request->no_telp,
+            'alamat'  => $request->alamat,
+            'xyz'     => $request->xyz, // Menyimpan teks password asli (raw)
+        ];
+
+        // ✨ Sinkronisasi Enkripsi Password Otomatis Jika Mengalami Perubahan
+        if ($request->xyz !== $user->xyz) {
+            $data['password'] = bcrypt($request->xyz);
+        }
+
+        $user->update($data);
+
+        return back()->with('success', 'Profil pribadi Anda berhasil diperbarui!');
+    }
 }
